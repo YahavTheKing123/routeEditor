@@ -1,0 +1,10 @@
+<svg viewBox="0 0 13 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Popup/Nativ_Elevation-All" transform="translate(-11.000000, -13.000000)" fill="#F9F9F9" stroke="#282B37" stroke-width="0.5">
+            <g id="Close" transform="translate(12.000000, 14.539789)">
+                <rect id="Rectangle" transform="translate(5.303301, 5.303301) rotate(45.000000) translate(-5.303301, -5.303301) " x="4.55330086" y="-1.94669914" width="1.5" height="14.5" rx="0.4"/>
+                <rect id="Rectangle" transform="translate(5.303301, 5.303301) scale(-1, 1) rotate(45.000000) translate(-5.303301, -5.303301) " x="4.55330086" y="-1.94669914" width="1.5" height="14.5" rx="0.4"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,281 @@
+.route-editor-wrapper {
+    --route-editor-bg-color: #282B37;
+    --route-editor-font-primary-color: #ffffff;
+    --route-editor-participate-list-bg-color: #434757;
+    --route-editor-participate-list-arrrow-button-bg-color: #363A4B;
+    --route-editor-selection-color: #4185F4;
+    --route-editor-participate-button-bg-color: #333644;
+    --route-editor-participate-button-border-color: #485066;
+    --route-editor-footer-button-bg-color: #6C768D;
+    --route-editor-footer-dropdown-label-color: #B0B8C6;
+
+    background-color: var(--route-editor-bg-color);
+    color: var(--route-editor-font-primary-color);
+
+    width: 58rem;
+    position: fixed;
+    top: calc(var(--touch-header-height, 5rem) + 1rem);
+    right: calc(var(--touch-left-menu-width, 10rem) + 1.5rem);
+    transform-origin: top right;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+}
+
+/*----------------------------------------------------- Header --------------------------------------*/
+.route-editor-header {
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem 0 1.5rem;
+}
+
+.route-editor-header-close-button {
+    height: 1.3rem;
+    width: 1.3rem;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+
+}
+
+.route-editor-header-close-icon {
+    height: 100%;
+    width: 100%;    
+}
+
+
+/*----------------------------------------------------- Particiaptes List --------------------------------------*/
+.route-editor-participate-list-wrapper {
+    background: var(--route-editor-participate-list-bg-color);
+    padding: 0.5rem;
+}
+
+.route-editor-participate-list-content {
+    background: var(--route-editor-bg-color);
+    border-radius: 0.7rem;
+    position: relative;
+    align-items: center;
+    overflow: hidden;
+}
+
+.route-editor-participate-list-right-arrrow-button,
+.route-editor-participate-list-left-arrrow-button  {
+    position: absolute;
+    height: 3rem;
+    width: 3rem;
+    background-color: var(--route-editor-participate-list-arrrow-button-bg-color);
+    border-radius: 0.4rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.route-editor-participate-list-right-arrrow-button:active,
+.route-editor-participate-list-left-arrrow-button:active,
+.route-editor-footer-zoom-button:active,
+.route-editor-footer-action-button:active {
+    background-color: var(--route-editor-selection-color);
+}
+
+.route-editor-participate-list-right-arrrow-button {
+    right: 0.7rem;
+}
+
+.route-editor-participate-list-left-arrrow-button {
+    left: 0.7rem;
+}
+
+.route-editor-participate-list-right-arrrow-icon,
+.route-editor-participate-list-left-arrrow-icon {
+    height: 1.8rem;
+}
+
+
+.route-editor-participate-list-right-arrrow-icon {
+    transform: rotate(0.25turn);
+}
+.route-editor-participate-list-left-arrrow-icon {
+    transform: rotate(0.75turn);
+}
+
+.route-editor-participates-buttons {
+    padding: 0 4.5rem;
+    display: flex;    
+    transform: translateX(0);
+    position: relative;
+}
+
+.route-editor-participates-buttons::before, 
+.route-editor-participates-buttons::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 5.5rem;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.route-editor-participates-buttons::before {
+    left: 0;
+    background: linear-gradient(to right, var(--route-editor-bg-color) 60%, transparent);
+}
+
+.route-editor-participates-buttons::after {
+    right: 0;
+    background: linear-gradient(to left, var(--route-editor-bg-color), transparent);
+}
+
+.route-editor-participates-buttons-wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.route-editor-participates-button {
+    height: 2.5rem;
+    min-width: 8rem;
+    max-width: 8rem;
+    border: 0.1rem solid var(--route-editor-participate-button-border-color);
+    background-color: var(--route-editor-participate-button-bg-color);
+    border-radius: 0.5rem;
+    margin: 0.7rem 0;
+    font-size: inherit;
+    color: #7C838F;
+    cursor: pointer;    
+    display: flex;
+    align-items: center;   
+    margin-left: 0.7rem;
+    transition: background-color 0.3s ease;
+}
+
+.all-participates-button {
+    justify-content: center;
+}
+
+.route-editor-participates-button.participates-button-selected {
+    background-color: var(--route-editor-selection-color);
+    color: var(--route-editor-font-primary-color);
+    border-color: transparent;
+}
+
+.route-editor-participates-button-color-point {
+    min-height: 0.8rem;
+    min-width: 0.8rem;
+    background: transparent;
+    border: 1px solid var(--route-editor-font-primary-color);
+    box-shadow: 0 0 6px 0 #000000;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 0.7rem;
+    margin-right: 1rem;
+}
+
+.route-editor-participates-button-label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/*----------------------------------------------------- Chart ---------------------------------------*/
+
+.route-editor-chart-wrapper {
+    height: 30rem;
+}
+
+/*----------------------------------------------------- Footer --------------------------------------*/
+.route-editor-footer {
+    height: 6.5rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.route-editor-footer-right-buttons{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.route-editor-footer-zoom-wrapper {
+    display: flex;
+    border-left: 0.1rem solid rgba(255,255,255,0.1);
+    height: 100%;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.route-editor-footer-zoom-button {
+    height: 2.4rem;
+    width: 2.4rem;
+    border: none;
+    background-color: var(--route-editor-footer-button-bg-color);
+    border-radius: 0.25rem;            
+    cursor: pointer;    
+    display: flex;
+    align-items: center;  
+    justify-content: center; 
+    margin-left: 1.5rem;
+    transition: background-color 0.6s ease;
+}
+
+.route-editor-footer-zoom-button:last-child {
+    margin-left: 2.5rem;
+}
+
+.route-editor-footer-zoom-out-icon, 
+.route-editor-footer-zoom-in-icon {
+    height: 1.5rem;
+}
+
+.route-editor-footer-dropdown-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.route-editor-footer-dropdown-content {
+    display: flex;
+    align-items: center;
+}
+
+.route-editor-footer-dropdown-icon-img {
+    height: 2rem;
+    margin: 0 1rem;
+}
+
+.route-editor-footer-dropdown-label {
+    color: var(--route-editor-footer-dropdown-label-color);
+    font-size: 1.4rem;
+}
+
+.route-editor-footer-left-buttons {
+    display: flex;
+}
+
+.route-editor-footer-action-button {
+    height: 2.4rem;
+    width: 2.4rem;
+    border: none;
+    background-color: var(--route-editor-footer-button-bg-color);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    transition: background-color 0.6s ease;
+}
+
+.route-editor-footer-action-button.plan-action-button {
+    width: max-content;
+    font-size: 1.6rem;
+    color: inherit;
+    padding-left: 0.8rem;
+    padding-right: 0.5rem;
+}

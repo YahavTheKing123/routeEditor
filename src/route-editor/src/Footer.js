@@ -1,13 +1,36 @@
 import React, { Component } from 'react';
+import Select from 'react-select';
+
 import zoomInIcon from './assets/plus.svg';
 import zoomOutIcon from './assets/minus.svg';
 import checkIcon from './assets/check.svg';
 import undoIcon from './assets/undo.svg';
 import fxIcon from './assets/fx.svg';
 import directionDown from './assets/directionDown.svg';
-import directionUp from './assets/directionUp.svg';
+import directionUp from'./assets/directionUp.svg';
+
 
 export default class Footer extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            dropdownOptions: null
+        } 
+    }
+
+    componentDidMount() {
+        const {dropDownOptionsKeys, translator} = this.props;
+
+        const dropdownOptions = Object.keys(dropDownOptionsKeys).map(key => ({
+            label: translator.t(key),
+            value: key
+        }))
+        
+        this.setState({
+            dropdownOptions
+        })
+    }
 
     renderZoomButtons() {
         return (
@@ -25,14 +48,24 @@ export default class Footer extends Component {
     getDropDownIcon() {
         return <img src={directionUp} className='route-editor-footer-dropdown-icon-img'/>
     }
-
+    
     renderDropDown() {
+        if (!this.state.dropdownOptions) return null
         return (
             <div className='route-editor-footer-dropdown-wrapper'>
                 <span className='route-editor-footer-dropdown-icon'>{this.getDropDownIcon()}</span>
                 <span className='route-editor-footer-dropdown-content'>
-                    <span className='route-editor-footer-dropdown-label'>{'נתיב:'}</span>
-                    <div>dropDown</div>
+                    <span className='route-editor-footer-dropdown-label'>{this.props.translator.t('route')}</span>
+                    <Select
+                        className={"Select__container"}
+                        classNamePrefix="Select"
+                        value={this.props.selectedDropdownItem || this.state.dropdownOptions[0]}
+                        options={this.state.dropdownOptions}
+                        isClearable={false}                        
+                        placeholder=""
+                        maxMenuHeight={'25rem'}
+                        onChange={selectedItem => this.props.onDropDownSelect(selectedItem)}
+                />
                 </span>                
             </div>
         )

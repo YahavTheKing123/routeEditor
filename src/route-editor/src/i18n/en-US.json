@@ -1,0 +1,10 @@
+{
+  "translation": {
+    "sideCut" : "Side Cut",
+    "plan": "Plan",
+    "route": "Route:",
+    "forward": "Forward",
+    "back": "Back",
+    "forwardBack": "Forward - Back"
+  }
+}

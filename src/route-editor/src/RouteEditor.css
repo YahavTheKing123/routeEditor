@@ -8,6 +8,9 @@
     --route-editor-participate-button-border-color: #485066;
     --route-editor-footer-button-bg-color: #6C768D;
     --route-editor-footer-dropdown-label-color: #B0B8C6;
+    --route-editor-footer-dropdown-arrow-color: #939dba;
+    --route-editor-footer-dropdown-options-bg-color :#383B4C;
+    --route-editor-footer-dropdown-option-border-color: #5C6073;
 
     background-color: var(--route-editor-bg-color);
     color: var(--route-editor-font-primary-color);
@@ -245,7 +248,7 @@
 }
 
 .route-editor-footer-dropdown-icon-img {
-    height: 2rem;
+    height: 1.8rem;
     margin: 0 1rem;
 }
 
@@ -254,6 +257,109 @@
     font-size: 1.4rem;
 }
 
+/* ---------------------------------------------------   react-select start  ----------------------------------- */
+
+.route-editor-footer-dropdown-content .Select__container {
+    height: 100%;
+    cursor: pointer;
+}
+
+.route-editor-footer-dropdown-content .Select__container .Select__control {
+    height: 100%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    box-shadow: unset;
+}
+
+.route-editor-footer-dropdown-content .Select__container .Select__control .Select__value-container .Select__single-value {
+    max-width: 100%;
+    color: var(--route-editor-font-primary-color);
+    font-size: 1.4rem;
+}
+
+.route-editor-footer-dropdown-content .Select__container .Select__control .Select__indicators .Select__indicator {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    padding: 0;
+    top: 50%;
+    transform: translateY(-45%);
+}
+
+.Select__indicator-separator {
+    display: none;
+}
+.route-editor-footer-dropdown-content .Select__container .Select__control .Select__value-container {
+    margin: 0;
+    height: 100%;    
+    outline: none;
+}
+
+.route-editor-footer-dropdown-content .Select__container .Select__control .Select__value-container > input{}
+
+.route-editor-footer-dropdown-content .Select__container .Select__control .Select__value-container:focus-within {}
+
+.route-editor-footer-dropdown-content .Select__container .Select__control .Select__indicators .Select__indicator svg {
+    fill: var(--route-editor-footer-dropdown-arrow-color);
+}
+
+.route-editor-footer-dropdown-content .Select__container .Select__menu-list {
+    background-color: var(--route-editor-footer-dropdown-options-bg-color);    
+    border: 0;
+    height: 100%;
+    width: max-content;
+    border-radius: 1rem;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.20);
+    cursor: pointer;
+}
+
+.route-editor-footer-dropdown-content .Select__container .Select__menu-list .Select__option {
+    color: var(--route-editor-font-primary-color);
+    background-color: var(--route-editor-footer-dropdown-options-bg-color);   
+    height: 5rem;
+    width: 14rem;
+    font-size: 1.4rem;    
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.route-editor-footer-dropdown-content .Select__container .Select__menu-list .Select__option::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 3rem);
+    border-bottom: 1px solid var(--route-editor-footer-dropdown-option-border-color);    
+}
+
+.route-editor-footer-dropdown-content .Select__container .Select__menu-list .Select__option:last-child:before {
+    display: none;
+}
+
+.route-editor-footer-dropdown-content .Select__container .Select__menu-list .Select__option:hover {
+    background-color: #4185f43b;
+}
+
+.route-editor-footer-dropdown-content .Select__container .Select__menu-list .Select__option:last-child {
+    border-bottom: 0;
+}
+
+.route-editor-footer-dropdown-content .Select__container .Select__menu-list .Select__option--is-selected,
+.route-editor-footer-dropdown-content .Select__container .Select__menu-list .Select__option--is-selected:hover{
+    color: var(--route-editor-font-primary-color);
+    position: relative;
+    right: 0;
+    left: 0;
+    padding: 0 3rem;
+    background-color: var(--route-editor-selection-color);
+}
+
+/* ---------------------------------------------------   react-select end  ----------------------------------- */
 .route-editor-footer-left-buttons {
     display: flex;
 }

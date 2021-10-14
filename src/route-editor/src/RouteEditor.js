@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
 import './RouteEditor.css';
+import i18next from 'i18next';
+import hebTranslation from './i18n/he-IL.json';
+import engTranslation from './i18n/en-US.json';
+//import {appConfig} from '~/app-config'; TODO: un comment this line
+
+//TODO: convert those lines to const icon = require('./assets/icon.svg)
 import closeIcon from './assets/close.svg';
 import chevronIcon from './assets/chevron.svg';
 import Footer from './Footer';
@@ -21,14 +27,49 @@ const arrowButtons = {
     left: 'left'
 }
 
+const routeOptions = {
+    forward: 'forward',
+    back: 'back',
+    forwardBack: 'forwardBack'
+}
+
+
 export default class RouteEditor extends Component {
     
     constructor(props) {
         super(props);
         this.state = {
             selectedDroneId: null,
-            arrowClickCounter: 0
+            arrowClickCounter: 0,
+            selectedRoute: null
         }
+    }
+
+    componentDidMount() {
+        this.initTranslation();
+    }
+
+    initTranslation = () => {
+        //TODO: remove this line
+        const appConfig = null;
+
+        let lng = 'he-IL';
+        if (appConfig && appConfig.getValueKey('language')) {
+            lng = appConfig.getValueKey('language');
+        }
+
+        this.translator = i18next.createInstance({
+            interpolation: {escapeValue: false},
+            lng,
+            resources: {
+                'en-US': engTranslation,
+                'he-IL': hebTranslation
+            },
+        }, (err, t) => {
+            this.setState(({
+                isTranslatorReady: true
+            }))
+        });
 
     }
     
@@ -39,7 +80,7 @@ export default class RouteEditor extends Component {
     renderHeader() {
         return (
             <div className='route-editor-header'>
-                <span className='route-editor-header-label'>חתך צד</span>
+                <span className='route-editor-header-label'>{this.translator.t('sideCut')}</span>
                 <button className='route-editor-header-close-button' onClick={this.props.onClose}>
                     <img className='route-editor-header-close-icon' src={closeIcon}/>
                 </button>
@@ -108,15 +149,24 @@ export default class RouteEditor extends Component {
         return <Chart/>
     }
 
+    onDropDownSelect = selectedRoute => {
+        this.setState({selectedRoute})
+    }
+
     renderFooter() {
         return (
-            <Footer/>
+            <Footer
+                translator={this.translator}
+                dropDownOptionsKeys={routeOptions}
+                onDropDownSelect={this.onDropDownSelect}
+                selectedDropdownItem={this.state.selectedRoute}
+            />
         );
     }
     
     render() {
         const data = this.getComponentData();
-        if (!data) return null;
+        if (!data || !this.state.isTranslatorReady) return null;
 
         return (
             <div className='route-editor-wrapper'>

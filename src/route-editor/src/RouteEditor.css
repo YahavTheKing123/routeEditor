@@ -304,14 +304,23 @@
     fill: var(--route-editor-footer-dropdown-arrow-color);
 }
 
+.route-editor-footer-dropdown-content .Select__container .Select__menu {
+    border-radius: 1rem;
+    padding: 0;
+    margin: 0;    
+    background-color: var(--route-editor-footer-dropdown-options-bg-color);
+}
+
 .route-editor-footer-dropdown-content .Select__container .Select__menu-list {
-    background-color: var(--route-editor-footer-dropdown-options-bg-color);    
+    background-color: var(--route-editor-footer-dropdown-options-bg-color);
     border: 0;
     height: 100%;
     width: max-content;
     border-radius: 1rem;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.20);
     cursor: pointer;
+    margin: 0;
+    padding: 0;
 }
 
 .route-editor-footer-dropdown-content .Select__container .Select__menu-list .Select__option {

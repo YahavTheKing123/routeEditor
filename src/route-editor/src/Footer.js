@@ -8,7 +8,13 @@ import undoIcon from './assets/undo.svg';
 import fxIcon from './assets/fx.svg';
 import directionDown from './assets/directionDown.svg';
 import directionUp from'./assets/directionUp.svg';
+import directionUpDown from'./assets/directionUpDown.svg';
 
+const icons = { 
+    back: directionDown,
+    forward: directionUp,
+    forwardBack: directionUpDown
+}
 
 export default class Footer extends Component {
 
@@ -46,7 +52,9 @@ export default class Footer extends Component {
     }
     
     getDropDownIcon() {
-        return <img src={directionUp} className='route-editor-footer-dropdown-icon-img'/>
+
+        const iconKey = this.props.selectedDropdownItem ? this.props.selectedDropdownItem.value : this.state.dropdownOptions[0].value;
+        return <img src={icons[iconKey]} className='route-editor-footer-dropdown-icon-img'/>
     }
     
     renderDropDown() {
@@ -85,7 +93,7 @@ export default class Footer extends Component {
             <div className='route-editor-footer-left-buttons'>
                 <button className='route-editor-footer-action-button plan-action-button' onClick={this.props.onClose}>
                     <img className='route-editor-footer-undo-icon' src={fxIcon} style={{height:'1.6rem', width:'1.6rem', marginLeft: '0.5rem'}}/>
-                    <span>תכנן</span>
+                    <span>{this.props.translator.t('plan')}</span>
                 </button>                
                 <button className='route-editor-footer-action-button' onClick={this.props.onClose}>
                     <img className='route-editor-footer-undo-icon' src={undoIcon}/>

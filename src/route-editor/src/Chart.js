@@ -25,23 +25,14 @@ const data = {
   
   const options = {
     /*responsive: true,*/
-    /*annotation: {
-        annotations: [
-          {
-            type: 'line',
-            mode: 'horizontal',
-            scaleID: 'y-axis-0',
-            value: 6,
-            borderColor: 'black',
-            borderWidth: 10,
-            label: {
-              backgroundColor: 'red',
-              content: 'Test Label',
-              enabled: true,
-            },
-          },
-        ],
-    },*/
+    layout: {
+      padding: {
+        left: 20,
+        right: 10,
+        top: 20,
+        bottom: 10
+      }
+    },
     maintainAspectRatio: false,
     plugins: { 
         legend: {
@@ -80,16 +71,35 @@ const data = {
     scales: {
       y: {
         beginAtZero: true,
+        ticks: {
+          color: 'rgba(255,255,255,0.7)',
+          font: {
+            size: 12,
+            weight: 'lighter',            
+          },
+        },
         grid: {
-            zeroLineColor: '#7C838F',
-            color: '#525761', 
+          drawBorder: false,       
+          color: function (ctx) {            
+            if (ctx.index === 0) return '#7C838F';
+            return '#525761'
+          },             
         }
       },
       x: {
         beginAtZero: true,
-        grid: {
-            zeroLineColor: '#7C838F',
-            color: '#525761', 
+        ticks: {
+          color: 'rgba(255,255,255,0.7)',
+          font: {
+            size: 12,
+            weight: 'lighter'
+          },
+        },
+        grid: {            
+            color: function (ctx) {
+              if (ctx.index === 0) return '#7C838F';
+              return '#525761'
+            }, 
         }
       },
     },   

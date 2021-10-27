@@ -3,6 +3,7 @@ import './RouteEditor.css';
 import i18next from 'i18next';
 import hebTranslation from './i18n/he-IL.json';
 import engTranslation from './i18n/en-US.json';
+
 //import {appConfig} from '~/app-config'; TODO: un comment this line
 
 //TODO: convert those lines to const icon = require('./assets/icon.svg)
@@ -46,7 +47,7 @@ export default class RouteEditor extends Component {
     }
 
     componentDidMount() {
-        this.initTranslation();
+        this.initTranslation();        
     }
 
     initTranslation = () => {

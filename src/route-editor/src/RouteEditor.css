@@ -6,6 +6,8 @@
     --route-editor-selection-color: #4185F4;
     --route-editor-participate-button-bg-color: #333644;
     --route-editor-participate-button-border-color: #485066;
+    --route-editor-chart-bg-color:#383B4C;
+
     --route-editor-footer-button-bg-color: #6C768D;
     --route-editor-footer-dropdown-label-color: #B0B8C6;
     --route-editor-footer-dropdown-arrow-color: #939dba;
@@ -190,7 +192,9 @@
 .route-editor-chart-wrapper {
     height: 30rem;
 }
-
+canvas#route-editor-canvas {
+    background-color: var(--route-editor-chart-bg-color);
+}
 /*----------------------------------------------------- Footer --------------------------------------*/
 .route-editor-footer {
     height: 6.5rem;

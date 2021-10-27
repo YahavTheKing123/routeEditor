@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Point for graph</title>
+    <defs>
+        <path d="M10,0 C15.5228475,0 20,4.4771525 20,10 C20,15.5228475 15.5228475,20 10,20 C4.4771525,20 0,15.5228475 0,10 C0,4.4771525 4.4771525,0 10,0 Z M10,1.36986301 C5.23370695,1.36986301 1.36986301,5.23370695 1.36986301,10 C1.36986301,14.766293 5.23370695,18.630137 10,18.630137 C14.766293,18.630137 18.630137,14.766293 18.630137,10 C18.630137,5.23370695 14.766293,1.36986301 10,1.36986301 Z M10,7.80821918 C11.2104871,7.80821918 12.1917808,8.78951288 12.1917808,10 C12.1917808,11.2104871 11.2104871,12.1917808 10,12.1917808 C8.78951288,12.1917808 7.80821918,11.2104871 7.80821918,10 C7.80821918,8.78951288 8.78951288,7.80821918 10,7.80821918 Z" id="path-1"/>
+        <filter x="-30.0%" y="-30.0%" width="160.0%" height="160.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"/>
+        </filter>
+    </defs>
+    <g id="Route-Editor" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="0" transform="translate(-1684.000000, -164.000000)">
+            <g id="Point-for-graph" transform="translate(1688.000000, 168.000000)">
+                <path d="M9.8630137,1.23287671 C14.6293067,1.23287671 18.4931507,5.09672065 18.4931507,9.8630137 C18.4931507,14.6293067 14.6293067,18.4931507 9.8630137,18.4931507 C5.09672065,18.4931507 1.23287671,14.6293067 1.23287671,9.8630137 C1.23287671,5.09672065 5.09672065,1.23287671 9.8630137,1.23287671 Z" id="Path" fill-opacity="0.25" fill="#000000"/>
+                <g id="Shape">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"/>
+                    <use fill="#979797" fill-rule="evenodd" xlink:href="#path-1"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

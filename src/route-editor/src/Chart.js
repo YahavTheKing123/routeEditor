@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Line, Chart } from 'react-chartjs-2';
+import { Scatter as Line, Chart } from 'react-chartjs-2';
 import zoomPlugin from "chartjs-plugin-zoom";
 import dragdataPlugin from "chartjs-plugin-dragdata";
 import point from './assets/point-no-shadow.svg';
@@ -11,16 +11,18 @@ const data = {
     labels: ['1', '2', '3', '4', '5', '6'],
     datasets: [
       {
-        label: '# of Votes',        
+        label: '# of Votes',
         data: [12, 19, 3, 5, 2, 3],
         borderWidth: 2.5,
         fill: false,
         borderColor: '#43BEF4',
-        backgroundColor: 'red',
+        backgroundColor: '#43BEF4',
         pointStyle: img,
         pointRadius: 10,
+        pointHitRadius: 20,
+        showLine: true
       },
-    ],
+    ],    
   };
   
   const options = {
@@ -44,7 +46,7 @@ const data = {
                 enabled: true // SET SCROOL ZOOM TO TRUE
               },
               mode: "xy",
-              speed: 100
+              speed: 20
             },
             pan: {
               enabled: false,
@@ -200,7 +202,7 @@ export default class RouteChart extends Component {
           ctx.restore();
       };
     };*/
-      
+      const a = Chart;
     }
 
     render() {

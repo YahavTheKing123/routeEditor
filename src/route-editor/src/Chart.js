@@ -1,32 +1,76 @@
 import React, { Component } from 'react'
+import {dronesColor} from './RouteEditor';
 import { Scatter as Line, Chart } from 'react-chartjs-2';
 import zoomPlugin from "chartjs-plugin-zoom";
 import dragdataPlugin from "chartjs-plugin-dragdata";
-import point from './assets/point-no-shadow.svg';
+//import point from './assets/point-no-shadow.svg';
 
 const img = new Image();
-img.src = point
+img.src = `data:image/svg+xml;utf8,<svg width="20px" height="21px" viewBox="0 0 20 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    
+<g id="Route-Editor" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="0" transform="translate(-1688.000000, -208.000000)">
+        <g id="Point-for-graph-No-Shadow" transform="translate(1688.000000, 208.169678)">
+            <path d="M9.8630137,1.23287671 C14.6293067,1.23287671 18.4931507,5.09672065 18.4931507,9.8630137 C18.4931507,14.6293067 14.6293067,18.4931507 9.8630137,18.4931507 C5.09672065,18.4931507 1.23287671,14.6293067 1.23287671,9.8630137 C1.23287671,5.09672065 5.09672065,1.23287671 9.8630137,1.23287671 Z" id="Path" fill="rgba(0,0,0,0.5)"/>
+            <path fill="%2343BEF4" d="M10,0 C15.5228475,0 20,4.4771525 20,10 C20,15.5228475 15.5228475,20 10,20 C4.4771525,20 0,15.5228475 0,10 C0,4.4771525 4.4771525,0 10,0 Z M10,1.36986301 C5.23370695,1.36986301 1.36986301,5.23370695 1.36986301,10 C1.36986301,14.766293 5.23370695,18.630137 10,18.630137 C14.766293,18.630137 18.630137,14.766293 18.630137,10 C18.630137,5.23370695 14.766293,1.36986301 10,1.36986301 Z M10,7.80821918 C11.2104871,7.80821918 12.1917808,8.78951288 12.1917808,10 C12.1917808,11.2104871 11.2104871,12.1917808 10,12.1917808 C8.78951288,12.1917808 7.80821918,11.2104871 7.80821918,10 C7.80821918,8.78951288 8.78951288,7.80821918 10,7.80821918 Z" id="Shape"/>
+        </g>
+    </g>
+</g>
+</svg>`;
+
+function getImageSrc(color) {
+  const escapedColor = encodeURIComponent(color);
+  return `data:image/svg+xml;utf8,<svg width="20px" height="21px" viewBox="0 0 20 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    
+  <g id="Route-Editor" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="0" transform="translate(-1688.000000, -208.000000)">
+          <g id="Point-for-graph-No-Shadow" transform="translate(1688.000000, 208.169678)">
+              <path d="M9.8630137,1.23287671 C14.6293067,1.23287671 18.4931507,5.09672065 18.4931507,9.8630137 C18.4931507,14.6293067 14.6293067,18.4931507 9.8630137,18.4931507 C5.09672065,18.4931507 1.23287671,14.6293067 1.23287671,9.8630137 C1.23287671,5.09672065 5.09672065,1.23287671 9.8630137,1.23287671 Z" id="Path" fill="rgba(0,0,0,0.5)"/>
+              <path fill="${escapedColor}" d="M10,0 C15.5228475,0 20,4.4771525 20,10 C20,15.5228475 15.5228475,20 10,20 C4.4771525,20 0,15.5228475 0,10 C0,4.4771525 4.4771525,0 10,0 Z M10,1.36986301 C5.23370695,1.36986301 1.36986301,5.23370695 1.36986301,10 C1.36986301,14.766293 5.23370695,18.630137 10,18.630137 C14.766293,18.630137 18.630137,14.766293 18.630137,10 C18.630137,5.23370695 14.766293,1.36986301 10,1.36986301 Z M10,7.80821918 C11.2104871,7.80821918 12.1917808,8.78951288 12.1917808,10 C12.1917808,11.2104871 11.2104871,12.1917808 10,12.1917808 C8.78951288,12.1917808 7.80821918,11.2104871 7.80821918,10 C7.80821918,8.78951288 8.78951288,7.80821918 10,7.80821918 Z" id="Shape"/>
+          </g>
+      </g>
+  </g>
+  </svg>`;
+}
+
+function getImage(id) {  
+  img.src = getImageSrc(dronesColor[id]);
+  return img
+}
+
+/*img.src = point;*/
 
 const data = {
-    labels: ['1', '2', '3', '4', '5', '6'],
+    //labels: ['1', '2', '3', '4', '5', '6'],
     datasets: [
       {
         label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 2.5,
-        fill: false,
+        data: [{x: 0, y: 90}, {x: 5, y: 120}, {x: 10, y: 120}, {x: 15, y: 120}, {x: 20, y: 120}, {x: 25, y: 120}, {x: 30, y: 120}],
         borderColor: '#43BEF4',
         backgroundColor: '#43BEF4',
         pointStyle: img,
-        pointRadius: 10,
-        pointHitRadius: 20,
-        showLine: true
+      },
+      {
+        label: '# of Votes',
+        data: [{x: 0, y: 30}, {x: 5, y: 95}, {x: 10, y: 59}, {x: 15, y: 44}, {x: 20, y: 150}, {x: 25, y: 130}, {x: 30, y: 88}],
+        borderColor: 'pink',
+        backgroundColor: 'pink',
+        pointStyle: function(param) {
+          return getImage(2)
+        },
       },
     ],    
   };
   
   const options = {
     /*responsive: true,*/
+    datasets: {
+      scatter: {
+        borderWidth: 2.5,
+        fill: false,
+        pointRadius: 10,
+        pointHitRadius: 20,
+        showLine: true
+      }
+    },
     layout: {
       padding: {
         left: 20,

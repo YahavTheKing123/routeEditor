@@ -3,56 +3,78 @@ import './RouteEditor.css';
 import i18next from 'i18next';
 import hebTranslation from './i18n/he-IL.json';
 import engTranslation from './i18n/en-US.json';
+import {SubscriptionsHOC} from "@elbit/light-client-app";
+import config from './config';
+import {appConfig} from '~/app-config';
 
-//import {appConfig} from '~/app-config'; TODO: un comment this line
-
-//TODO: convert those lines to const icon = require('./assets/icon.svg)
 import closeIcon from './assets/close.svg';
-import chevronIcon from './assets/chevron.svg';
 import Footer from './Footer';
 import Chart from './Chart';
+import ParticipateList from './ParticipateList';
 
-const MOVMENT_FACTOR = 8 + 0.7; // button width + margin left
-const MAX_DRONES_IN_LIST = 5;
-
-export const dronesColor = {
-    0: '#43BEF4',
-    1: '#43F47D',
-    2: '#B959F4',
-    3: '#F49459',
-    4: '#F459A2'
-}
-
-const arrowButtons = {
-    right: 'right',
-    left: 'left'
-}
-
-const routeOptions = {
+export const routeOptions = {
     forward: 'forward',
     back: 'back',
+    patrol: 'patrol',
     forwardBack: 'forwardBack'
 }
 
+export const navDirectionMapper = {
+    forward: 1,
+    back: 2,
+    patrol: 3
+}
 
-export default class RouteEditor extends Component {
-    
+class RouteEditor extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            selectedDroneId: null,
+            selectedDroneId: config.ALL,
             arrowClickCounter: 0,
-            selectedRoute: null
+            selectedRouteDirection: routeOptions.forward,
+            isDataReady: false
         }
     }
 
     componentDidMount() {
-        this.initTranslation();        
+        this.setSnames();
+        this.initTranslation();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.subscriptionResults !== this.props.subscriptionResults) {
+            this.setData();
+        }
+    }
+
+    getSubscriptionResults = (subscriptionResults) => {
+        if(subscriptionResults === undefined) {
+            return null;
+        }
+        return Object.values(subscriptionResults.toJS());
+    }
+
+    setData = (subscriptionResults = this.props.subscriptionResults) => {
+        const entities = this.getSubscriptionResults(subscriptionResults);
+        if (!entities) {
+            return null;
+        }
+
+        this.buildDataTree(entities);
+    }
+
+    setSnames() {
+        const {mission, navPlan, player, virtualPlayer, waypoint} = this.props.additionalData.snames || {};
+
+        this.missionSname = mission || config.snames.missionSname;
+        this.navPlanSname = navPlan || config.snames.navPlanSname;
+        this.playerSname = player || config.snames.playerSname;
+        this.virtualPlayerSname = virtualPlayer || config.snames.virtualPlayerSname;
+        this.waypointSname = waypoint || config.snames.waypointSname;
     }
 
     initTranslation = () => {
-        //TODO: remove this line
-        const appConfig = null;
 
         let lng = 'he-IL';
         if (appConfig && appConfig.getValueKey('language')) {
@@ -73,16 +95,71 @@ export default class RouteEditor extends Component {
         });
 
     }
-    
-    getComponentData() {
-        return this.props.entities;
+
+    buildDataTree = entities => {
+
+        // data will be arragened as follow:
+        // waypoints -> navPlanId -> navPlan -> linkedPlayerOrDestinationPoint(playerId) -> player -> virtualPlayer
+
+        const entsIdToEntsMap = {}; //all entites as map for better perfomance when building the data stucture
+        const navPlansToWaypointsMap = {};
+        const playerToVirtualPlayerMap = {};
+        const virtualPlayerToNavPlansMap = {};
+        const virtualPlayerToColorMap = {};
+
+        entities.forEach(ent => {
+            entsIdToEntsMap[ent._id] = ent;
+
+            if (ent.sname === this.waypointSname && ent.navPlan && ent.navPlan._id) {
+                if (navPlansToWaypointsMap[ent.navPlan._id]) {
+                    navPlansToWaypointsMap[ent.navPlan._id].push(ent);
+                } else {
+                    navPlansToWaypointsMap[ent.navPlan._id] = [ent];
+                }
+            }
+
+            if (ent.sname === this.virtualPlayerSname &&
+                ent.autonomyBase &&
+                ent.autonomyBase.playerHolder &&
+                ent.autonomyBase.playerHolder.player &&
+                ent.autonomyBase.playerHolder.player._id) {
+                playerToVirtualPlayerMap[ent.autonomyBase.playerHolder.player._id] = ent;
+            }
+
+        })
+
+        for (key in navPlansToWaypointsMap) {
+            const navPlan = entsIdToEntsMap[key];
+            if (navPlan && navPlan.linkedPlayerOrDestinationPoint && navPlan.linkedPlayerOrDestinationPoint._id) {
+                const vPlayerId = playerToVirtualPlayerMap[navPlan.linkedPlayerOrDestinationPoint._id]._id;
+                if (virtualPlayerToNavPlansMap[vPlayerId]) {
+                    virtualPlayerToNavPlansMap[vPlayerId].push(navPlan)
+                } else {
+                    virtualPlayerToNavPlansMap[vPlayerId] = [navPlan]
+                }
+            }
+        }
+
+        //set player color
+        Object.keys(virtualPlayerToNavPlansMap).map((vPlayerId, index) => {
+            virtualPlayerToColorMap[vPlayerId] =  config.dronesColor[index];
+        })
+
+        this.entsIdToEntsMap = entsIdToEntsMap;
+        this.navPlansToWaypointsMap = navPlansToWaypointsMap;
+        this.playerToVirtualPlayerMap = playerToVirtualPlayerMap;
+        this.virtualPlayerToNavPlansMap = virtualPlayerToNavPlansMap;
+        this.virtualPlayerToColorMap = virtualPlayerToColorMap;
+
+        this.setState({isDataReady: true});
     }
+
 
     renderHeader() {
         return (
             <div className='route-editor-header'>
                 <span className='route-editor-header-label'>{this.translator.t('sideCut')}</span>
-                <button className='route-editor-header-close-button' onClick={this.props.onClose}>
+                <button className='route-editor-header-close-button' onClick={() => this.props.layoutAPI.removeContent({contentId: this.props.id})}>
                     <img className='route-editor-header-close-icon' src={closeIcon}/>
                 </button>
             </div>
@@ -93,65 +170,34 @@ export default class RouteEditor extends Component {
         return id === this.state.selectedDroneId ? 'participates-button-selected' : '';
     }
 
-    onArrowButtonClick(arrow) {
-        let {arrowClickCounter} = this.state;        
-        const data = this.getComponentData();
 
-        switch (arrow) {
-            case arrowButtons.right:
-                if (arrowClickCounter === 0) return;
-                arrowClickCounter--;
-                break;
-            case arrowButtons.left:
-                if (data.length > MAX_DRONES_IN_LIST && data.length - MAX_DRONES_IN_LIST >= arrowClickCounter) {                    
-                    arrowClickCounter++
-                };
-                break;
-            default:
-                break;                
-        }
-
-        this.setState({arrowClickCounter})
-    }
-
-    renderParticipateList(data) {
-        return (
-            <div className='route-editor-participate-list-wrapper'>
-                <div className='route-editor-participate-list-content'>
-                    <button className='route-editor-participate-list-right-arrrow-button' onClick={this.onArrowButtonClick.bind(this, arrowButtons.right)}>
-                        <img className='route-editor-participate-list-right-arrrow-icon' src={chevronIcon}/>
-                    </button>
-                    <button className='route-editor-participate-list-left-arrrow-button' onClick={this.onArrowButtonClick.bind(this, arrowButtons.left)}>
-                        <img className='route-editor-participate-list-left-arrrow-icon' src={chevronIcon}/>
-                    </button>
-                    <div className='route-editor-participates-buttons'>
-                        <div className='route-editor-participates-buttons-wrapper' style={{transform: `translateX(${this.state.arrowClickCounter * MOVMENT_FACTOR}rem)`}}>
-                            <button className={`route-editor-participates-button all-participates-button ${this.getSelectedDroneClass('all')}`} onClick={() => this.setState({selectedDroneId: 'all'})}>{'הכל'}</button>
-                            {
-                                data.map((drone, i) => {
-                                    return (
-                                        <button className={`route-editor-participates-button  ${this.getSelectedDroneClass(drone._id)}`} 
-                                                onClick={() => this.setState({selectedDroneId: drone._id})}
-                                                title={drone.appX.base.dispName}>
-                                            <span className='route-editor-participates-button-color-point' style={{backgroundColor: dronesColor[i]}}></span>
-                                            <span className='route-editor-participates-button-label'>{drone.appX.base.dispName}</span>
-                                        </button>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
+     renderParticipateList() {
+        return <ParticipateList
+                    translator={this.translator}
+                    virtualPlayerToNavPlansMap={this.virtualPlayerToNavPlansMap}
+                    getSelectedDroneClass={this.getSelectedDroneClass}
+                    selectDrone={vPlayerId => this.setState({selectedDroneId: vPlayerId})}
+                    selectedDroneId={this.state.selectedDroneId}
+                    virtualPlayerToColorMap = {this.virtualPlayerToColorMap}
+                    entsIdToEntsMap={this.entsIdToEntsMap}
+                />
     }
 
     renderChart() {
-        return <Chart/>
+        return <Chart
+                    selectedDroneId={this.state.selectedDroneId}
+                    entsIdToEntsMap={this.entsIdToEntsMap}
+                    navPlansToWaypointsMap={this.navPlansToWaypointsMap}
+                    playerToVirtualPlayerMap={this.playerToVirtualPlayerMap}
+                    virtualPlayerToNavPlansMap = {this.virtualPlayerToNavPlansMap}
+                    virtualPlayerToColorMap = {this.virtualPlayerToColorMap}
+                    selectedRouteDirection={this.state.selectedRouteDirection}
+                    setChartInstance={getChartInstance => this.getChartInstance = getChartInstance}
+                />
     }
 
-    onDropDownSelect = selectedRoute => {
-        this.setState({selectedRoute})
+    onDropDownSelect = selectedRouteDirection => {
+        this.setState({selectedRouteDirection})
     }
 
     renderFooter() {
@@ -160,22 +206,22 @@ export default class RouteEditor extends Component {
                 translator={this.translator}
                 dropDownOptionsKeys={routeOptions}
                 onDropDownSelect={this.onDropDownSelect}
-                selectedDropdownItem={this.state.selectedRoute}
+                selectedDropdownItem={this.state.selectedRouteDirection}
             />
         );
     }
-    
+
     render() {
-        const data = this.getComponentData();
-        if (!data || !this.state.isTranslatorReady) return null;
+        if (!this.state.isDataReady || !this.state.isTranslatorReady) return null;
 
         return (
             <div className='route-editor-wrapper'>
                 {this.renderHeader()}
-                {this.renderParticipateList(data)}
+                {this.renderParticipateList()}
                 {this.renderChart()}
                 {this.renderFooter()}
             </div>
         )
     }
 }
+export default SubscriptionsHOC(RouteEditor)

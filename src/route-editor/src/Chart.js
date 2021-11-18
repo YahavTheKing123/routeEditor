@@ -1,258 +1,407 @@
 import React, { Component } from 'react'
-import {dronesColor} from './RouteEditor';
 import { Scatter as Line, Chart } from 'react-chartjs-2';
 import zoomPlugin from "chartjs-plugin-zoom";
 import dragdataPlugin from "chartjs-plugin-dragdata";
-//import point from './assets/point-no-shadow.svg';
+import {getNavPlanImage, imagePointTypes, getPolylineHights} from "./chartUtils";
+import {routeOptions, navDirectionMapper} from "./RouteEditor";
+import config from "./config";
+import {Globals} from "@elbit/light-client-app";
 
-const img = new Image();
-img.src = `data:image/svg+xml;utf8,<svg width="20px" height="21px" viewBox="0 0 20 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    
-<g id="Route-Editor" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-    <g id="0" transform="translate(-1688.000000, -208.000000)">
-        <g id="Point-for-graph-No-Shadow" transform="translate(1688.000000, 208.169678)">
-            <path d="M9.8630137,1.23287671 C14.6293067,1.23287671 18.4931507,5.09672065 18.4931507,9.8630137 C18.4931507,14.6293067 14.6293067,18.4931507 9.8630137,18.4931507 C5.09672065,18.4931507 1.23287671,14.6293067 1.23287671,9.8630137 C1.23287671,5.09672065 5.09672065,1.23287671 9.8630137,1.23287671 Z" id="Path" fill="rgba(0,0,0,0.5)"/>
-            <path fill="%2343BEF4" d="M10,0 C15.5228475,0 20,4.4771525 20,10 C20,15.5228475 15.5228475,20 10,20 C4.4771525,20 0,15.5228475 0,10 C0,4.4771525 4.4771525,0 10,0 Z M10,1.36986301 C5.23370695,1.36986301 1.36986301,5.23370695 1.36986301,10 C1.36986301,14.766293 5.23370695,18.630137 10,18.630137 C14.766293,18.630137 18.630137,14.766293 18.630137,10 C18.630137,5.23370695 14.766293,1.36986301 10,1.36986301 Z M10,7.80821918 C11.2104871,7.80821918 12.1917808,8.78951288 12.1917808,10 C12.1917808,11.2104871 11.2104871,12.1917808 10,12.1917808 C8.78951288,12.1917808 7.80821918,11.2104871 7.80821918,10 C7.80821918,8.78951288 8.78951288,7.80821918 10,7.80821918 Z" id="Shape"/>
-        </g>
-    </g>
-</g>
-</svg>`;
+const {geo} = require('@elbit/js-geo');
 
-function getImageSrc(color) {
-  const escapedColor = encodeURIComponent(color);
-  return `data:image/svg+xml;utf8,<svg width="20px" height="21px" viewBox="0 0 20 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    
-  <g id="Route-Editor" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-      <g id="0" transform="translate(-1688.000000, -208.000000)">
-          <g id="Point-for-graph-No-Shadow" transform="translate(1688.000000, 208.169678)">
-              <path d="M9.8630137,1.23287671 C14.6293067,1.23287671 18.4931507,5.09672065 18.4931507,9.8630137 C18.4931507,14.6293067 14.6293067,18.4931507 9.8630137,18.4931507 C5.09672065,18.4931507 1.23287671,14.6293067 1.23287671,9.8630137 C1.23287671,5.09672065 5.09672065,1.23287671 9.8630137,1.23287671 Z" id="Path" fill="rgba(0,0,0,0.5)"/>
-              <path fill="${escapedColor}" d="M10,0 C15.5228475,0 20,4.4771525 20,10 C20,15.5228475 15.5228475,20 10,20 C4.4771525,20 0,15.5228475 0,10 C0,4.4771525 4.4771525,0 10,0 Z M10,1.36986301 C5.23370695,1.36986301 1.36986301,5.23370695 1.36986301,10 C1.36986301,14.766293 5.23370695,18.630137 10,18.630137 C14.766293,18.630137 18.630137,14.766293 18.630137,10 C18.630137,5.23370695 14.766293,1.36986301 10,1.36986301 Z M10,7.80821918 C11.2104871,7.80821918 12.1917808,8.78951288 12.1917808,10 C12.1917808,11.2104871 11.2104871,12.1917808 10,12.1917808 C8.78951288,12.1917808 7.80821918,11.2104871 7.80821918,10 C7.80821918,8.78951288 8.78951288,7.80821918 10,7.80821918 Z" id="Shape"/>
-          </g>
-      </g>
-  </g>
-  </svg>`;
-}
-
-function getImage(id) {  
-  img.src = getImageSrc(dronesColor[id]);
-  return img
-}
-
-/*img.src = point;*/
-
-const data = {
-    //labels: ['1', '2', '3', '4', '5', '6'],
-    datasets: [
-      {
-        label: '# of Votes',
-        data: [{x: 0, y: 90}, {x: 5, y: 120}, {x: 10, y: 120}, {x: 15, y: 120}, {x: 20, y: 120}, {x: 25, y: 120}, {x: 30, y: 120}],
-        borderColor: '#43BEF4',
-        backgroundColor: '#43BEF4',
-        pointStyle: img,
-      },
-      {
-        label: '# of Votes',
-        data: [{x: 0, y: 30}, {x: 5, y: 95}, {x: 10, y: 59}, {x: 15, y: 44}, {x: 20, y: 150}, {x: 25, y: 130}, {x: 30, y: 88}],
-        borderColor: 'pink',
-        backgroundColor: 'pink',
-        pointStyle: function(param) {
-          return getImage(2)
-        },
-      },
-    ],    
-  };
-  
-  const options = {
-    /*responsive: true,*/
-    datasets: {
-      scatter: {
-        borderWidth: 2.5,
-        fill: false,
-        pointRadius: 10,
-        pointHitRadius: 20,
-        showLine: true
-      }
-    },
-    layout: {
-      padding: {
-        left: 20,
-        right: 10,
-        top: 20,
-        bottom: 10
-      }
-    },
-    maintainAspectRatio: false,
-    plugins: { 
-        legend: {
-             display: false 
-        },
-        zoom: {
-            zoom: {
-              wheel: {
-                enabled: true // SET SCROOL ZOOM TO TRUE
-              },
-              mode: "xy",
-              speed: 20
-            },
-            pan: {
-              enabled: false,
-              mode: "xy",
-              speed: 100
-            }
-        },
-        dragData: {
-            round: 1,
-            showTooltip: true,
-            onDragStart: function(e, datasetIndex, index, value) {
-              // console.log(e)
-            },
-            onDrag: function(e, datasetIndex, index, value) {              
-              e.target.style.cursor = 'grabbing'
-              // console.log(e, datasetIndex, index, value)
-            },
-            onDragEnd: function(e, datasetIndex, index, value) {
-              e.target.style.cursor = 'default' 
-              // console.log(datasetIndex, index, value)
-            },
-        }      
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          color: 'rgba(255,255,255,0.7)',
-          font: {
-            size: 12,
-            weight: 'lighter',            
-          },
-        },
-        grid: {
-          drawBorder: false,       
-          color: function (ctx) {            
-            if (ctx.index === 0) return '#7C838F';
-            return '#525761'
-          },             
-        }
-      },
-      x: {
-        beginAtZero: true,
-        ticks: {
-          color: 'rgba(255,255,255,0.7)',
-          font: {
-            size: 12,
-            weight: 'lighter'
-          },
-        },
-        grid: {            
-            color: function (ctx) {
-              if (ctx.index === 0) return '#7C838F';
-              return '#525761'
-            }, 
-        }
-      },
-    },   
-  };
-    
 export default class RouteChart extends Component {
 
-    componentDidMount = () => {
+    constructor(props) {
+        super(props);
+        this.setOptions();
 
-      Chart.register(zoomPlugin);
-      Chart.register(dragdataPlugin);
-    //   Chart.register({
-    //     id: 'dropShadow',
-    //     afterDraw: function (chart, easing) {
-    //       console.log(chart);          
-    //       let originial = this;
-    //       const { ctx } = chart;
-    //       let originalStroke = ctx.stroke;
-    //       ctx.stroke = function () {
-    //         ctx.save();
-    //         ctx.shadowColor = '#012633';
-    //         ctx.shadowBlur = 3;
-    //         ctx.shadowOffsetX = 0;
-    //         ctx.shadowOffsetY = 0;
-    //         originalStroke.apply(this, arguments)
-    //         ctx.restore();
-    //       }
-    //     }
-    //   });
-      /*Chart.register({
-        id: 'drawMaxHeightLine',
-        afterDraw: (chart) => {
-            // eslint-disable-next-line no-underscore-dangle
-            if (chart.tooltip._active && chart.tooltip._active.length) {
-              // find coordinates of tooltip
-              const activePoint = chart.tooltip._active[0];
-              const { ctx } = chart;
-              const { x } = activePoint.element;
-              const topY = chart.scales.y.top;
-              const bottomY = chart.scales.y.bottom;
-    
-              // draw vertical line
-              ctx.save();
-              ctx.beginPath();
-              ctx.moveTo(x, topY);
-              ctx.lineTo(x, bottomY);
-              ctx.lineWidth = 1;
-              ctx.strokeStyle = '#1C2128';
-              ctx.stroke();
-              ctx.restore();
+        this.isDraggingPoint = false;
+        this.chartRef = React.createRef();
+        this.state = {
+            navPlanPolylinePoints: null
+        }
+    }
+
+    setOptions = () => {
+        const gridFirstLineColor = '#7C838F';
+        const gridLineColor = '#525761';
+
+        this.options = {
+            /*responsive: true,*/
+            datasets: {
+                scatter: {
+                    borderWidth: 2.5,
+                    fill: false,
+                    pointRadius: 10,
+                    pointHitRadius: 20,
+                    showLine: true
+                }
+            },
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 10,
+                    top: 20,
+                    bottom: 10
+                }
+            },
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                zoom: {
+                    zoom: {
+                        wheel: {
+                            enabled: true // SET SCROOL ZOOM TO TRUE
+                        },
+                        mode: "xy",
+                        speed: 20
+                    },
+                    pan: {
+                        enabled: true,
+                        //mode: "xy",
+                        mode: (event) => {
+                            if (!this.isDraggingPoint) {
+                                return 'xy'
+                            } else return ''
+                        },
+                        rangeMin: {
+                            y: 0,
+                            x: 0
+                        },
+                        rangeMax: {
+                            y: 10,
+                        },
+                        speed: 100
+                    }
+                },
+                dragData: {
+                    round: 1,
+                    showTooltip: true,
+                    onDragStart: (e, datasetIndex, index, value) => {
+                        this.isDraggingPoint = true;
+                        if (this.props.selectedDroneId === config.ALL || value.isPlayer) return false
+                    },
+                    onDrag: (e, datasetIndex, index, value) => {
+                        e.target.style.cursor = 'grabbing'
+                        //return this.onDragHandler(e, datasetIndex, index, value);
+                        return false
+                    },
+                    onDragEnd: (e, datasetIndex, index, value) => {
+                        e.target.style.cursor = 'default'
+                        this.isDraggingPoint = false;
+                    },
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return Math.round(value)
+                        },
+                        color: 'rgba(255,255,255,0.7)',
+                        font: {
+                            size: 12,
+                            weight: 'lighter',
+                        },
+                    },
+                    grid: {
+                        drawBorder: false,
+                        color: (ctx) => {
+                            if (ctx.index === 0) return gridFirstLineColor;
+                            return gridLineColor
+                        },
+                    }
+                },
+                x: {
+                    offset: false,
+                    beginAtZero: true,
+                    /*max: (event) => {
+                        let maxValue = 0;
+                        event.chart.data.datasets.forEach(dataSet => {
+                            dataSet.data.forEach(point => {
+                                if (point.x > maxValue) {
+                                    maxValue = point.x;
+                                }
+                            })
+                        })
+                        console.log(maxValue)
+                        return maxValue;
+                    },*/
+                    ticks: {
+                        callback: (value) => {
+                            return Math.round(value)
+                        },
+                        color: 'rgba(255,255,255,0.7)',
+                        font: {
+                            size: 12,
+                            weight: 'lighter'
+                        },
+                    },
+                    grid: {
+                        color:  (ctx) => {
+                            if (ctx.index === 0) return gridFirstLineColor;
+                            return gridLineColor
+                        },
+                    }
+                },
+            },
+        };
+    }
+
+    componentDidMount = () => {
+        this.props.setChartInstance(this.getChart)
+        Chart.register(zoomPlugin);
+        Chart.register(dragdataPlugin);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (
+            (prevProps.selectedDroneId !== this.props.selectedDroneId) ||
+            (prevProps.selectedRouteDirection !== this.props.selectedRouteDirection)
+        ) {
+            this.chartRef.current && this.chartRef.current.resetZoom();
+
+            //get NavPlan DTM if needed
+            if (
+                this.props.selectedDroneId !== config.ALL
+            ) {
+                this.setState({navPlanPolylinePoints: null}, () => this.getNavPlanDTMPoints())
             }
-          },
-      })*/
-    //   Chart.helpers.extend(Chart.elements.Line.prototype, {
-    //     draw () {
-          
-      
-    //           console.log(this)
-      
-    //       const { ctx } = this._chart
-      
-    //       const originalStroke = ctx.stroke
-      
-    //       ctx.stroke = function () {
-    //         ctx.save()
-    //         ctx.shadowColor = 'red'
-    //         ctx.shadowBlur = 0
-    //         ctx.shadowOffsetX = 0
-    //         ctx.shadowOffsetY = 8
-    //         originalStroke.apply(this, arguments)
-    //         ctx.restore()
-    //       }
-          
-    //       Chart.elements.Line.prototype.draw.apply(this, arguments)
-          
-    //       ctx.stroke = originalStroke;
-    //     }
-    //   })
-      
-      /*Chart.defaults.ShadowLine = Chart.defaults.line
-      Chart.controllers.ShadowLine = Chart.controllers.line.extend({
-        datasetElementType: ShadowLineElement
-      })
-      const a = Chart
-      debugger
-    let draw = Chart.controllers.line.prototype.draw;   
-    Chart.controllers.line.prototype.draw = function() {
-      draw.apply(this, arguments);
-      let ctx = this.chart.chart.ctx;
-      let _stroke = ctx.stroke;
-      ctx.stroke = function() {
-          ctx.save();
-          ctx.shadowColor = '#6ece87';
-          ctx.shadowBlur = 5;
-          ctx.shadowOffsetX = 0;
-          ctx.shadowOffsetY = 4;
-          _stroke.apply(this, arguments);
-          ctx.restore();
-      };
-    };*/
-      const a = Chart;
+        }
+    }
+
+    onDragHandler(e, datasetIndex, index, value) {
+        if (this.props.selectedDroneId === config.ALL) return false;
+
+    }
+
+    async getNavPlanDTMPoints() {
+
+        const {virtualPlayerToNavPlansMap, navPlansToWaypointsMap, selectedRouteDirection, selectedDroneId} = this.props;
+        const navPlanArr = virtualPlayerToNavPlansMap[selectedDroneId];
+
+        const navPlan = this.getNavPlanByDirection(navPlanArr, selectedRouteDirection);
+        const navPlanPolylinePoints = await Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlan.appX.base.position, 0));
+        this.setState({
+            navPlanPolylinePoints
+        })
+    }
+
+    getChart = () => {
+        return this.chartRef;
+    }
+
+    getCoordinate(position) {
+        const [x,y,z] = position.geometry.coordinates;
+        return new geo.coordinate(x,y,z);
+    }
+
+    getNavPlanByDirection(navPlanArr, selectedRouteDirection) {
+        if (selectedRouteDirection === routeOptions.patrol) {
+            return navPlanArr.find(nav => nav.direction === navDirectionMapper[selectedRouteDirection])
+        }
+        return navPlanArr.find(nav => nav.direction === navDirectionMapper[selectedRouteDirection])
+    }
+
+    getNavPlanWaypoints(navPlanArr, selectedRouteDirection, navPlansToWaypointsMap) {
+        if (selectedRouteDirection === routeOptions.forwardBack) {
+
+            const navPlanForward = navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.forward]);
+            const navPlanPatrol =  navPlanArr.find(nav => nav.navPlanType === navDirectionMapper[routeOptions.patrol]);
+            const navPlanBack = navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.back]);
+
+            const forwardPointsArr = navPlanForward && navPlanForward._id && navPlansToWaypointsMap[navPlanForward._id] || [];
+            const patrolPointsArr = navPlanPatrol && navPlanPatrol._id && navPlansToWaypointsMap[navPlanPatrol._id] || [];
+            const backPointsArr = navPlanBack && navPlanBack._id && navPlansToWaypointsMap[navPlanBack._id] || [];
+
+            const sortedForwardPoints = forwardPointsArr.sort((a,b) => a.index - b.index);
+            const sortedPatrolPoints = patrolPointsArr.sort((a,b) => a.index - b.index);
+            const sortedBackPoints = backPointsArr.sort((a,b) => a.index - b.index);
+
+            return [
+                ...sortedForwardPoints,
+                ...sortedPatrolPoints,
+                ...sortedBackPoints
+            ]
+        } else {
+            // here we cover also the navPlanType === patrol since its has default navPlanDirection
+            const navPlan = this.getNavPlanByDirection(navPlanArr, selectedRouteDirection);
+            return navPlan && navPlan._id ? navPlansToWaypointsMap[navPlan._id].sort((a,b) => a.index - b.index) : []
+        }
+    }
+
+    getNavPlanLinkedPlayerPosition(navPlanArr, selectedRouteDirection) {
+        const direction = selectedRouteDirection === routeOptions.forwardBack ? routeOptions.forward : selectedRouteDirection;
+        const navPlan = this.getNavPlanByDirection(navPlanArr, direction);
+
+        if (navPlan && navPlan.linkedPlayerOrDestinationPoint && navPlan.linkedPlayerOrDestinationPoint._id) {
+            const player = this.props.entsIdToEntsMap[navPlan.linkedPlayerOrDestinationPoint._id];
+            if (player) {
+                return geo.serializer.deserializePosition(player.appX.base.position, geo.returnTypeEnum.geoJson);
+            }
+        }
+
+        return null;
+    }
+
+    getClosetsSegmentToPlayer = (playerPosition, prevPosition, position, i, vector) => {
+
+        let closetsSegmentToPlayer = {afterWaypoint: null, diff: null}
+        if (playerPosition) {
+            const vectorFromPrevWaypointToPlayer = geo.geometricCalculations.vectorFromTwoLocations(this.getCoordinate(prevPosition), this.getCoordinate(playerPosition));
+            const vectorFromPlayerToCurrentWaypoint = geo.geometricCalculations.vectorFromTwoLocations(this.getCoordinate(playerPosition), this.getCoordinate(position));
+
+            const diffFromSegment = (vectorFromPrevWaypointToPlayer.distance + vectorFromPlayerToCurrentWaypoint.distance) - vector.distance;
+            if (closetsSegmentToPlayer.afterWaypoint == null) {
+                closetsSegmentToPlayer.afterWaypoint = i -1;
+                closetsSegmentToPlayer.diff = diffFromSegment;
+            } else if (diffFromSegment < closetsSegmentToPlayer.diff) {
+                closetsSegmentToPlayer.afterWaypoint = i -1;
+                closetsSegmentToPlayer.diff = diffFromSegment;
+            }
+        }
+        return closetsSegmentToPlayer;
+    }
+
+    getNavPlanDTMDataSet = () => {
+        const {navPlanPolylinePoints} = this.state;
+        let totalNavPlanLength = 0;
+
+        const navPlanDTMPoints = navPlanPolylinePoints.map((point, i) => {
+
+            if (i !== 0) {
+                const vector = geo.geometricCalculations.vectorFromTwoLocations(
+                    new geo.coordinate(navPlanPolylinePoints[i-1].x / 100000, navPlanPolylinePoints[i-1].y / 100000, navPlanPolylinePoints[i-1].z),
+                    new geo.coordinate(point.x / 100000, point.y / 100000, point.z / 100000)
+                );
+                totalNavPlanLength += vector.distance;
+            }
+
+            const dtmChartPoint = {
+                x: Math.round(totalNavPlanLength),
+                y: point.z,
+            }
+
+            return dtmChartPoint;
+        })
+
+
+
+        const dataset = {
+            label: '',
+            data: navPlanDTMPoints,
+            borderColor: '#ff9c44',
+            backgroundColor: '#8b572470',
+            pointRadius: 0,
+            fill: true,
+            dragData: false
+        }
+
+        return dataset;
+    }
+
+    getNavPlanDataSet = vPlayerId => {
+
+        const {virtualPlayerToNavPlansMap, navPlansToWaypointsMap, virtualPlayerToColorMap, selectedRouteDirection} = this.props;
+
+        const navPlanArr = virtualPlayerToNavPlansMap[vPlayerId];
+
+        const sortedWaypoints = this.getNavPlanWaypoints(navPlanArr, selectedRouteDirection, navPlansToWaypointsMap) || [];
+        let totalNavPlanLength = 0;
+
+        let closetsSegmentToPlayer = null
+        const playerPosition = this.getNavPlanLinkedPlayerPosition(navPlanArr, selectedRouteDirection);
+
+        const navPlanPoints = sortedWaypoints.map((waypoint, i) => {
+            const position = geo.serializer.deserializePosition(waypoint.appX.base.position, geo.returnTypeEnum.geoJson);
+
+            if (i !== 0) {
+                const prevPosition = geo.serializer.deserializePosition(sortedWaypoints[i-1].appX.base.position, geo.returnTypeEnum.geoJson);
+                const vector = geo.geometricCalculations.vectorFromTwoLocations(this.getCoordinate(prevPosition), this.getCoordinate(position));
+
+                closetsSegmentToPlayer = this.getClosetsSegmentToPlayer(playerPosition, prevPosition, position, i, vector);
+                totalNavPlanLength += vector.distance;
+            }
+
+            const point = {
+                x: Math.round(totalNavPlanLength),
+                y: waypoint.heightAMSL,
+                waypoint
+            }
+
+            if (i === 0) {
+                point.isFirst = true;
+            } else if (i === sortedWaypoints.length -1) {
+                point.isLast = true;
+            }
+            return point;
+        })
+
+        if (playerPosition && closetsSegmentToPlayer.afterWaypoint) {
+            const i = closetsSegmentToPlayer.afterWaypoint;
+            const playerPoint = {
+                x: (navPlanPoints[i].x + navPlanPoints[i+1].x) / 2,
+                y: (navPlanPoints[i].y + navPlanPoints[i+1].y) / 2,
+                isPlayer: true
+            }
+
+            navPlanPoints.splice(i +1, 0,playerPoint);
+        }
+
+        const dataset = {
+            label: '',
+            data: navPlanPoints,
+            borderColor: virtualPlayerToColorMap[vPlayerId],
+            backgroundColor: virtualPlayerToColorMap[vPlayerId],
+            pointStyle: function(param) {
+                if (param.raw && param.raw.isFirst) {
+                    return getNavPlanImage(imagePointTypes.start, virtualPlayerToColorMap[vPlayerId])
+                } else if (param.raw && param.raw.isLast) {
+                    return getNavPlanImage(imagePointTypes.end, virtualPlayerToColorMap[vPlayerId])
+                } else if (param.raw && param.raw.isPlayer) {
+                    return getNavPlanImage(imagePointTypes.drone, virtualPlayerToColorMap[vPlayerId])
+                }
+                return getNavPlanImage(imagePointTypes.regular, virtualPlayerToColorMap[vPlayerId])
+            }
+        }
+        return dataset;
+    }
+
+    getChartData = () => {
+        let data = {};
+        let datasets = [];
+        const {selectedDroneId, virtualPlayerToNavPlansMap} = this.props;
+
+        if (this.props.selectedDroneId === config.ALL) {
+            Object.keys(virtualPlayerToNavPlansMap).forEach((vPlayerId) => {
+                datasets.push(this.getNavPlanDataSet(vPlayerId));
+            })
+        } else {
+            datasets.push(this.getNavPlanDataSet(selectedDroneId));
+            datasets.push(this.getNavPlanDTMDataSet(selectedDroneId));
+        }
+
+        data.datasets = datasets;
+        return data;
     }
 
     render() {
+
+        if (this.props.selectedDroneId !== config.ALL && !this.state.navPlanPolylinePoints) return null;
+        const chartData = this.getChartData();
+
         return (
-            <div className='route-editor-chart-wrapper'>                
-                    <Line data={data} options={options} id='route-editor-canvas'/>
+            <div className='route-editor-chart-wrapper'>
+                    <Line
+                        data={chartData}
+                        options={this.options}
+                        id='route-editor-canvas'
+                        ref={this.chartRef}
+                        redraw
+                    />
             </div>
         )
     }

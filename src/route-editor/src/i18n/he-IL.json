@@ -5,6 +5,8 @@
     "route": "נתיב:",
     "forward": "הלוך",
     "back": "חזור",
-    "forwardBack": "הלוך - חזור"
+    "forwardBack": "הלוך - חזור",
+    "patrol": "משימתי",
+    "all": "הכל"
   }
 }

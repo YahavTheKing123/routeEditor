@@ -5,6 +5,8 @@
     "route": "Route:",
     "forward": "Forward",
     "back": "Back",
-    "forwardBack": "Forward - Back"
+    "forwardBack": "Forward - Back",
+    "patrol": "Patrol",
+    "all": "All"
   }
 }

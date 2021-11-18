@@ -10,7 +10,7 @@ import directionDown from './assets/directionDown.svg';
 import directionUp from'./assets/directionUp.svg';
 import directionUpDown from'./assets/directionUpDown.svg';
 
-const icons = { 
+const icons = {
     back: directionDown,
     forward: directionUp,
     forwardBack: directionUpDown
@@ -22,7 +22,7 @@ export default class Footer extends Component {
         super(props);
         this.state = {
             dropdownOptions: null
-        } 
+        }
     }
 
     componentDidMount() {
@@ -32,7 +32,7 @@ export default class Footer extends Component {
             label: translator.t(key),
             value: key
         }))
-        
+
         this.setState({
             dropdownOptions
         })
@@ -50,13 +50,13 @@ export default class Footer extends Component {
             </div>
         )
     }
-    
+
     getDropDownIcon() {
 
-        const iconKey = this.props.selectedDropdownItem ? this.props.selectedDropdownItem.value : this.state.dropdownOptions[0].value;
+        const iconKey = this.props.selectedDropdownItem ? this.props.selectedDropdownItem : this.state.dropdownOptions[0].value;
         return <img src={icons[iconKey]} className='route-editor-footer-dropdown-icon-img'/>
     }
-    
+
     renderDropDown() {
         if (!this.state.dropdownOptions) return null
         return (
@@ -67,14 +67,14 @@ export default class Footer extends Component {
                     <Select
                         className={"Select__container"}
                         classNamePrefix="Select"
-                        value={this.props.selectedDropdownItem || this.state.dropdownOptions[0]}
+                        value={this.state.dropdownOptions.find(item => item.value === this.props.selectedDropdownItem)}
                         options={this.state.dropdownOptions}
-                        isClearable={false}                        
+                        isClearable={false}
                         placeholder=""
                         maxMenuHeight={'25rem'}
-                        onChange={selectedItem => this.props.onDropDownSelect(selectedItem)}
+                        onChange={selectedItem => this.props.onDropDownSelect(selectedItem.value)}
                 />
-                </span>                
+                </span>
             </div>
         )
     }
@@ -94,10 +94,10 @@ export default class Footer extends Component {
                 <button className='route-editor-footer-action-button plan-action-button' onClick={this.props.onClose}>
                     <img className='route-editor-footer-undo-icon' src={fxIcon} style={{height:'1.6rem', width:'1.6rem', marginLeft: '0.5rem'}}/>
                     <span>{this.props.translator.t('plan')}</span>
-                </button>                
+                </button>
                 <button className='route-editor-footer-action-button' onClick={this.props.onClose}>
                     <img className='route-editor-footer-undo-icon' src={undoIcon}/>
-                </button>   
+                </button>
                 <button className='route-editor-footer-action-button' onClick={this.props.onClose}>
                     <img className='route-editor-footer-check-icon' src={checkIcon}/>
                 </button>
@@ -107,7 +107,7 @@ export default class Footer extends Component {
 
     render() {
         return (
-            <div className='route-editor-footer'>               
+            <div className='route-editor-footer'>
                     {this.renderRightButtons()}
                     {this.renderLeftButtons()}
             </div>

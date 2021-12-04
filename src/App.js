@@ -1,3 +1,4 @@
+import { tsThisType } from "@babel/types";
 import {Component} from "react";
 import {RouteEditor} from './route-editor/src';
 
@@ -5,7 +6,8 @@ export default class App extends Component {
 
 
   state = {
-    entities: null
+    entities: null,
+    subscriptionResults: null
   }
 
   async fetchData() {
@@ -13,20 +15,32 @@ export default class App extends Component {
     const entities = await response.json();
 
     this.setState({
-      entities
+      subscriptionResults:{
+        toJS() {
+          return entities
+        }
+      }
     })
   }
 
   componentDidMount() {
-    this.fetchData();
+    setTimeout(() => this.fetchData(),500)    
   }
 
+  subscriptionResults = {
+    toJS() {
+      return {subscriptionResults: this.state.entities}
+    }
+  }
 
   render () {
     return (
       <>
         <div className='side-bar'></div>
-        <RouteEditor entities={this.state.entities}/>
+        <RouteEditor 
+          subscriptionResults={this.state.subscriptionResults}
+          additionalData={{snames: {updateNavPlansCommandSname: 'dummyCommand'}}}
+          entities={this.state.entities}/>
       </>
     )
   }

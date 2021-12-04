@@ -1,0 +1,75 @@
+{
+  "_from": "@elbit/light-client-app",
+  "_id": "@elbit/light-client-app@2.0.96",
+  "_inBundle": false,
+  "_integrity": "sha1-A+bpBWO0Jth+n4KGnjKn3j1wvBc=",
+  "_location": "/@elbit/light-client-app",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@elbit/light-client-app",
+    "name": "@elbit/light-client-app",
+    "escapedName": "@elbit%2flight-client-app",
+    "scope": "@elbit",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "http://artifactory.devbit.io/artifactory/api/npm/e-cix-local-npm-general/@elbit/light-client-app/-/@elbit/light-client-app-2.0.96.tgz",
+  "_shasum": "03e6e90563b426d87e9f82869e32a7de3d70bc17",
+  "_spec": "@elbit/light-client-app",
+  "_where": "C:\\lior\\drones\\code\\30-11-21\\light-client-app",
+  "author": "",
+  "browser": {
+    "./src/GeoCalculations/proj4.js": "./src/GeoCalculations/proj4.shim.js",
+    "./src/GeoCalculations/ConcreteImplementations/MapCore/MapCoreFiles/MapCore_Calculations.js": false,
+    "./src/GeoCalculations/ConcreteImplementations/MapCore/MapCoreFiles/pthreads-main.js": false
+  },
+  "bugs": {
+    "url": "http://dauc-git1.dap.ucdev/C4I-Inf-Modules/light-client-app/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@elbit/helper": "~0.0.0",
+    "@elbit/logger-server": "~2.0.0",
+    "@elbit/position-validator": "~1.0.0",
+    "crc": "^3.8.0",
+    "mocha": "^3.2.0",
+    "proj4": "^2.4.4"
+  },
+  "deprecated": false,
+  "description": "[object Object]",
+  "devDependencies": {
+    "chai": "^3.5.0"
+  },
+  "eslintConfig": {
+    "extends": "@elbit"
+  },
+  "files": [
+    "src/",
+    "LICENSE"
+  ],
+  "homepage": "http://dauc-git1.dap.ucdev/C4I-Inf-Modules/light-client-app",
+  "keywords": [],
+  "license": "MIT",
+  "main": "src/index.js",
+  "name": "@elbit/light-client-app",
+  "repository": {
+    "type": "git",
+    "url": "git://dauc-git1.dap.ucdev/C4I-Inf-Modules/light-client-app.git"
+  },
+  "scripts": {
+    "deploy": "elbit-gulp -P",
+    "lint": "eslint ./src/index.js",
+    "postinstall": "elbit-gulp -C",
+    "test": "npm run lint",
+    "test-cov": "istanbul cover -x *.spec.js node_modules/mocha/bin/_mocha -- {lib,test}/**/*.spec.js -R spec --bail",
+    "test-spec": "mocha {lib,test}/**/*.spec.js -R spec --bail"
+  },
+  "version": "2.0.96"
+}

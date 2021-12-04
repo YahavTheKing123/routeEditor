@@ -337,9 +337,9 @@ export default class RouteChart extends Component {
 
             const navPlans = [];
 
-            navPlanForwardPos ? navPlans.push(Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlanForwardPos, 0))) : null;
-            navPlanPatrolPos ? navPlans.push(Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlanPatrolPos, 0))) : null;
-            navPlanBackPos ? navPlans.push(Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlanBackPos, 0))) : null;
+            if (navPlanForwardPos) navPlans.push(Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlanForwardPos, 0)));
+            if (navPlanPatrolPos) navPlans.push(Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlanPatrolPos, 0)));
+            if (navPlanBackPos) navPlans.push(Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlanBackPos, 0)));
 
             const response = await Promise.all(navPlans);
             navPlanPolylinePoints = response.reduce((previousValue, currentValue) => [...previousValue, ...currentValue],[])

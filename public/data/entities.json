@@ -1,44 +1,1111 @@
 [
-    {   "_id": "1",
-        "appX": {
-            "base": {
-                "dispName": "רפאל"
+    {
+      "id": "oPrRgq4AAAACL14XdAAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.dot_circle"
             }
+          ],
+          "position": "8AIO7UwB4iSAAAALVAA",
+          "dispName": "Start",
+          "serverLut": 1638353267054
         }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "heightAGL": 14,
+      "heightAMSL": 29,
+      "index": 0,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbQAAAA",
+        "dispName": "????? ???? 1"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XdAAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
     },
-    {   "_id": "2",
-        "appX": {
-            "base": {
-                "dispName": "ליאונרדו"
+    {
+      "id": "oPrRgq4AAAACL14XcAAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.dot_circle"
             }
+          ],
+          "position": "8AIO8MkB4htRAAALVAA",
+          "dispName": "Start",
+          "serverLut": 1638353071944
         }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "heightAGL": 15,
+      "heightAMSL": 29,
+      "index": 0,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbAAAAA",
+        "dispName": "????? ???? 2"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XcAAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
     },
-    {   "_id": "3",
-        "appX": {
-            "base": {
-                "dispName": "דונטלו"
+    {
+      "id": "oPrRgq4AAAACL14XaAAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.dot_circle"
             }
+          ],
+          "position": "8AIO8e0B4hwbAAAFeAA",
+          "dispName": "Start",
+          "serverLut": 1638353033012
         }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "heightAGL": 0,
+      "heightAMSL": 14,
+      "index": 0,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XZgAAAA",
+        "dispName": "???? some-name 8.11.21 11:27:08"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XaAAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
     },
-    {   "_id": "4",
-        "appX": {
-            "base": {
-                "dispName": "מיכאלאנג'לו"
+    {
+      "id": "oPrRgq4AAAACL14XfgAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.orange_dot_circle"
             }
+          ],
+          "position": "8AIO8bkB4hsQAABNvAA",
+          "dispName": "2-rtl",
+          "serverLut": 1638353072014
         }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "heightAGL": 185,
+      "heightAMSL": 199,
+      "index": 2,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbwAAAA",
+        "dispName": "????? ???? 2"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XfgAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
     },
-    {   "_id": "5",
-        "appX": {
-            "base": {
-                "dispName": "ספלינטר"
+    {
+      "id": "NKfeAjI",
+      "appX": {
+        "base": {
+          "entityName": "????",
+          "icons": [
+            {
+              "sname": "autonomyBase.resource.player_g3_enabled"
+            },
+            {
+              "sname": "autonomyBase.resource.player_investigator"
             }
+          ],
+          "position": "4AIO7KwB4fvLAAAJ2g",
+          "serverLut": 1638281272443,
+          "dispName": "2"
         }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "sid": 48146228,
+      "statusInMission": 1,
+      "currentMissionId": {
+        "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+        "dispName": "some-name 8.11.21 11:27:08"
+      },
+      "_id": "NKfeAjI",
+      "sname": "autonomyBase.entity.player"
     },
-    {   "_id": "6",
-        "appX": {
-            "base": {
-                "dispName": "שרדר"
-            }
+    {
+      "id": "PmHYgq4AAAACL14XbwAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????",
+          "icons": [],
+          "dispName": "????? ???? 2",
+          "position": "kQAAAAQCDxjDAeIScQAATPTOWUUXyDTYsUOISPzA8EBBgABCaAA",
+          "serverLut": 1638353072026
         }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "linkedPlayerOrDestinationPoint": {
+        "_id": "NKfeAjI",
+        "dispName": "2"
+      },
+      "mission": {
+        "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+        "dispName": "some-name 8.11.21 11:27:08"
+      },
+      "navPlanType": 2,
+      "sid": 47735102,
+      "playerPosition": null,
+      "_id": "PmHYgq4AAAACL14XbwAAAA",
+      "sname": "autonomyBase.entity.navPlan"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XegAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.orange_dot_circle"
+            }
+          ],
+          "position": "8AIO8e0B4hwbAABYrAA",
+          "dispName": "2-rtl",
+          "serverLut": 1638353267482
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "heightAGL": 213,
+      "heightAMSL": 227,
+      "index": 2,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbgAAAA",
+        "dispName": "????? ???? 1"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XegAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XdgAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.dot_circle"
+            }
+          ],
+          "position": "8AIPDD8B4ijCAACTqAA",
+          "dispName": "2",
+          "serverLut": 1638353267054
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "heightAGL": 360,
+      "heightAMSL": 378,
+      "index": 2,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbQAAAA",
+        "dispName": "????? ???? 1"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XdgAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XcgAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.dot_circle"
+            }
+          ],
+          "position": "8AIPDM4B4ifRAABzPAA",
+          "dispName": "2",
+          "serverLut": 1638353071972
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "heightAGL": 277,
+      "heightAMSL": 295,
+      "index": 2,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbAAAAA",
+        "dispName": "????? ???? 2"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XcgAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XagAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.orange_dot_circle"
+            }
+          ],
+          "position": "8AIPCp4B4hiTAAAAAAA",
+          "dispName": "Start-rtl",
+          "serverLut": 1638353033994
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "heightAGL": -18,
+      "heightAMSL": 0,
+      "index": 0,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XZwAAAA",
+        "dispName": "???? some-name 8.11.21 11:27:08"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XagAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "dafdga4AAAACL14XYwAAAA",
+      "appX": {
+        "base": {
+          "dispName": "?????? ?????????",
+          "entityName": "?????? ?????????",
+          "icons": [
+            {
+              "sname": "appX.resource.default-icon",
+              "sid": 81605578011
+            }
+          ],
+          "serverLut": 1638188960824
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "mission": {
+        "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+        "dispName": "some-name 8.11.21 11:27:08"
+      },
+      "sid": 31303541,
+      "_id": "dafdga4AAAACL14XYwAAAA",
+      "sname": "PlanningMngrService.entity.virtualPlan"
+    },
+    {
+      "id": "H8bega4AAAACL14XZAAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????",
+          "icons": [
+            {
+              "sname": "Harvest.resource.virtual_player_investigator"
+            }
+          ],
+          "position": "4AIO7G4B4hEFAAB~WA",
+          "serverLut": 1638353033320,
+          "dispName": "???? ?????? (1)"
+        }
+      },
+      "autonomyBase": {
+        "playerHolder": {
+          "player": {
+            "_id": "NKfeAjE",
+            "dispName": "1"
+          }
+        },
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "heightAGL": 305.7176056943561,
+      "heightAMSL": 326,
+      "mission": {
+        "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+        "dispName": "some-name 8.11.21 11:27:08"
+      },
+      "sid": 31376927,
+      "virtualPlan": {
+        "_id": "dafdga4AAAACL14XYwAAAA",
+        "dispName": "?????? ?????????"
+      },
+      "_id": "H8bega4AAAACL14XZAAAAA",
+      "sname": "PlanningMngrService.entity.VirtualPlayer"
+    },
+    {
+      "id": "PmHYgq4AAAACL14XZwAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????",
+          "icons": [],
+          "dispName": "???? some-name 8.11.21 11:27:08",
+          "position": "kQAAAAICDwqeAeIYkwAAAADYsUOIAAAAAAA",
+          "serverLut": 1638353033856
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "mission": {
+        "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+        "dispName": "some-name 8.11.21 11:27:08"
+      },
+      "navPlanType": 1,
+      "sid": 47735102,
+      "playerPosition": null,
+      "_id": "PmHYgq4AAAACL14XZwAAAA",
+      "sname": "autonomyBase.entity.navPlan"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XfQAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.orange_dot_circle"
+            }
+          ],
+          "position": "8AIPCmoB4heIAABEwAA",
+          "dispName": "1-rtl",
+          "serverLut": 1638353072013
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "heightAGL": 159,
+      "heightAMSL": 176,
+      "index": 1,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbwAAAA",
+        "dispName": "????? ???? 2"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XfQAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XeQAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.orange_dot_circle"
+            }
+          ],
+          "position": "8AIPCp4B4hiTAAB7DAA",
+          "dispName": "1-rtl",
+          "serverLut": 1638353267457
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "heightAGL": 297,
+      "heightAMSL": 315,
+      "index": 1,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbgAAAA",
+        "dispName": "????? ???? 1"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XeQAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "PmHYgq4AAAACL14XbAAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????",
+          "icons": [],
+          "dispName": "????? ???? 2",
+          "position": "kQAAAAQCDvDJAeIbUUtUQSRAygAAAABa4Uu2AABn6Ev11WDGQAA",
+          "serverLut": 1638353071965
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "linkedPlayerOrDestinationPoint": {
+        "_id": "NKfeAjI",
+        "dispName": "2"
+      },
+      "mission": {
+        "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+        "dispName": "some-name 8.11.21 11:27:08"
+      },
+      "navPlanType": 2,
+      "sid": 47735102,
+      "playerPosition": "8AIO7KwB4fvLAAAJ2gA",
+      "_id": "PmHYgq4AAAACL14XbAAAAA",
+      "sname": "autonomyBase.entity.navPlan"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XdQAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.dot_circle"
+            }
+          ],
+          "position": "8AIO8V4B4h0MAAA6NAA",
+          "dispName": "1",
+          "serverLut": 1638353267543
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "heightAGL": 136,
+      "heightAMSL": 149,
+      "index": 1,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbQAAAA",
+        "dispName": "????? ???? 1"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XdQAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XcQAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.dot_circle"
+            }
+          ],
+          "position": "8AIO8e0B4hwbAAALVAA",
+          "dispName": "1",
+          "serverLut": 1638353071994
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "heightAGL": 15,
+      "heightAMSL": 29,
+      "index": 1,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbAAAAA",
+        "dispName": "????? ???? 2"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XcQAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XaQAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.dot_circle"
+            }
+          ],
+          "position": "8AIPDM4B4ifRAAAHCAA",
+          "dispName": "End",
+          "serverLut": 1638353033054
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "heightAGL": 0,
+      "heightAMSL": 18,
+      "index": 1,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XZgAAAA",
+        "dispName": "???? some-name 8.11.21 11:27:08"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XaQAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XfwAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.orange_dot_circle"
+            }
+          ],
+          "position": "8AIO8MkB4htRAAALVAA",
+          "dispName": "End-rtl",
+          "serverLut": 1638353072031
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "heightAGL": 15,
+      "heightAMSL": 29,
+      "index": 3,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbwAAAA",
+        "dispName": "????? ???? 2"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XfwAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "PmHYgq4AAAACL14XbgAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????",
+          "icons": [],
+          "dispName": "????? ???? 1",
+          "position": "kQAAAAQCDxVOAeIglQAAlHDKsMgC2WTYsUOI4mDEoUhlgABNWAA",
+          "serverLut": 1638353267477
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "linkedPlayerOrDestinationPoint": {
+        "_id": "NKfeAjE",
+        "dispName": "1"
+      },
+      "mission": {
+        "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+        "dispName": "some-name 8.11.21 11:27:08"
+      },
+      "navPlanType": 2,
+      "sid": 47735102,
+      "playerPosition": null,
+      "_id": "PmHYgq4AAAACL14XbgAAAA",
+      "sname": "autonomyBase.entity.navPlan"
+    },
+    {
+      "id": "h~Xfgq4AAAAAdeMWBQAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ?????????",
+          "icons": [
+            {
+              "sname": "autonomyBase.resource.mission_investigation"
+            }
+          ],
+          "dispName": "some-name 8.11.21 11:27:08",
+          "position": "kgAAAAUCDwzOAeIn0UdPXpbAWkE2xurYJMDi0qLG6kAiyUJB~sENAA",
+          "serverLut": 1638281656028
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "heightAGLConstraint": {
+        "minHeight": 50,
+        "maxHeight": 300
+      },
+      "heightAMSLConstraint": {
+        "minHeight": 76,
+        "maxHeight": 326
+      },
+      "heightOfSafetyAboveGround": 10,
+      "heightOfSafetyBetweenPlayers": 30,
+      "maxAltitudeRelativeToMaxGroundAltitude": 300,
+      "minAltitudeRelativeToMaxGroundAltitude": 50,
+      "missionSafetyRange": 0,
+      "sid": 48231815,
+      "maxGroundAltitude": 26,
+      "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+      "sname": "autonomyBase.entity.mission"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XewAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.orange_dot_circle"
+            }
+          ],
+          "position": "8AIO7UwB4iSAAAALVAA",
+          "dispName": "End-rtl",
+          "serverLut": 1638353266971
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "heightAGL": 14,
+      "heightAMSL": 29,
+      "index": 3,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbgAAAA",
+        "dispName": "????? ???? 1"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XewAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XdwAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.dot_circle"
+            }
+          ],
+          "position": "8AIPFU4B4iCVAADFqAA",
+          "dispName": "End",
+          "serverLut": 1638353267553
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "heightAGL": 486,
+      "heightAMSL": 506,
+      "index": 3,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbQAAAA",
+        "dispName": "????? ???? 1"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XdwAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XcwAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.dot_circle"
+            }
+          ],
+          "position": "8AIPGMMB4hJxAABs~AA",
+          "dispName": "End",
+          "serverLut": 1638353072047
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "heightAGL": 259,
+      "heightAMSL": 279,
+      "index": 3,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbAAAAA",
+        "dispName": "????? ???? 2"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XcwAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XawAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.orange_dot_circle"
+            }
+          ],
+          "position": "8AIO8e0B4hwbAAAFeAA",
+          "dispName": "End-rtl",
+          "serverLut": 1638353034015
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "heightAGL": 0,
+      "heightAMSL": 14,
+      "index": 1,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XZwAAAA",
+        "dispName": "???? some-name 8.11.21 11:27:08"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XawAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "H8bega4AAAACL14XZQAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????",
+          "icons": [
+            {
+              "sname": "Harvest.resource.virtual_player_investigator"
+            }
+          ],
+          "position": "8AIPGMMB4hJxAABzoAA",
+          "serverLut": 1638353032751,
+          "dispName": "???? ?????? (2)"
+        }
+      },
+      "autonomyBase": {
+        "playerHolder": {
+          "player": {
+            "_id": "NKfeAjI",
+            "dispName": "2"
+          }
+        },
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "heightAGL": 275.1141289224739,
+      "heightAMSL": 296,
+      "mission": {
+        "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+        "dispName": "some-name 8.11.21 11:27:08"
+      },
+      "sid": 31376927,
+      "virtualPlan": {
+        "_id": "dafdga4AAAACL14XYwAAAA",
+        "dispName": "?????? ?????????"
+      },
+      "_id": "H8bega4AAAACL14XZQAAAA",
+      "sname": "PlanningMngrService.entity.VirtualPlayer"
+    },
+    {
+      "id": "PmHYgq4AAAACL14XZgAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????",
+          "icons": [],
+          "dispName": "???? some-name 8.11.21 11:27:08",
+          "position": "kQAAAAICDvHtAeIcG0XGWuFLtkGJAA",
+          "serverLut": 1638353032956
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "mission": {
+        "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+        "dispName": "some-name 8.11.21 11:27:08"
+      },
+      "navPlanType": 1,
+      "sid": 47735102,
+      "playerPosition": null,
+      "_id": "PmHYgq4AAAACL14XZgAAAA",
+      "sname": "autonomyBase.entity.navPlan"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XfAAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.orange_dot_circle"
+            }
+          ],
+          "position": "8AIPGMMB4hJxAABM9AA",
+          "dispName": "Start-rtl",
+          "serverLut": 1638353072075
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "heightAGL": 177,
+      "heightAMSL": 197,
+      "index": 0,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbwAAAA",
+        "dispName": "????? ???? 2"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XfAAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "oPrRgq4AAAACL14XeAAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????? ????",
+          "icons": [
+            {},
+            {
+              "sname": "autonomyBase.resource.orange_dot_circle"
+            }
+          ],
+          "position": "8AIPFU4B4iCVAACUcAA",
+          "dispName": "Start-rtl",
+          "serverLut": 1638353267522
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 2,
+      "heightAGL": 360,
+      "heightAMSL": 380,
+      "index": 0,
+      "navPlan": {
+        "_id": "PmHYgq4AAAACL14XbgAAAA",
+        "dispName": "????? ???? 1"
+      },
+      "sid": 47315616,
+      "_id": "oPrRgq4AAAACL14XeAAAAA",
+      "sname": "autonomyBase.entity.wayPoint"
+    },
+    {
+      "id": "PmHYgq4AAAACL14XbQAAAA",
+      "appX": {
+        "base": {
+          "entityName": "????",
+          "icons": [],
+          "dispName": "????? ???? 1",
+          "position": "kQAAAAQCDu1MAeIkgEtURBLHdG7gWuFLtgAAWXRJD8gtcgAA",
+          "serverLut": 1638353267504
+        }
+      },
+      "autonomyBase": {
+        "crossSection": {
+          "root": {
+            "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+            "dispName": "some-name 8.11.21 11:27:08"
+          }
+        }
+      },
+      "direction": 1,
+      "linkedPlayerOrDestinationPoint": {
+        "_id": "NKfeAjE",
+        "dispName": "1"
+      },
+      "mission": {
+        "_id": "h~Xfgq4AAAAAdeMWBQAAAA",
+        "dispName": "some-name 8.11.21 11:27:08"
+      },
+      "navPlanType": 2,
+      "sid": 47735102,
+      "playerPosition": "8AIO6UwB4ho5AAAGEAA",
+      "_id": "PmHYgq4AAAACL14XbQAAAA",
+      "sname": "autonomyBase.entity.navPlan"
     }
-]
+  ]

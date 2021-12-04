@@ -156,7 +156,7 @@ class RouteEditor extends Component {
             }
         })
 
-        for (key in navPlansToWaypointsMap) {
+        for (const key in navPlansToWaypointsMap) {
             const navPlan = entsIdToEntsMap[key];
             if (navPlan && navPlan.linkedPlayerOrDestinationPoint && navPlan.linkedPlayerOrDestinationPoint._id) {
                 const vPlayerId = playerToVirtualPlayerMap[navPlan.linkedPlayerOrDestinationPoint._id]._id;

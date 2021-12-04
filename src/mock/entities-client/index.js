@@ -1,0 +1,5 @@
+const EntitiesMngr = {}
+
+export {
+    EntitiesMngr
+}

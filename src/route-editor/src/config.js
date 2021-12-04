@@ -15,6 +15,8 @@ const config = {
         4: '#F459A2'
     },
     ALL: 'all',
+    dataSetDTMIdentifier: 'dataSetDTMIdentifier',
+    partrolRouteTypes: [3, 4, 5]
 }
 
 export default config;

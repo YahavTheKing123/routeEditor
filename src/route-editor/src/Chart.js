@@ -6,6 +6,9 @@ import {getNavPlanImage, imagePointTypes, getPolylineHights} from "./chartUtils"
 import {routeOptions, navDirectionMapper} from "./RouteEditor";
 import config from "./config";
 import {Globals} from "@elbit/light-client-app";
+import {Enum} from '~/enums-client';
+import {DisplayDataHandler} from '~/converter-mngr';
+import ldsh from 'lodash';
 
 const {geo} = require('@elbit/js-geo');
 
@@ -17,6 +20,7 @@ export default class RouteChart extends Component {
 
         this.isDraggingPoint = false;
         this.chartRef = React.createRef();
+        this.newWaypointsHeight = {};
         this.state = {
             navPlanPolylinePoints: null
         }
@@ -28,29 +32,62 @@ export default class RouteChart extends Component {
 
         this.options = {
             /*responsive: true,*/
+            hover: {
+                mode: 'dataset'
+            },
+            animation: {
+                //duration: 0
+            },
             datasets: {
                 scatter: {
                     borderWidth: 2.5,
                     fill: false,
                     pointRadius: 10,
-                    pointHitRadius: 20,
+                    pointHitRadius: 15,
                     showLine: true
                 }
             },
             layout: {
                 padding: {
                     left: 20,
-                    right: 10,
+                    right: 20,
                     top: 20,
                     bottom: 10
                 }
             },
             maintainAspectRatio: false,
             plugins: {
+                tooltip: {
+                    //mode: 'nearest',
+                    yAlign: 'bottom',
+                    borderColor: '#bab4cab5',
+                    borderWidth: 0.5,
+                    textDirection: 'ltr',
+                    displayColors: false,
+                    filter: (tooltipItem, data) => {
+                      return tooltipItem.dataset.identifier === config.dataSetDTMIdentifier ? false : true
+                    },
+                    callbacks: {
+                        title: (tooltipItem, data) => {
+                            return this.getTooltipTitle(tooltipItem,data)
+                        },
+                        label: (tooltipItem, data) => {
+                            return  tooltipItem &&
+                                    tooltipItem.parsed &&
+                                    tooltipItem.parsed.y &&
+                                    DisplayDataHandler.parse({type:Enum.fieldType.altitude , data: Math.round(tooltipItem.parsed.y) ,fieldMetadata: {hideLabel: false}}) + '\u0027' + ' AMSL';
+                        },
+                        labelTextColor: (context) => '#c2c5cb',
+                    }
+                },
                 legend: {
                     display: false
                 },
                 zoom: {
+                    limits: {
+                        x: {min: 0, max: 'original'},
+                        y: {min: 0}
+                    },
                     zoom: {
                         wheel: {
                             enabled: true // SET SCROOL ZOOM TO TRUE
@@ -66,13 +103,13 @@ export default class RouteChart extends Component {
                                 return 'xy'
                             } else return ''
                         },
-                        rangeMin: {
+                        /*rangeMin: {
                             y: 0,
                             x: 0
                         },
                         rangeMax: {
                             y: 10,
-                        },
+                        },*/
                         speed: 100
                     }
                 },
@@ -80,26 +117,73 @@ export default class RouteChart extends Component {
                     round: 1,
                     showTooltip: true,
                     onDragStart: (e, datasetIndex, index, value) => {
+                        const {mission, selectedDroneId} = this.props;
+
                         this.isDraggingPoint = true;
-                        if (this.props.selectedDroneId === config.ALL || value.isPlayer) return false
+                        if (selectedDroneId === config.ALL || value.isPlayer) return false;
+
+
+                        if (this.isPatrolWaypoint(value.waypoint)) {
+                            this.minLimitPoint = mission.heightAGLConstraint && mission.heightAGLConstraint.minHeight || 0;
+
+                        } else {
+                            const dtmDataSet = this.chartRef.current.data.datasets.find(ds => ds.identifier === config.dataSetDTMIdentifier);
+                            const dtmOnPoint =  dtmDataSet.data.find(point => Math.round(point.x) === Math.round(value.x));
+                            const offset = mission.heightOfSafetyAboveGround  || 0;
+                            this.minLimitPoint = dtmOnPoint.y + offset;
+                        }
                     },
                     onDrag: (e, datasetIndex, index, value) => {
-                        e.target.style.cursor = 'grabbing'
-                        //return this.onDragHandler(e, datasetIndex, index, value);
-                        return false
+                        e.target.style.cursor = 'grabbing';
+                        const dataSetData = this.chartRef.current.data.datasets[datasetIndex].data;
+
+                        // Set player icon in the middle of the line between current moving the next point
+                        if (dataSetData[index + 1] && dataSetData[index + 1].isPlayer && dataSetData[index + 2]) {
+                            dataSetData[index + 1].y = (value.y + dataSetData[index + 2].y) / 2
+                        } else if (dataSetData[index - 1] && dataSetData[index - 1].isPlayer && dataSetData[index - 2]) {
+                            dataSetData[index - 1].y = (value.y + dataSetData[index - 2].y) / 2
+                        }
+
+                        if (value.y <= this.minLimitPoint) {
+                            this.chartRef.current.data.datasets[datasetIndex].data[index].y = this.minLimitPoint;
+                        }
                     },
                     onDragEnd: (e, datasetIndex, index, value) => {
                         e.target.style.cursor = 'default'
                         this.isDraggingPoint = false;
+                        this.minLimitPoint = null;
+                        if (value.waypoint) {
+                            // we will save the AGL. calc by newAmsl - DTM
+
+                            const dtm = this.chartRef.current.data.datasets.find(ds => ds.identifier === config.dataSetDTMIdentifier)
+                            const dtmPoint = dtm.data.find(point => point.x === value.x);
+
+                            this.newWaypointsHeight[value.waypoint._id] = {
+                                newHeightAGL: Math.round(value.y - dtmPoint.y),
+                                newHeightAMSL: value.y,
+                                waypoint: value.waypoint
+                            };
+                            this.props.updateChartChangesFlag(true);
+                        }
                     },
                 }
             },
             scales: {
                 y: {
+                    title: {
+                        display: false,
+                        text: 'meters',
+                        align: 'start'
+                    },
                     beginAtZero: true,
                     ticks: {
-                        callback: function(value) {
-                            return Math.round(value)
+                        stepSize: 100,
+                        callback: function(value, index) {
+                            if (index === 0) {
+                                return DisplayDataHandler.buildBtypeMembers({ field: { value: 0, type: Enum.fieldType.altitude } }).shortName;
+                            }
+                            const parsedValue = DisplayDataHandler.parse({type:Enum.fieldType.altitude , data: Math.round(value),  fieldMetadata: {hideLabel: false}});
+                            return Math.round(parsedValue)
                         },
                         color: 'rgba(255,255,255,0.7)',
                         font: {
@@ -131,8 +215,12 @@ export default class RouteChart extends Component {
                         return maxValue;
                     },*/
                     ticks: {
-                        callback: (value) => {
-                            return Math.round(value)
+                        callback: (value, index) => {
+                            if (index === 0) {
+                                return DisplayDataHandler.buildBtypeMembers({ field: { value: 0, type: Enum.fieldType.distance } }).shortName;
+                            }
+                            const parsedValue = DisplayDataHandler.parse({type:Enum.fieldType.distance , data: Math.round(value),  fieldMetadata: {hideLabel: false}});
+                            return Math.round(parsedValue)
                         },
                         color: 'rgba(255,255,255,0.7)',
                         font: {
@@ -151,10 +239,65 @@ export default class RouteChart extends Component {
         };
     }
 
+    getTooltipTitle = (tooltipItem, data) => {
+        if (tooltipItem) {
+            let title = '';
+            tooltipItem.forEach((item, i) => {
+                const itemTitle = ldsh.get(item, 'raw.isPlayer') ?  'Player' : ldsh.get(item, 'raw.waypoint.appX.base.dispName');
+                if (i === 0) {
+                    title = itemTitle;
+                } else {
+                    title += ', ' + itemTitle;
+                }
+            })
+            return title;
+        }
+    }
+
+    isPatrolWaypoint = (waypoint) => {
+        let isPatrolWP = false;
+        if (waypoint && waypoint.navPlan) {
+            const linkedNavPlan = this.props.entsIdToEntsMap[waypoint.navPlan._id];
+            if (config.partrolRouteTypes.includes(linkedNavPlan.navPlanType)) {
+                isPatrolWP = true;
+            }
+        }
+        return isPatrolWP;
+    }
+
     componentDidMount = () => {
-        this.props.setChartInstance(this.getChart)
         Chart.register(zoomPlugin);
         Chart.register(dragdataPlugin);
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        const {
+            selectedDroneId,
+            entsIdToEntsMap,
+            mission,
+            navPlansToWaypointsMap,
+            playerToVirtualPlayerMap,
+            virtualPlayerToNavPlansMap,
+            selectedRouteDirection
+        } = nextProps;
+
+        if (this.props.selectedDroneId !==  selectedDroneId ||
+            this.props.selectedRouteDirection !==  selectedRouteDirection) {
+            this.newWaypointsHeight = {};
+        }
+
+
+        if ((this.props.selectedDroneId !==  selectedDroneId ||
+            this.props.selectedRouteDirection !==  selectedRouteDirection ||
+            this.props.entsIdToEntsMap !==  entsIdToEntsMap ||
+            this.props.navPlansToWaypointsMap !==  navPlansToWaypointsMap ||
+            this.props.playerToVirtualPlayerMap !==  playerToVirtualPlayerMap ||
+            this.props.virtualPlayerToNavPlansMap !==  virtualPlayerToNavPlansMap
+            //this.props.mission !==  mission
+        ) || this.state !== nextState) {
+            return true;
+        }
+        return false
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -165,33 +308,45 @@ export default class RouteChart extends Component {
             this.chartRef.current && this.chartRef.current.resetZoom();
 
             //get NavPlan DTM if needed
-            if (
-                this.props.selectedDroneId !== config.ALL
-            ) {
+            if (this.props.selectedDroneId !== config.ALL) {
                 this.setState({navPlanPolylinePoints: null}, () => this.getNavPlanDTMPoints())
             }
         }
     }
 
-    onDragHandler(e, datasetIndex, index, value) {
-        if (this.props.selectedDroneId === config.ALL) return false;
-
-    }
-
     async getNavPlanDTMPoints() {
 
-        const {virtualPlayerToNavPlansMap, navPlansToWaypointsMap, selectedRouteDirection, selectedDroneId} = this.props;
+        const {virtualPlayerToNavPlansMap, selectedRouteDirection, selectedDroneId} = this.props;
         const navPlanArr = virtualPlayerToNavPlansMap[selectedDroneId];
 
-        const navPlan = this.getNavPlanByDirection(navPlanArr, selectedRouteDirection);
-        const navPlanPolylinePoints = await Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlan.appX.base.position, 0));
-        this.setState({
-            navPlanPolylinePoints
-        })
-    }
+        let navPlanPolylinePoints = [];
 
-    getChart = () => {
-        return this.chartRef;
+        if (selectedRouteDirection !== routeOptions.forwardBack) {
+            const navPlan = this.getNavPlanByDirection(navPlanArr, selectedRouteDirection);
+            if (navPlan) {
+                navPlanPolylinePoints = await Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlan.appX.base.position, 0));
+            }
+        } else {
+            const navPlanForward = navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.forward]);
+            const navPlanPatrol =  navPlanArr.find(nav => config.partrolRouteTypes.includes(nav.navPlanType));
+            const navPlanBack = navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.back]);
+
+            const navPlanForwardPos = navPlanForward && navPlanForward.appX.base.position;
+            const navPlanPatrolPos =  navPlanPatrol && navPlanPatrol.appX.base.position;
+            const navPlanBackPos = navPlanBack && navPlanBack.appX.base.position;
+
+            const navPlans = [];
+
+            navPlanForwardPos ? navPlans.push(Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlanForwardPos, 0))) : null;
+            navPlanPatrolPos ? navPlans.push(Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlanPatrolPos, 0))) : null;
+            navPlanBackPos ? navPlans.push(Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlanBackPos, 0))) : null;
+
+            const response = await Promise.all(navPlans);
+            navPlanPolylinePoints = response.reduce((previousValue, currentValue) => [...previousValue, ...currentValue],[])
+        }
+
+
+        this.setState({navPlanPolylinePoints});
     }
 
     getCoordinate(position) {
@@ -201,36 +356,33 @@ export default class RouteChart extends Component {
 
     getNavPlanByDirection(navPlanArr, selectedRouteDirection) {
         if (selectedRouteDirection === routeOptions.patrol) {
-            return navPlanArr.find(nav => nav.direction === navDirectionMapper[selectedRouteDirection])
+            return navPlanArr.find(nav => config.partrolRouteTypes.includes(nav.navPlanType))
         }
         return navPlanArr.find(nav => nav.direction === navDirectionMapper[selectedRouteDirection])
     }
 
-    getNavPlanWaypoints(navPlanArr, selectedRouteDirection, navPlansToWaypointsMap) {
-        if (selectedRouteDirection === routeOptions.forwardBack) {
+    markAndSortNavPlanPointsByType(waypoints, type) {
+        return waypoints.map(wp => ({...wp, pointChartType: type})).sort((a,b) => a.index - b.index);
+    }
 
+    getNavPlanWaypoints(navPlanArr, selectedRouteDirection, navPlansToWaypointsMap) {
             const navPlanForward = navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.forward]);
-            const navPlanPatrol =  navPlanArr.find(nav => nav.navPlanType === navDirectionMapper[routeOptions.patrol]);
+            const navPlanPatrol =  navPlanArr.find(nav => config.partrolRouteTypes.includes(nav.navPlanType));
             const navPlanBack = navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.back]);
 
             const forwardPointsArr = navPlanForward && navPlanForward._id && navPlansToWaypointsMap[navPlanForward._id] || [];
             const patrolPointsArr = navPlanPatrol && navPlanPatrol._id && navPlansToWaypointsMap[navPlanPatrol._id] || [];
             const backPointsArr = navPlanBack && navPlanBack._id && navPlansToWaypointsMap[navPlanBack._id] || [];
 
-            const sortedForwardPoints = forwardPointsArr.sort((a,b) => a.index - b.index);
-            const sortedPatrolPoints = patrolPointsArr.sort((a,b) => a.index - b.index);
-            const sortedBackPoints = backPointsArr.sort((a,b) => a.index - b.index);
+            const sortedForwardPoints = this.markAndSortNavPlanPointsByType(forwardPointsArr, routeOptions.forward);
+            const sortedPatrolPoints = this.markAndSortNavPlanPointsByType(patrolPointsArr, routeOptions.patrol);
+            const sortedBackPoints = this.markAndSortNavPlanPointsByType(backPointsArr, routeOptions.back);
 
             return [
                 ...sortedForwardPoints,
                 ...sortedPatrolPoints,
                 ...sortedBackPoints
             ]
-        } else {
-            // here we cover also the navPlanType === patrol since its has default navPlanDirection
-            const navPlan = this.getNavPlanByDirection(navPlanArr, selectedRouteDirection);
-            return navPlan && navPlan._id ? navPlansToWaypointsMap[navPlan._id].sort((a,b) => a.index - b.index) : []
-        }
     }
 
     getNavPlanLinkedPlayerPosition(navPlanArr, selectedRouteDirection) {
@@ -247,9 +399,8 @@ export default class RouteChart extends Component {
         return null;
     }
 
-    getClosetsSegmentToPlayer = (playerPosition, prevPosition, position, i, vector) => {
+    getClosetsSegmentToPlayer = (playerPosition, prevPosition, position, i, vector, closetsSegmentToPlayer) => {
 
-        let closetsSegmentToPlayer = {afterWaypoint: null, diff: null}
         if (playerPosition) {
             const vectorFromPrevWaypointToPlayer = geo.geometricCalculations.vectorFromTwoLocations(this.getCoordinate(prevPosition), this.getCoordinate(playerPosition));
             const vectorFromPlayerToCurrentWaypoint = geo.geometricCalculations.vectorFromTwoLocations(this.getCoordinate(playerPosition), this.getCoordinate(position));
@@ -263,7 +414,6 @@ export default class RouteChart extends Component {
                 closetsSegmentToPlayer.diff = diffFromSegment;
             }
         }
-        return closetsSegmentToPlayer;
     }
 
     getNavPlanDTMDataSet = () => {
@@ -288,13 +438,16 @@ export default class RouteChart extends Component {
             return dtmChartPoint;
         })
 
-
-
         const dataset = {
-            label: '',
+            identifier: config.dataSetDTMIdentifier,
+            label: 'dtm',
             data: navPlanDTMPoints,
             borderColor: '#ff9c44',
             backgroundColor: '#8b572470',
+            pointBorderColor: 'rgba(0,0,0,0)',
+            pointBackgroundColor: 'rgba(0,0,0,0)',
+            pointHoverBackgroundColor: 'rgba(0,0,0,0)',
+            pointHoverBorderColor: 'rgba(0,0,0,0)',
             pointRadius: 0,
             fill: true,
             dragData: false
@@ -303,56 +456,97 @@ export default class RouteChart extends Component {
         return dataset;
     }
 
+
+    isLastWaypoint = (navPointCount, sortedWaypoints, navPlansWPCounts) => {
+            if (this.props.selectedRouteDirection ===  routeOptions.forwardBack) {
+                return navPointCount === sortedWaypoints.length -1
+            } else {
+                return navPlansWPCounts[this.props.selectedRouteDirection] - 1 === navPointCount
+            }
+    }
+
+    getNavPlansWPCounts(sortedWaypoints) {
+        return {
+            [routeOptions.forward]: sortedWaypoints.filter(wp => wp.pointChartType === routeOptions.forward).length,
+            [routeOptions.patrol]: sortedWaypoints.filter(wp => wp.pointChartType === routeOptions.patrol).length,
+            [routeOptions.back]: sortedWaypoints.filter(wp => wp.pointChartType === routeOptions.back).length,
+        }
+    }
+
+    getLatestWPHeightAMSL(waypoint) {
+        const waypointChanges = this.newWaypointsHeight[waypoint._id];
+
+        if (!waypointChanges) return waypoint.heightAMSL;
+        if (waypointChanges.waypoint.lut  ===  waypoint.lut) return waypointChanges.newHeightAMSL;
+
+        // waypoint.lut here must be bigger than the changed one. so remove the change and return the new one
+
+        delete this.newWaypointsHeight[waypoint._id];
+        return waypoint.heightAMSL;
+    }
+
     getNavPlanDataSet = vPlayerId => {
 
         const {virtualPlayerToNavPlansMap, navPlansToWaypointsMap, virtualPlayerToColorMap, selectedRouteDirection} = this.props;
 
-        const navPlanArr = virtualPlayerToNavPlansMap[vPlayerId];
-
-        const sortedWaypoints = this.getNavPlanWaypoints(navPlanArr, selectedRouteDirection, navPlansToWaypointsMap) || [];
-        let totalNavPlanLength = 0;
-
-        let closetsSegmentToPlayer = null
+        const navPlanArr = virtualPlayerToNavPlansMap[vPlayerId] || [];
         const playerPosition = this.getNavPlanLinkedPlayerPosition(navPlanArr, selectedRouteDirection);
+        const sortedWaypoints = this.getNavPlanWaypoints(navPlanArr, selectedRouteDirection, navPlansToWaypointsMap) || [];
+        const navPlansWPCounts = this.getNavPlansWPCounts(sortedWaypoints);
 
-        const navPlanPoints = sortedWaypoints.map((waypoint, i) => {
+        let totalNavPlanLength = 0;
+        let closetsSegmentToPlayer = {afterWaypoint: null, diff: null}
+        const navPlanPoints = [];
+        let navPointCount = 0;
+
+        sortedWaypoints.forEach((waypoint, i) => {
+
             const position = geo.serializer.deserializePosition(waypoint.appX.base.position, geo.returnTypeEnum.geoJson);
+            let vector = {};
 
             if (i !== 0) {
                 const prevPosition = geo.serializer.deserializePosition(sortedWaypoints[i-1].appX.base.position, geo.returnTypeEnum.geoJson);
-                const vector = geo.geometricCalculations.vectorFromTwoLocations(this.getCoordinate(prevPosition), this.getCoordinate(position));
+                vector = geo.geometricCalculations.vectorFromTwoLocations(this.getCoordinate(prevPosition), this.getCoordinate(position));
 
-                closetsSegmentToPlayer = this.getClosetsSegmentToPlayer(playerPosition, prevPosition, position, i, vector);
-                totalNavPlanLength += vector.distance;
+                this.getClosetsSegmentToPlayer(playerPosition, prevPosition, position, i, vector, closetsSegmentToPlayer);
             }
 
-            const point = {
-                x: Math.round(totalNavPlanLength),
-                y: waypoint.heightAMSL,
-                waypoint
-            }
+            if ([waypoint.pointChartType, routeOptions.forwardBack].includes(selectedRouteDirection)) {
+                totalNavPlanLength += navPointCount === 0 ? 0 : vector.distance;
 
-            if (i === 0) {
-                point.isFirst = true;
-            } else if (i === sortedWaypoints.length -1) {
-                point.isLast = true;
+                const point = {
+                    x: Math.round(totalNavPlanLength),
+                    y: this.getLatestWPHeightAMSL(waypoint), // TODO - CHECK waypoint time change vs drag time change and set this  value accordingly
+                    waypoint
+                }
+
+                if (navPointCount === 0) {
+                    point.isFirst = true;
+                } else if (this.isLastWaypoint(navPointCount, sortedWaypoints, navPlansWPCounts)) {
+                    point.isLast = true;
+                }
+                navPlanPoints.push(point);
+                navPointCount++;
             }
-            return point;
         })
 
         if (playerPosition && closetsSegmentToPlayer.afterWaypoint) {
             const i = closetsSegmentToPlayer.afterWaypoint;
-            const playerPoint = {
-                x: (navPlanPoints[i].x + navPlanPoints[i+1].x) / 2,
-                y: (navPlanPoints[i].y + navPlanPoints[i+1].y) / 2,
-                isPlayer: true
-            }
+            if ([sortedWaypoints[i].pointChartType, routeOptions.forwardBack].includes(selectedRouteDirection)) {
+                const j = navPlanPoints.findIndex(elem => elem.waypoint._id === sortedWaypoints[i]._id);
 
-            navPlanPoints.splice(i +1, 0,playerPoint);
+                const playerPoint = {
+                    x: (navPlanPoints[j].x + navPlanPoints[j+1].x) / 2,
+                    y: (navPlanPoints[j].y + navPlanPoints[j+1].y) / 2,
+                    isPlayer: true
+                }
+
+                navPlanPoints.splice(j + 1, 0, playerPoint);
+            }
         }
 
         const dataset = {
-            label: '',
+            label: `data ${vPlayerId}`,
             data: navPlanPoints,
             borderColor: virtualPlayerToColorMap[vPlayerId],
             backgroundColor: virtualPlayerToColorMap[vPlayerId],
@@ -396,11 +590,12 @@ export default class RouteChart extends Component {
         return (
             <div className='route-editor-chart-wrapper'>
                     <Line
+
                         data={chartData}
                         options={this.options}
                         id='route-editor-canvas'
                         ref={this.chartRef}
-                        redraw
+
                     />
             </div>
         )

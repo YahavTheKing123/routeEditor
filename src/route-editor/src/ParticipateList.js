@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import chevronIcon from './assets/chevron.svg';
+import ldsh from 'lodash';
 const MOVMENT_FACTOR = 8 + 0.7; // button width + margin left
 const MAX_DRONES_IN_LIST = 5;
 
@@ -14,6 +15,14 @@ export default class ParticipateList extends Component {
         super(props);
         this.state = {
             arrowClickCounter: 0,
+        }
+    }
+    componentDidMount() {
+        if (this.props.virtualPlayerToNavPlansMap) {
+            const vPlayersIds = Object.keys(this.props.virtualPlayerToNavPlansMap);
+            if (vPlayersIds.length === 1) {
+                this.props.selectDrone(vPlayersIds[0]);
+            }
         }
     }
 
@@ -38,6 +47,18 @@ export default class ParticipateList extends Component {
         this.setState({arrowClickCounter})
     }
 
+    getPlayerName(vPlayerId) {
+        //return this.props.entsIdToEntsMap[vPlayerId].appX.base.dispName
+        return ldsh.get(this.props.entsIdToEntsMap[vPlayerId], 'autonomyBase.playerHolder.player.dispName');
+    }
+
+    selectDrone(id) {
+        const {chartConainer, selectDrone: selectDroneCallback} = this.props;
+
+        chartConainer && chartConainer.current && chartConainer.current.chartRef && chartConainer.current.chartRef.current && chartConainer.current.chartRef.current.resetZoom();
+        selectDroneCallback(id);
+    }
+
     render() {
         return (
         <div className='route-editor-participate-list-wrapper'>
@@ -50,17 +71,17 @@ export default class ParticipateList extends Component {
                 </button>
                 <div className='route-editor-participates-buttons'>
                     <div className='route-editor-participates-buttons-wrapper' style={{transform: `translateX(${this.state.arrowClickCounter * MOVMENT_FACTOR}rem)`}}>
-                        <button className={`route-editor-participates-button all-participates-button ${this.props.getSelectedDroneClass('all')}`} onClick={() => this.props.selectDrone('all')}>
+                        <button className={`route-editor-participates-button all-participates-button ${this.props.getSelectedDroneClass('all')}`} onClick={this.selectDrone.bind(this, 'all')}>
                             {this.props.translator.t('all')}
                         </button>
                         {
                             Object.keys(this.props.virtualPlayerToNavPlansMap).map((vPlayerId, i) => {
                                 return (
                                     <button className={`route-editor-participates-button ${this.props.getSelectedDroneClass(vPlayerId)}`}
-                                            onClick={() => this.props.selectDrone(vPlayerId)}
-                                            title={this.props.entsIdToEntsMap[vPlayerId].appX.base.dispName}>
+                                            onClick={this.selectDrone.bind(this, vPlayerId)}
+                                            title={this.getPlayerName(vPlayerId)}>
                                         <span className='route-editor-participates-button-color-point' style={{backgroundColor: this.props.virtualPlayerToColorMap[vPlayerId]}}></span>
-                                        <span className='route-editor-participates-button-label'>{this.props.entsIdToEntsMap[vPlayerId].appX.base.dispName}</span>
+                                        <span className='route-editor-participates-button-label'>{this.getPlayerName(vPlayerId)}</span>
                                     </button>
                                 )
                             })

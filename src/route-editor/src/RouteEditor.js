@@ -3,14 +3,16 @@ import './RouteEditor.css';
 import i18next from 'i18next';
 import hebTranslation from './i18n/he-IL.json';
 import engTranslation from './i18n/en-US.json';
-import {SubscriptionsHOC} from "@elbit/light-client-app";
+import ausTranslation from './i18n/en-AU.json';
+import {Globals, SubscriptionsHOC} from "@elbit/light-client-app";
 import config from './config';
 import {appConfig} from '~/app-config';
-
 import closeIcon from './assets/close.svg';
 import Footer from './Footer';
 import Chart from './Chart';
 import ParticipateList from './ParticipateList';
+import Draggable from 'react-draggable';
+import ldsh from 'lodash';
 
 export const routeOptions = {
     forward: 'forward',
@@ -32,19 +34,38 @@ class RouteEditor extends Component {
         this.state = {
             selectedDroneId: config.ALL,
             arrowClickCounter: 0,
-            selectedRouteDirection: routeOptions.forward,
-            isDataReady: false
+            selectedRouteDirection: routeOptions.forwardBack,
+            isDataReady: false,
+            isChartHasChanges: false,
+            isNavPlanningCommandAvailable: false
         }
+        this.chartContainerRef = React.createRef();
     }
 
     componentDidMount() {
         this.setSnames();
         this.initTranslation();
+        this.setNavPlanningCommand();
+    }
+
+    setNavPlanningCommand() {
+        const {additionalData} = this.props;
+
+        const commnadSname = additionalData && additionalData.snames && additionalData.snames.updateNavPlansCommandSname;
+        if (!commnadSname) return;
+
+        this.navPlanningCommand = Globals.get().clientFacade.createCommand(commnadSname, {})
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.subscriptionResults !== this.props.subscriptionResults) {
             this.setData();
+        }
+
+        if (prevState.selectedDroneId !== this.state.selectedDroneId ||
+            prevState.selectedRouteDirection !== this.state.selectedRouteDirection
+        ) {
+            this.updateChartChangesFlag(false);
         }
     }
 
@@ -55,8 +76,8 @@ class RouteEditor extends Component {
         return Object.values(subscriptionResults.toJS());
     }
 
-    setData = (subscriptionResults = this.props.subscriptionResults) => {
-        const entities = this.getSubscriptionResults(subscriptionResults);
+    setData = () => {
+        const entities = this.getSubscriptionResults(this.props.subscriptionResults);
         if (!entities) {
             return null;
         }
@@ -86,19 +107,19 @@ class RouteEditor extends Component {
             lng,
             resources: {
                 'en-US': engTranslation,
-                'he-IL': hebTranslation
+                'he-IL': hebTranslation,
+                'en-AU': ausTranslation
             },
         }, (err, t) => {
             this.setState(({
                 isTranslatorReady: true
             }))
         });
-
     }
 
     buildDataTree = entities => {
 
-        // data will be arragened as follow:
+        // data will be arranged as follow:
         // waypoints -> navPlanId -> navPlan -> linkedPlayerOrDestinationPoint(playerId) -> player -> virtualPlayer
 
         const entsIdToEntsMap = {}; //all entites as map for better perfomance when building the data stucture
@@ -126,6 +147,13 @@ class RouteEditor extends Component {
                 playerToVirtualPlayerMap[ent.autonomyBase.playerHolder.player._id] = ent;
             }
 
+            if (ent.sname === this.missionSname) {
+                this.mission = ent;
+                const isNavPlanningCommandAvailable = this.navPlanningCommand.isAvailable(Globals.get(), null,this.mission._id);
+                if (this.state.isNavPlanningCommandAvailable !== isNavPlanningCommandAvailable) {
+                    this.setState({isNavPlanningCommandAvailable})
+                }
+            }
         })
 
         for (key in navPlansToWaypointsMap) {
@@ -158,7 +186,10 @@ class RouteEditor extends Component {
     renderHeader() {
         return (
             <div className='route-editor-header'>
-                <span className='route-editor-header-label'>{this.translator.t('sideCut')}</span>
+                <span className='route-editor-header-label'>
+                    {this.translator.t('sideCut')}
+                    {this.mission ? <span className='route-editor-header-description'> - {this.mission.appX.base.dispName}</span> : null}
+                </span>
                 <button className='route-editor-header-close-button' onClick={() => this.props.layoutAPI.removeContent({contentId: this.props.id})}>
                     <img className='route-editor-header-close-icon' src={closeIcon}/>
                 </button>
@@ -180,19 +211,31 @@ class RouteEditor extends Component {
                     selectedDroneId={this.state.selectedDroneId}
                     virtualPlayerToColorMap = {this.virtualPlayerToColorMap}
                     entsIdToEntsMap={this.entsIdToEntsMap}
+                    chartConainer={this.chartContainerRef}
                 />
+    }
+
+    updateChartChangesFlag = (isChartHasChanges) => {
+        if (isChartHasChanges !== this.state.isChartHasChanges) {
+            if (!isChartHasChanges) {
+                this.chartContainerRef.current.newWaypointsHeight = {};
+            }
+            this.setState({isChartHasChanges});
+        }
     }
 
     renderChart() {
         return <Chart
                     selectedDroneId={this.state.selectedDroneId}
                     entsIdToEntsMap={this.entsIdToEntsMap}
+                    mission={this.mission}
                     navPlansToWaypointsMap={this.navPlansToWaypointsMap}
                     playerToVirtualPlayerMap={this.playerToVirtualPlayerMap}
                     virtualPlayerToNavPlansMap = {this.virtualPlayerToNavPlansMap}
                     virtualPlayerToColorMap = {this.virtualPlayerToColorMap}
                     selectedRouteDirection={this.state.selectedRouteDirection}
-                    setChartInstance={getChartInstance => this.getChartInstance = getChartInstance}
+                    ref={this.chartContainerRef}
+                    updateChartChangesFlag={this.updateChartChangesFlag}
                 />
     }
 
@@ -200,13 +243,35 @@ class RouteEditor extends Component {
         this.setState({selectedRouteDirection})
     }
 
+    onExecuteNavPlanningCommand = () => {
+        if (!this.navPlanningCommand) return;
+
+        const {selectedDroneId} = this.state;
+
+        const params = {
+            entityId: this.mission._id,
+            playerId: ldsh.get(this.entsIdToEntsMap[selectedDroneId], 'autonomyBase.playerHolder.player._id'),
+            virtualPlayerId: selectedDroneId
+        }
+        this.navPlanningCommand.setParams(params);
+        this.navPlanningCommand.execute();
+    }
+
     renderFooter() {
         return (
             <Footer
+                selectedDroneId={this.state.selectedDroneId}
+                virtualPlayerToNavPlansMap = {this.virtualPlayerToNavPlansMap}
+                chartConainer={this.chartContainerRef}
                 translator={this.translator}
                 dropDownOptionsKeys={routeOptions}
                 onDropDownSelect={this.onDropDownSelect}
                 selectedDropdownItem={this.state.selectedRouteDirection}
+                executeNavPlanningCommand={this.onExecuteNavPlanningCommand}
+                isNavPlanningCommandAvailable={this.state.isNavPlanningCommandAvailable}
+                refetchData={this.refetchChartData}
+                isChartHasChanges={this.state.isChartHasChanges}
+                updateChartChangesFlag={this.updateChartChangesFlag}
             />
         );
     }
@@ -215,12 +280,14 @@ class RouteEditor extends Component {
         if (!this.state.isDataReady || !this.state.isTranslatorReady) return null;
 
         return (
-            <div className='route-editor-wrapper'>
-                {this.renderHeader()}
-                {this.renderParticipateList()}
-                {this.renderChart()}
-                {this.renderFooter()}
-            </div>
+                <Draggable handle={'.route-editor-header'} bounds={'body'}>
+                    <div className='route-editor-wrapper'>
+                        {this.renderHeader()}
+                        {this.renderParticipateList()}
+                        {this.renderChart()}
+                        {this.renderFooter()}
+                    </div>
+                </Draggable>
         )
     }
 }

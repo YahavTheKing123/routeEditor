@@ -5,6 +5,7 @@
 .route-editor-wrapper {
     --route-editor-bg-color: #282B37;
     --route-editor-font-primary-color: #ffffff;
+    --route-editor-header-description-color: #c2c5cb;
     --route-editor-participate-list-bg-color: #434757;
     --route-editor-participate-list-arrrow-button-bg-color: #363A4B;
     --route-editor-selection-color: #4185F4;
@@ -14,6 +15,7 @@
     --route-editor-chart-grid-first-line-color: #7C838F;
     --route-editor-chart-grid-lines-color: #525761;
     --route-editor-footer-button-bg-color: #6C768D;
+    --route-editor-footer-button-hover-bg-color: #568be1;
     --route-editor-footer-dropdown-label-color: #B0B8C6;
     --route-editor-footer-dropdown-arrow-color: #939dba;
     --route-editor-footer-dropdown-options-bg-color :#383B4C;
@@ -39,6 +41,12 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem 0 1.5rem;
+    user-select: none;
+    cursor: all-scroll;
+}
+
+.route-editor-header-description {
+    color: var(--route-editor-header-description-color);
 }
 
 .route-editor-header-close-button {
@@ -218,10 +226,10 @@ canvas#route-editor-canvas {
 
 .route-editor-footer-zoom-wrapper {
     display: flex;
-    border-left: 0.1rem solid rgba(255,255,255,0.1);
+    border-inline-end: 0.1rem solid rgba(255,255,255,0.1);
     height: 100%;
     align-items: center;
-    margin-right: 1rem;
+    margin-inline-end: 1rem;
 }
 
 .route-editor-footer-zoom-button {
@@ -239,12 +247,17 @@ canvas#route-editor-canvas {
 }
 
 .route-editor-footer-zoom-button:last-child {
-    margin-left: 2.5rem;
+    margin-inline-end: 2.5rem;
+    margin-inline-start: 1rem;
 }
 
 .route-editor-footer-zoom-out-icon,
 .route-editor-footer-zoom-in-icon {
     height: 1.5rem;
+}
+
+.route-editor-footer-reset-zoom-icon {
+    height: 1.8rem;
 }
 
 .route-editor-footer-dropdown-wrapper {
@@ -271,7 +284,7 @@ canvas#route-editor-canvas {
 
 .route-editor-footer-dropdown-content .Select__container {
     height: 100%;
-    cursor: pointer;
+
 }
 
 .route-editor-footer-dropdown-content .Select__container .Select__control {
@@ -328,7 +341,7 @@ canvas#route-editor-canvas {
     width: max-content;
     border-radius: 1rem;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.20);
-    cursor: pointer;
+    /*cursor: pointer;*/
     margin: 0;
     padding: 0;
 }
@@ -354,6 +367,7 @@ canvas#route-editor-canvas {
     height: 100%;
     width: calc(100% - 3rem);
     border-bottom: 1px solid var(--route-editor-footer-dropdown-option-border-color);
+    z-index: 1;
 }
 
 .route-editor-footer-dropdown-content .Select__container .Select__menu-list .Select__option:last-child:before {
@@ -379,6 +393,12 @@ canvas#route-editor-canvas {
     border: transparent;
 }
 
+.route-editor-footer-dropdown-content .Select__container .Select__menu-list .Select__option--is-disabled {
+    opacity: 0.2;
+    pointer-events: none;
+    cursor: default;
+}
+
 /* ---------------------------------------------------   react-select end  ----------------------------------- */
 .route-editor-footer-left-buttons {
     display: flex;
@@ -395,7 +415,11 @@ canvas#route-editor-canvas {
     align-items: center;
     justify-content: center;
     margin-left: 1rem;
-    /*transition: background-color 0.6s ease;*/
+    transition: background-color 0.6s ease;
+}
+.route-editor-footer-action-button:hover,
+.route-editor-footer-zoom-button:hover {
+    background-color: var(--route-editor-footer-button-hover-bg-color);
 }
 
 .route-editor-footer-action-button.plan-action-button {
@@ -404,4 +428,15 @@ canvas#route-editor-canvas {
     color: inherit;
     padding-left: 0.8rem;
     padding-right: 0.5rem;
+}
+
+.route-editor-footer-action-buttons.route-editor-footer-left-buttons-disable,
+.plan-action-button.plan-action-button-disable {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: initial;
+}
+
+.route-editor-footer-action-buttons {
+    display: flex;
 }

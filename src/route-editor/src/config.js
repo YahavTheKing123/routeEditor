@@ -16,7 +16,9 @@ const config = {
     },
     ALL: 'all',
     dataSetDTMIdentifier: 'dataSetDTMIdentifier',
-    partrolRouteTypes: [3, 4, 5]
+    partrolRouteTypes: [3, 4, 5],
+    chartXaxisMaxFactor: 1.05,
+    chartYaxisMaxFactor: 1.1
 }
 
 export default config;

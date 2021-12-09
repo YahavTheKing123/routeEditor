@@ -46,7 +46,7 @@ class RouteEditor extends Component {
     componentDidMount() {
         this.setSnames();
         this.initTranslation();
-        this.setNavPlanningCommand();
+        this.setNavPlanningCommand();        
     }
 
     setNavPlanningCommand() {
@@ -58,6 +58,13 @@ class RouteEditor extends Component {
         this.navPlanningCommand = Globals.get().clientFacade.createCommand(commnadSname, {})
     }
 
+    setContextEntityInState() {
+        const {additionalData} = this.props;
+        if (!additionalData || !additionalData.contextId) return;
+
+        // set 
+    }
+
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.subscriptionResults !== this.props.subscriptionResults) {
             this.setData();
@@ -67,6 +74,10 @@ class RouteEditor extends Component {
             prevState.selectedRouteDirection !== this.state.selectedRouteDirection
         ) {
             this.updateChartChangesFlag(false);
+        }
+
+        if (!prevState.isDataReady && this.state.isDataReady) {
+            this.setContextEntityInState()
         }
     }
 
@@ -238,6 +249,7 @@ class RouteEditor extends Component {
                     ref={this.chartContainerRef}
                     updateChartChangesFlag={this.updateChartChangesFlag}
                     isHideChartPoints={this.state.isHideChartPoints}
+                    maxAmslAltitude={this.props.additionalData.maxAmslAltitude}
                 />
     }
 

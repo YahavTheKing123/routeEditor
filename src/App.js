@@ -39,7 +39,11 @@ export default class App extends Component {
         <div className='side-bar'></div>
         <RouteEditor 
           subscriptionResults={this.state.subscriptionResults}
-          additionalData={{snames: {updateNavPlansCommandSname: 'dummyCommand'}}}
+          additionalData={{
+            snames: {updateNavPlansCommandSname: 'dummyCommand'},
+            maxAmslAltitude: 700,
+            contextId: ''
+          }}
           entities={this.state.entities}/>
       </>
     )

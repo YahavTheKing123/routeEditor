@@ -86,7 +86,7 @@ export default class RouteChart extends Component {
                 zoom: {
                     limits: {
                         x: {min: 0, max: 'original'},
-                        y: {min: 0}
+                        y: {min: 0, max: this.props.maxAmslAltitude ? this.props.maxAmslAltitude * config.chartYaxisMaxFactor : 'original'}
                     },
                     zoom: {
                         wheel: {
@@ -124,7 +124,7 @@ export default class RouteChart extends Component {
 
 
                         if (this.isPatrolWaypoint(value.waypoint)) {
-                            this.minLimitPoint = mission.heightAGLConstraint && mission.heightAGLConstraint.minHeight || 0;
+                            this.minLimitPoint = mission.heightAMSLConstraint && mission.heightAMSLConstraint.minHeight || 0;
 
                         } else {
                             const dtmDataSet = this.chartRef.current.data.datasets.find(ds => ds.identifier === config.dataSetDTMIdentifier);
@@ -146,6 +146,8 @@ export default class RouteChart extends Component {
 
                         if (value.y <= this.minLimitPoint) {
                             this.chartRef.current.data.datasets[datasetIndex].data[index].y = this.minLimitPoint;
+                        } else if (value.y > this.props.maxAmslAltitude) {
+                            this.chartRef.current.data.datasets[datasetIndex].data[index].y = this.props.maxAmslAltitude;
                         }
                     },
                     onDragEnd: (e, datasetIndex, index, value) => {
@@ -197,11 +199,12 @@ export default class RouteChart extends Component {
                             if (ctx.index === 0) return gridFirstLineColor;
                             return gridLineColor
                         },
-                    }
+                    },
+                    suggestedMax: this.props.maxAmslAltitude * config.chartYaxisMaxFactor,
                 },
                 x: {
                     offset: false,
-                    beginAtZero: true,
+                    beginAtZero: true,                    
                     /*max: (event) => {
                         let maxValue = 0;
                         event.chart.data.datasets.forEach(dataSet => {
@@ -211,8 +214,7 @@ export default class RouteChart extends Component {
                                 }
                             })
                         })
-                        console.log(maxValue)
-                        return maxValue;
+                        return maxValue * config.chartXaxisMaxFactor;
                     },*/
                     ticks: {
                         callback: (value, index) => {
@@ -312,7 +314,7 @@ export default class RouteChart extends Component {
             (prevProps.selectedRouteDirection !== this.props.selectedRouteDirection)
         ) {
             this.chartRef.current && this.chartRef.current.resetZoom();
-
+            this.setOptions();
             //get NavPlan DTM if needed
             if (this.props.selectedDroneId !== config.ALL) {
                 this.setState({navPlanPolylinePoints: null}, () => this.getNavPlanDTMPoints())
@@ -469,6 +471,46 @@ export default class RouteChart extends Component {
         return dataset;
     }
 
+    getNavPlanUpperLimitDataSet(navPlanDataSet, navPlanDTMDataSet) {
+        const {maxAmslAltitude} = this.props;
+        let navPlanUpperLimitPoints = [];
+        
+        if (maxAmslAltitude) {
+            const navPlanArr = navPlanDataSet.data;
+            const dtmArr = navPlanDTMDataSet.data;
+
+            navPlanUpperLimitPoints = [
+                {
+                    x: 0, 
+                    y: maxAmslAltitude
+                },
+                {
+                    x: Math.max(dtmArr[dtmArr.length -1].x, navPlanArr[navPlanArr.length -1].x),
+                    y: maxAmslAltitude
+                }
+            ]
+        };
+        
+        const dataset = {
+            identifier: config.dataSetDTMIdentifier,
+            label: 'upperLimit',
+            data: navPlanUpperLimitPoints,
+            borderColor: '#F15858',
+            backgroundColor: '#8b572470',
+            pointBorderColor: 'rgba(0,0,0,0)',
+            pointBackgroundColor: 'rgba(0,0,0,0)',
+            pointHoverBackgroundColor: 'rgba(0,0,0,0)',
+            pointHoverBorderColor: 'rgba(0,0,0,0)',
+            pointRadius: 0, 
+            borderWidth: 3,  
+            borderDash: [1,6],
+            borderCapStyle: 'round',
+            dragData: false
+        }
+
+        return dataset;
+    }
+
     getNavPlansWPCounts(sortedWaypoints) {
         return {
             [routeOptions.forward]: sortedWaypoints.filter(wp => wp.pointChartType === routeOptions.forward).length,
@@ -481,7 +523,7 @@ export default class RouteChart extends Component {
         const waypointChanges = this.newWaypointsHeight[waypoint._id];
 
         if (!waypointChanges) return waypoint.heightAMSL;
-        if (waypointChanges.waypoint.lut  ===  waypoint.lut) return waypointChanges.newHeightAMSL;
+        if (waypointChanges.waypoint.appX.base.serverLut  ===  waypoint.appX.base.serverLut) return waypointChanges.newHeightAMSL;
 
         // waypoint.lut here must be bigger than the changed one. so remove the change and return the new one
 
@@ -611,9 +653,14 @@ export default class RouteChart extends Component {
             Object.keys(virtualPlayerToNavPlansMap).forEach((vPlayerId) => {
                 datasets.push(this.getNavPlanDataSet(vPlayerId));
             })
-        } else {
-            datasets.push(this.getNavPlanDataSet(selectedDroneId));
-            datasets.push(this.getNavPlanDTMDataSet(selectedDroneId));
+        } else {       
+            const navPlanDataSet = this.getNavPlanDataSet(selectedDroneId)     
+            datasets.push(navPlanDataSet);
+
+            const navPlanDTMDataSet = this.getNavPlanDTMDataSet();
+            datasets.push(navPlanDTMDataSet);
+
+            datasets.push(this.getNavPlanUpperLimitDataSet(navPlanDataSet, navPlanDTMDataSet))
         }
 
         data.datasets = datasets;
@@ -628,7 +675,6 @@ export default class RouteChart extends Component {
         return (
             <div className='route-editor-chart-wrapper'>
                     <Line
-
                         data={chartData}
                         options={this.options}
                         id='route-editor-canvas'

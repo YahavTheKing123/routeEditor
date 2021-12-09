@@ -239,11 +239,15 @@ export default class RouteChart extends Component {
         };
     }
 
+    getPlayerTooltipItem = item => {        
+        return 'Player ' + item.raw.playerDispName
+    }
+
     getTooltipTitle = (tooltipItem, data) => {
         if (tooltipItem) {
             let title = '';
             tooltipItem.forEach((item, i) => {
-                const itemTitle = ldsh.get(item, 'raw.isPlayer') ?  'Player' : ldsh.get(item, 'raw.waypoint.appX.base.dispName');
+                const itemTitle = ldsh.get(item, 'raw.isPlayer') ?  this.getPlayerTooltipItem(item) : ldsh.get(item, 'raw.waypoint.appX.base.dispName');
                 if (i === 0) {
                     title = itemTitle;
                 } else {
@@ -385,18 +389,25 @@ export default class RouteChart extends Component {
             ]
     }
 
-    getNavPlanLinkedPlayerPosition(navPlanArr, selectedRouteDirection) {
+    getNavPlanLinkedPlayerPositionAndDispName(navPlanArr, selectedRouteDirection) {
+
+        const res = {
+            playerPosition: null,
+            playerDispName: null
+        }
+
         const direction = selectedRouteDirection === routeOptions.forwardBack ? routeOptions.forward : selectedRouteDirection;
         const navPlan = this.getNavPlanByDirection(navPlanArr, direction);
 
         if (navPlan && navPlan.linkedPlayerOrDestinationPoint && navPlan.linkedPlayerOrDestinationPoint._id) {
             const player = this.props.entsIdToEntsMap[navPlan.linkedPlayerOrDestinationPoint._id];
             if (player) {
-                return geo.serializer.deserializePosition(player.appX.base.position, geo.returnTypeEnum.geoJson);
+                res.playerDispName = player.appX.base.dispName;
+                res.playerPosition = geo.serializer.deserializePosition(player.appX.base.position, geo.returnTypeEnum.geoJson);
             }
         }
 
-        return null;
+        return res;
     }
 
     getClosetsSegmentToPlayer = (playerPosition, prevPosition, position, i, vector, closetsSegmentToPlayer) => {
@@ -456,15 +467,6 @@ export default class RouteChart extends Component {
         return dataset;
     }
 
-
-    isLastWaypoint = (navPointCount, sortedWaypoints, navPlansWPCounts) => {
-            if (this.props.selectedRouteDirection ===  routeOptions.forwardBack) {
-                return navPointCount === sortedWaypoints.length -1
-            } else {
-                return navPlansWPCounts[this.props.selectedRouteDirection] - 1 === navPointCount
-            }
-    }
-
     getNavPlansWPCounts(sortedWaypoints) {
         return {
             [routeOptions.forward]: sortedWaypoints.filter(wp => wp.pointChartType === routeOptions.forward).length,
@@ -485,12 +487,41 @@ export default class RouteChart extends Component {
         return waypoint.heightAMSL;
     }
 
+    isStartPoint(waypoint) {
+        return waypoint.pointChartType === routeOptions.forward && waypoint.index === 0;
+    }
+
+    isEndPoint(waypoint, navPlansWPCounts) {
+        return waypoint.pointChartType === routeOptions.back && waypoint.index === navPlansWPCounts[routeOptions.back] - 1;
+    }
+
+    isPatrolStartPoint(waypoint) {
+        return waypoint.pointChartType === routeOptions.patrol && waypoint.index === 0;
+    }
+
+    isPatrolEndPoint(waypoint, navPlansWPCounts) {
+        return waypoint.pointChartType === routeOptions.patrol && waypoint.index === navPlansWPCounts[routeOptions.back] - 1;
+    }
+
+    setPointTypeIconIndicator(chartPoint, waypoint, navPlansWPCounts) {
+        
+        if (this.isStartPoint(waypoint)) {
+            chartPoint.isStartPoint = true;
+        } else if (this.isEndPoint(waypoint, navPlansWPCounts)) {
+            chartPoint.isEndPoint = true;
+        } else if (this.isPatrolStartPoint(waypoint)){
+            chartPoint.isStartPatrolPoint = true;
+        } else if (this.isPatrolEndPoint(waypoint, navPlansWPCounts)) {
+            chartPoint.isEndPatrolPoint = true;
+        }
+    }
+
     getNavPlanDataSet = vPlayerId => {
 
         const {virtualPlayerToNavPlansMap, navPlansToWaypointsMap, virtualPlayerToColorMap, selectedRouteDirection} = this.props;
 
         const navPlanArr = virtualPlayerToNavPlansMap[vPlayerId] || [];
-        const playerPosition = this.getNavPlanLinkedPlayerPosition(navPlanArr, selectedRouteDirection);
+        const {playerPosition, playerDispName} = this.getNavPlanLinkedPlayerPositionAndDispName(navPlanArr, selectedRouteDirection);
         const sortedWaypoints = this.getNavPlanWaypoints(navPlanArr, selectedRouteDirection, navPlansToWaypointsMap) || [];
         const navPlansWPCounts = this.getNavPlansWPCounts(sortedWaypoints);
 
@@ -516,20 +547,18 @@ export default class RouteChart extends Component {
 
                 const point = {
                     x: Math.round(totalNavPlanLength),
-                    y: this.getLatestWPHeightAMSL(waypoint), // TODO - CHECK waypoint time change vs drag time change and set this  value accordingly
+                    y: this.getLatestWPHeightAMSL(waypoint),
                     waypoint
                 }
 
-                if (navPointCount === 0) {
-                    point.isFirst = true;
-                } else if (this.isLastWaypoint(navPointCount, sortedWaypoints, navPlansWPCounts)) {
-                    point.isLast = true;
-                }
+                this.setPointTypeIconIndicator(point, waypoint, navPlansWPCounts);
+
                 navPlanPoints.push(point);
                 navPointCount++;
             }
         })
 
+        // set player point on the dataset
         if (playerPosition && closetsSegmentToPlayer.afterWaypoint) {
             const i = closetsSegmentToPlayer.afterWaypoint;
             if ([sortedWaypoints[i].pointChartType, routeOptions.forwardBack].includes(selectedRouteDirection)) {
@@ -538,7 +567,8 @@ export default class RouteChart extends Component {
                 const playerPoint = {
                     x: (navPlanPoints[j].x + navPlanPoints[j+1].x) / 2,
                     y: (navPlanPoints[j].y + navPlanPoints[j+1].y) / 2,
-                    isPlayer: true
+                    isPlayer: true,
+                    playerDispName
                 }
 
                 navPlanPoints.splice(j + 1, 0, playerPoint);
@@ -551,10 +581,14 @@ export default class RouteChart extends Component {
             borderColor: virtualPlayerToColorMap[vPlayerId],
             backgroundColor: virtualPlayerToColorMap[vPlayerId],
             pointStyle: function(param) {
-                if (param.raw && param.raw.isFirst) {
+                if (param.raw && param.raw.isStartPoint) {
                     return getNavPlanImage(imagePointTypes.start, virtualPlayerToColorMap[vPlayerId])
-                } else if (param.raw && param.raw.isLast) {
+                } else if (param.raw && param.raw.isEndPoint) {
                     return getNavPlanImage(imagePointTypes.end, virtualPlayerToColorMap[vPlayerId])
+                } else if (param.raw && param.raw.isStartPatrolPoint) {
+                    return getNavPlanImage(imagePointTypes.patrolStart, virtualPlayerToColorMap[vPlayerId])
+                } else if (param.raw && param.raw.isEndPatrolPoint) {
+                    return getNavPlanImage(imagePointTypes.patrolEnd, virtualPlayerToColorMap[vPlayerId])
                 } else if (param.raw && param.raw.isPlayer) {
                     return getNavPlanImage(imagePointTypes.drone, virtualPlayerToColorMap[vPlayerId])
                 }

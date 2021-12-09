@@ -77,7 +77,7 @@ export default class ParticipateList extends Component {
                         {
                             Object.keys(this.props.virtualPlayerToNavPlansMap).map((vPlayerId, i) => {
                                 return (
-                                    <button className={`route-editor-participates-button ${this.props.getSelectedDroneClass(vPlayerId)}`}
+                                    <button key={vPlayerId} className={`route-editor-participates-button ${this.props.getSelectedDroneClass(vPlayerId)}`}
                                             onClick={this.selectDrone.bind(this, vPlayerId)}
                                             title={this.getPlayerName(vPlayerId)}>
                                         <span className='route-editor-participates-button-color-point' style={{backgroundColor: this.props.virtualPlayerToColorMap[vPlayerId]}}></span>

@@ -31,6 +31,10 @@
     transform-origin: top right;
     border-radius: 1rem;
     font-size: 1.4rem;
+    /*
+        resize: both;
+        overflow: auto;
+    */
 }
 
 /*----------------------------------------------------- Header --------------------------------------*/
@@ -203,7 +207,7 @@
 /*----------------------------------------------------- Chart ---------------------------------------*/
 
 .route-editor-chart-wrapper {
-    height: 30rem;
+    min-height: 30rem;
 }
 canvas#route-editor-canvas {
     background-color: var(--route-editor-chart-bg-color);
@@ -212,7 +216,7 @@ canvas#route-editor-canvas {
 /*----------------------------------------------------- Footer --------------------------------------*/
 .route-editor-footer {
     height: 6.5rem;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -229,7 +233,7 @@ canvas#route-editor-canvas {
     border-inline-end: 0.1rem solid rgba(255,255,255,0.1);
     height: 100%;
     align-items: center;
-    margin-inline-end: 1rem;
+    margin-inline-end: 2rem;
 }
 
 .route-editor-footer-zoom-button {
@@ -242,7 +246,7 @@ canvas#route-editor-canvas {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 1.5rem;
+    margin: 0 0.5rem;
     transition: background-color 0.6s ease;
 }
 
@@ -256,7 +260,8 @@ canvas#route-editor-canvas {
     height: 1.5rem;
 }
 
-.route-editor-footer-reset-zoom-icon {
+.route-editor-footer-reset-zoom-icon,
+.route-editor-footer-hide-points-icon {
     height: 1.8rem;
 }
 

@@ -4,6 +4,7 @@ import Select from 'react-select';
 import zoomInIcon from './assets/plus.svg';
 import zoomOutIcon from './assets/minus.svg';
 import resetZoomIcon from './assets/center_focus_round_corners.svg';
+import hidePointsIcon from './assets/visibility_off.svg';
 import checkIcon from './assets/check.svg';
 import undoIcon from './assets/undo.svg';
 import fxIcon from './assets/fx.svg';
@@ -88,6 +89,9 @@ export default class Footer extends Component {
                 <button className='route-editor-footer-zoom-button' onClick={this.resetZoom} title={this.props.translator.t('resetZoom')}>
                     <img className='route-editor-footer-reset-zoom-icon' src={resetZoomIcon}/>
                 </button>
+                <button className='route-editor-footer-zoom-button' onClick={this.resetZoom} title={this.props.translator.t('resetZoom')}>
+                    <img className='route-editor-footer-hide-points-icon' src={hidePointsIcon}/>
+                </button>
                 {/*<button className='route-editor-footer-zoom-button' onClick={this.props.onClose}>
                     <img className='route-editor-footer-zoom-out-icon' src={zoomOutIcon}/>
                 </button>
@@ -108,7 +112,7 @@ export default class Footer extends Component {
         if (!this.state.dropdownOptions) return null
         return (
             <div className='route-editor-footer-dropdown-wrapper'>
-                <span className='route-editor-footer-dropdown-icon'>{this.getDropDownIcon()}</span>
+                {/*<span className='route-editor-footer-dropdown-icon'>{this.getDropDownIcon()}</span>*/}
                 <span className='route-editor-footer-dropdown-content'>
                     <span className='route-editor-footer-dropdown-label'>{this.props.translator.t('route')}</span>
                     <Select

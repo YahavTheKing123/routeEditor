@@ -37,7 +37,8 @@ class RouteEditor extends Component {
             selectedRouteDirection: routeOptions.forwardBack,
             isDataReady: false,
             isChartHasChanges: false,
-            isNavPlanningCommandAvailable: false
+            isNavPlanningCommandAvailable: false,
+            isHideChartPoints: false
         }
         this.chartContainerRef = React.createRef();
     }
@@ -236,6 +237,7 @@ class RouteEditor extends Component {
                     selectedRouteDirection={this.state.selectedRouteDirection}
                     ref={this.chartContainerRef}
                     updateChartChangesFlag={this.updateChartChangesFlag}
+                    isHideChartPoints={this.state.isHideChartPoints}
                 />
     }
 
@@ -272,6 +274,8 @@ class RouteEditor extends Component {
                 refetchData={this.refetchChartData}
                 isChartHasChanges={this.state.isChartHasChanges}
                 updateChartChangesFlag={this.updateChartChangesFlag}
+                isHideChartPoints={this.state.isHideChartPoints}
+                toggleHideChartPoints={() => this.setState({isHideChartPoints: !this.state.isHideChartPoints})}
             />
         );
     }

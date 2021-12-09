@@ -282,7 +282,8 @@ export default class RouteChart extends Component {
             navPlansToWaypointsMap,
             playerToVirtualPlayerMap,
             virtualPlayerToNavPlansMap,
-            selectedRouteDirection
+            selectedRouteDirection,
+            isHideChartPoints
         } = nextProps;
 
         if (this.props.selectedDroneId !==  selectedDroneId ||
@@ -296,7 +297,8 @@ export default class RouteChart extends Component {
             this.props.entsIdToEntsMap !==  entsIdToEntsMap ||
             this.props.navPlansToWaypointsMap !==  navPlansToWaypointsMap ||
             this.props.playerToVirtualPlayerMap !==  playerToVirtualPlayerMap ||
-            this.props.virtualPlayerToNavPlansMap !==  virtualPlayerToNavPlansMap
+            this.props.virtualPlayerToNavPlansMap !==  virtualPlayerToNavPlansMap || 
+            this.props.isHideChartPoints !== isHideChartPoints
             //this.props.mission !==  mission
         ) || this.state !== nextState) {
             return true;
@@ -518,7 +520,7 @@ export default class RouteChart extends Component {
 
     getNavPlanDataSet = vPlayerId => {
 
-        const {virtualPlayerToNavPlansMap, navPlansToWaypointsMap, virtualPlayerToColorMap, selectedRouteDirection} = this.props;
+        const {virtualPlayerToNavPlansMap, navPlansToWaypointsMap, virtualPlayerToColorMap, selectedRouteDirection, isHideChartPoints} = this.props;
 
         const navPlanArr = virtualPlayerToNavPlansMap[vPlayerId] || [];
         const {playerPosition, playerDispName} = this.getNavPlanLinkedPlayerPositionAndDispName(navPlanArr, selectedRouteDirection);
@@ -579,8 +581,10 @@ export default class RouteChart extends Component {
             label: `data ${vPlayerId}`,
             data: navPlanPoints,
             borderColor: virtualPlayerToColorMap[vPlayerId],
-            backgroundColor: virtualPlayerToColorMap[vPlayerId],
+            backgroundColor: virtualPlayerToColorMap[vPlayerId],       
+            pointRadius: isHideChartPoints ? 0 : 3,
             pointStyle: function(param) {
+                if (isHideChartPoints) return false
                 if (param.raw && param.raw.isStartPoint) {
                     return getNavPlanImage(imagePointTypes.start, virtualPlayerToColorMap[vPlayerId])
                 } else if (param.raw && param.raw.isEndPoint) {
@@ -593,7 +597,7 @@ export default class RouteChart extends Component {
                     return getNavPlanImage(imagePointTypes.drone, virtualPlayerToColorMap[vPlayerId])
                 }
                 return getNavPlanImage(imagePointTypes.regular, virtualPlayerToColorMap[vPlayerId])
-            }
+            }         
         }
         return dataset;
     }

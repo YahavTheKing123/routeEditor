@@ -84,12 +84,14 @@ export default class Footer extends Component {
     }
 
     renderZoomButtons() {
+        const hideChartPointsActiveClass = this.props.isHideChartPoints ? 'route-editor-footer-zoom-button-active' : '';
+
         return (
             <div className='route-editor-footer-zoom-wrapper'>
                 <button className='route-editor-footer-zoom-button' onClick={this.resetZoom} title={this.props.translator.t('resetZoom')}>
                     <img className='route-editor-footer-reset-zoom-icon' src={resetZoomIcon}/>
                 </button>
-                <button className='route-editor-footer-zoom-button' onClick={this.resetZoom} title={this.props.translator.t('resetZoom')}>
+                <button className={`route-editor-footer-zoom-button ${hideChartPointsActiveClass}`} onClick={this.props.toggleHideChartPoints} title={this.props.translator.t('hideChartPoints')}>
                     <img className='route-editor-footer-hide-points-icon' src={hidePointsIcon}/>
                 </button>
                 {/*<button className='route-editor-footer-zoom-button' onClick={this.props.onClose}>

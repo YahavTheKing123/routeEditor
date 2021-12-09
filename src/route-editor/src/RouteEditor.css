@@ -102,7 +102,8 @@
 .route-editor-participate-list-right-arrrow-button:active,
 .route-editor-participate-list-left-arrrow-button:active,
 .route-editor-footer-zoom-button:active,
-.route-editor-footer-action-button:active {
+.route-editor-footer-action-button:active,
+.route-editor-footer-zoom-button.route-editor-footer-zoom-button-active {
     background-color: var(--route-editor-selection-color);
 }
 

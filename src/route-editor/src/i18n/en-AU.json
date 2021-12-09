@@ -10,6 +10,7 @@
     "all": "All",
     "resetZoom": "Reset Zoom",
     "undo": "Undo Changes",
-    "save": "Save Changes"
+    "save": "Save Changes",
+    "hideChartPoints": "Hide Chart Points"
   }
 }

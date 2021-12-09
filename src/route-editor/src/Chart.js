@@ -200,10 +200,10 @@ export default class RouteChart extends Component {
                             return gridLineColor
                         },
                     },
-                    suggestedMax: this.props.maxAmslAltitude * config.chartYaxisMaxFactor,
+                    suggestedMax: this.props.maxAmslAltitude * config.chartYaxisMaxFactor                    
                 },
                 x: {
-                    offset: false,
+                    offset: true,
                     beginAtZero: true,                    
                     /*max: (event) => {
                         let maxValue = 0;

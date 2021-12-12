@@ -58,11 +58,72 @@ class RouteEditor extends Component {
         this.navPlanningCommand = Globals.get().clientFacade.createCommand(commnadSname, {})
     }
 
-    setContextEntityInState() {
-        const {additionalData} = this.props;
-        if (!additionalData || !additionalData.contextId) return;
 
-        // set 
+    getNavPlanDirection(navPlanEnt) {
+        let direction = routeOptions.forwardBack;
+
+        if (config.partrolRouteTypes.includes(navPlanEnt.navPlanType)) {
+            direction = routeOptions.patrol;
+        } else if (navPlanEnt.direction === navDirectionMapper[routeOptions.forward]) {
+            direction = routeOptions.forward;
+        } else if (navPlanEnt.direction === navDirectionMapper[routeOptions.back]) {
+            direction = routeOptions.back;
+        }
+
+        return direction;
+    }
+
+    setContextEntityInState() {
+        // we can set here navPlan (back, forward or patrol), and / or player and / or vPlayer
+
+        const {additionalData : {contextId = null}} = this.props;
+        if (!contextId) return;
+
+        const contextEntity = this.entsIdToEntsMap[contextId];
+
+        /*this.state.selectedDroneId
+        this.entsIdToEntsMap        
+        this.navPlansToWaypointsMap
+        this.playerToVirtualPlayerMap
+        this.virtualPlayerToNavPlansMap
+        this.virtualPlayerToColorMap
+        this.state.selectedRouteDirection*/
+
+        switch (contextEntity.sname) {
+            case this.navPlanSname: {
+                //navPlan -> linkedPlayerOrDestinationPoint(playerId) -> player -> virtualPlayer
+                const playerId = ldsh.get(contextEntity, 'linkedPlayerOrDestinationPoint._id');
+                if (!playerId) return;                
+                const vPlayer = this.playerToVirtualPlayerMap[playerId];
+                if (!vPlayer) return;
+
+                this.setState({
+                    selectedDroneId: vPlayer._id,
+                    selectedRouteDirection: this.getNavPlanDirection(contextEntity)
+                })
+                
+                break;
+            }
+            case this.playerSname: {
+                const vPlayer = this.playerToVirtualPlayerMap[contextEntity._id];
+                if (!vPlayer) return;
+
+                this.setState({
+                    selectedDroneId: vPlayer._id,                    
+                })
+                
+                break;
+            }
+            case this.virtualPlayerSname: {
+                this.setState({
+                    selectedDroneId: contextEntity._id,                    
+                })
+                break;
+            }
+                        
+            default:
+                break;
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {

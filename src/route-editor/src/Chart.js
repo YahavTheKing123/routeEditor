@@ -203,7 +203,7 @@ export default class RouteChart extends Component {
                     suggestedMax: this.props.maxAmslAltitude * config.chartYaxisMaxFactor                    
                 },
                 x: {
-                    offset: true,
+                    //offset: true,
                     beginAtZero: true,                    
                     /*max: (event) => {
                         let maxValue = 0;

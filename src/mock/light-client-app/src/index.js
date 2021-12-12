@@ -1573,6 +1573,9 @@ let dtmCount = -1;
 
 function getLinePoints(linePos) {  
 
+// dtm 1 - forward: 32 back: 49
+// dtm 2 - forward: 33 back: 42
+
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       debugger;

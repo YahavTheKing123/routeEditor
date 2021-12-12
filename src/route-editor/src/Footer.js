@@ -12,7 +12,7 @@ import directionDown from './assets/directionDown.svg';
 import directionUp from'./assets/directionUp.svg';
 import directionUpDown from'./assets/directionUpDown.svg';
 import config from "./config";
-import {navDirectionMapper, routeOptions} from "./RouteEditor";
+import {navDirectionMapper, routeOptions, reactSelectMenuOptions} from "./RouteEditor";
 import {EntitiesMngr} from '~/entities-client';
 
 const icons = {
@@ -110,6 +110,11 @@ export default class Footer extends Component {
         return <img src={icons[iconKey]} className='route-editor-footer-dropdown-icon-img'/>
     }
 
+    onItemChange = (selectedItem, { action, prevInputValue }) => {
+        console.log(action, prevInputValue)
+         this.props.onDropDownSelect(selectedItem.value)
+    }
+
     renderDropDown() {
         if (!this.state.dropdownOptions) return null
         return (
@@ -125,7 +130,9 @@ export default class Footer extends Component {
                         isClearable={false}
                         placeholder=""
                         maxMenuHeight={'25rem'}
-                        onChange={selectedItem => this.props.onDropDownSelect(selectedItem.value)}
+                        onChange={this.onItemChange}
+                        onMenuOpen={() => this.props.handleMenuAction(reactSelectMenuOptions.open)}
+                        onMenuClose={() => this.props.handleMenuAction(reactSelectMenuOptions.close)}
                 />
                 </span>
             </div>

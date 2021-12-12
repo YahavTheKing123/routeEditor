@@ -27,6 +27,11 @@ export const navDirectionMapper = {
     patrol: 3
 }
 
+export const reactSelectMenuOptions = {
+    open: 'open',
+    close: 'close'
+}
+
 class RouteEditor extends Component {
 
     constructor(props) {
@@ -38,7 +43,8 @@ class RouteEditor extends Component {
             isDataReady: false,
             isChartHasChanges: false,
             isNavPlanningCommandAvailable: false,
-            isHideChartPoints: false
+            isHideChartPoints: false,
+            reactSelectMenuOption: reactSelectMenuOptions.close
         }
         this.chartContainerRef = React.createRef();
     }
@@ -47,6 +53,10 @@ class RouteEditor extends Component {
         this.setSnames();
         this.initTranslation();
         this.setNavPlanningCommand();        
+    }
+
+    onResize = e => {
+        console.log(e);
     }
 
     setNavPlanningCommand() {
@@ -349,6 +359,7 @@ class RouteEditor extends Component {
                 updateChartChangesFlag={this.updateChartChangesFlag}
                 isHideChartPoints={this.state.isHideChartPoints}
                 toggleHideChartPoints={() => this.setState({isHideChartPoints: !this.state.isHideChartPoints})}
+                handleMenuAction={actionType => this.setState({reactSelectMenuOption: actionType})}
             />
         );
     }
@@ -356,9 +367,11 @@ class RouteEditor extends Component {
     render() {
         if (!this.state.isDataReady || !this.state.isTranslatorReady) return null;
 
+        const reactSelectMenuOpenClass = this.state.reactSelectMenuOption === reactSelectMenuOptions.open ? 'react-select-menu-open' : '';
+
         return (
                 <Draggable handle={'.route-editor-header'} bounds={'body'}>
-                    <div className='route-editor-wrapper'>
+                    <div className={`route-editor-wrapper ${reactSelectMenuOpenClass}`} onResize={this.onResize}>
                         {this.renderHeader()}
                         {this.renderParticipateList()}
                         {this.renderChart()}

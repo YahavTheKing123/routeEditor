@@ -21,25 +21,34 @@
     --route-editor-footer-dropdown-options-bg-color :#383B4C;
     --route-editor-footer-dropdown-option-border-color: #5C6073;
 
+    --route-editor-header-height: 4rem;
+    --route-editor-participate-list-height: 4.9rem;
+    --route-editor-chart-height: 30rem;
+    --route-editor-footer-height: 6.5rem;
+
     background-color: var(--route-editor-bg-color);
     color: var(--route-editor-font-primary-color);
 
-    width: 58rem;
+    min-width: 58rem;
     position: fixed;
     top: calc(var(--touch-header-height, 5rem) + 1rem);
     right: calc(var(--touch-left-menu-width, 10rem) + 1.5rem);
     transform-origin: top right;
     border-radius: 1rem;
-    font-size: 1.4rem;
-    /*
-        resize: both;
-        overflow: auto;
-    */
+    font-size: 1.4rem;    
+    resize: both;
+    overflow: auto;  
+    min-height: 45.4rem;  
+}
+
+.react-select-menu-open {
+    resize: initial;
+    overflow: initial;    
 }
 
 /*----------------------------------------------------- Header --------------------------------------*/
 .route-editor-header {
-    height: 4rem;
+    height: var(--route-editor-header-height);
     width: 100%;
     display: flex;
     align-items: center;
@@ -72,6 +81,7 @@
 .route-editor-participate-list-wrapper {
     background: var(--route-editor-participate-list-bg-color);
     padding: 0.5rem;
+    height: var(--route-editor-participate-list-height);
 }
 
 .route-editor-participate-list-content {
@@ -208,15 +218,17 @@
 /*----------------------------------------------------- Chart ---------------------------------------*/
 
 .route-editor-chart-wrapper {
-    min-height: 30rem;
+    min-height: var(--route-editor-chart-height);
+    height: calc(100% - (var(--route-editor-header-height) + var(--route-editor-participate-list-height) + var(--route-editor-footer-height)));
 }
+
 canvas#route-editor-canvas {
     background-color: var(--route-editor-chart-bg-color);
 }
 
 /*----------------------------------------------------- Footer --------------------------------------*/
 .route-editor-footer {
-    height: 6.5rem;
+    height: var(--route-editor-footer-height);
     padding: 1rem 1.5rem;
     display: flex;
     align-items: center;

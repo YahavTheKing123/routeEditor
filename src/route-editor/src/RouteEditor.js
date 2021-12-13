@@ -52,7 +52,7 @@ class RouteEditor extends Component {
     componentDidMount() {
         this.setSnames();
         this.initTranslation();
-        this.setNavPlanningCommand();        
+        this.setNavPlanningCommand();
     }
 
     onResize = e => {
@@ -91,19 +91,11 @@ class RouteEditor extends Component {
 
         const contextEntity = this.entsIdToEntsMap[contextId];
 
-        /*this.state.selectedDroneId
-        this.entsIdToEntsMap        
-        this.navPlansToWaypointsMap
-        this.playerToVirtualPlayerMap
-        this.virtualPlayerToNavPlansMap
-        this.virtualPlayerToColorMap
-        this.state.selectedRouteDirection*/
-
         switch (contextEntity.sname) {
             case this.navPlanSname: {
                 //navPlan -> linkedPlayerOrDestinationPoint(playerId) -> player -> virtualPlayer
                 const playerId = ldsh.get(contextEntity, 'linkedPlayerOrDestinationPoint._id');
-                if (!playerId) return;                
+                if (!playerId) return;
                 const vPlayer = this.playerToVirtualPlayerMap[playerId];
                 if (!vPlayer) return;
 
@@ -111,7 +103,7 @@ class RouteEditor extends Component {
                     selectedDroneId: vPlayer._id,
                     selectedRouteDirection: this.getNavPlanDirection(contextEntity)
                 })
-                
+
                 break;
             }
             case this.playerSname: {
@@ -119,18 +111,18 @@ class RouteEditor extends Component {
                 if (!vPlayer) return;
 
                 this.setState({
-                    selectedDroneId: vPlayer._id,                    
+                    selectedDroneId: vPlayer._id,
                 })
-                
+
                 break;
             }
             case this.virtualPlayerSname: {
                 this.setState({
-                    selectedDroneId: contextEntity._id,                    
+                    selectedDroneId: contextEntity._id,
                 })
                 break;
             }
-                        
+
             default:
                 break;
         }

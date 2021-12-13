@@ -9,6 +9,7 @@ import {Globals} from "@elbit/light-client-app";
 import {Enum} from '~/enums-client';
 import {DisplayDataHandler} from '~/converter-mngr';
 import ldsh from 'lodash';
+import {LightMapInterface} from '~/map';
 
 const {geo} = require('@elbit/js-geo');
 
@@ -118,7 +119,7 @@ export default class RouteChart extends Component {
                     showTooltip: true,
                     onDragStart: (e, datasetIndex, index, value) => {
                         const {mission, selectedDroneId} = this.props;
-
+                        this.selectOnMap(value.waypoint || value);
                         this.isDraggingPoint = true;
                         if (selectedDroneId === config.ALL || value.isPlayer) return false;
 
@@ -200,14 +201,15 @@ export default class RouteChart extends Component {
                             return gridLineColor
                         },
                     },
-                    suggestedMax: this.props.maxAmslAltitude * config.chartYaxisMaxFactor                    
+                    suggestedMax: this.props.selectedDroneId !== config.ALL ? this.props.maxAmslAltitude * config.chartYaxisMaxFactor : 0
                 },
                 x: {
                     //offset: true,
-                    beginAtZero: true,                    
-                    /*max: (event) => {
+                    beginAtZero: true,
+                    max: (event) => {
                         let maxValue = 0;
                         event.chart.data.datasets.forEach(dataSet => {
+                            if (!dataSet.data) return;
                             dataSet.data.forEach(point => {
                                 if (point.x > maxValue) {
                                     maxValue = point.x;
@@ -215,7 +217,7 @@ export default class RouteChart extends Component {
                             })
                         })
                         return maxValue * config.chartXaxisMaxFactor;
-                    },*/
+                    },
                     ticks: {
                         callback: (value, index) => {
                             if (index === 0) {
@@ -241,7 +243,7 @@ export default class RouteChart extends Component {
         };
     }
 
-    getPlayerTooltipItem = item => {        
+    getPlayerTooltipItem = item => {
         return 'Player ' + item.raw.playerDispName
     }
 
@@ -258,6 +260,18 @@ export default class RouteChart extends Component {
             })
             return title;
         }
+    }
+
+    selectOnMap = ent => {
+        // this is wrapped in setTimout since i want it to be async task becuase if not, the ui is a bit gliches.
+        setTimeout(()=> {
+            LightMapInterface.indicateMapPosition({
+                id: ent._id,
+                hideIndication: false,
+                isMultipleSelection: true,
+                notNotifyMultiSelect: true
+            });
+        }, 0)
     }
 
     isPatrolWaypoint = (waypoint) => {
@@ -299,13 +313,31 @@ export default class RouteChart extends Component {
             this.props.entsIdToEntsMap !==  entsIdToEntsMap ||
             this.props.navPlansToWaypointsMap !==  navPlansToWaypointsMap ||
             this.props.playerToVirtualPlayerMap !==  playerToVirtualPlayerMap ||
-            this.props.virtualPlayerToNavPlansMap !==  virtualPlayerToNavPlansMap || 
+            this.props.virtualPlayerToNavPlansMap !==  virtualPlayerToNavPlansMap ||
             this.props.isHideChartPoints !== isHideChartPoints
             //this.props.mission !==  mission
         ) || this.state !== nextState) {
             return true;
         }
         return false
+    }
+
+    selectNavPlanOnMap() {
+        const {selectedRouteDirection, selectedDroneId, virtualPlayerToNavPlansMap} = this.props;
+
+        const navPlanArr = virtualPlayerToNavPlansMap[selectedDroneId] || [];
+        if (selectedRouteDirection !== routeOptions.forwardBack) {
+            const navPlan = this.getNavPlanByDirection(navPlanArr, selectedRouteDirection);
+            navPlan && this.selectOnMap(navPlan);
+        } else {
+            Object.keys(routeOptions).forEach(option => {
+                if (option !== routeOptions.forwardBack) {
+                    const navPlan = this.getNavPlanByDirection(navPlanArr, option);
+                    navPlan && this.selectOnMap(navPlan);
+                }
+            })
+        }
+
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -317,7 +349,8 @@ export default class RouteChart extends Component {
             this.setOptions();
             //get NavPlan DTM if needed
             if (this.props.selectedDroneId !== config.ALL) {
-                this.setState({navPlanPolylinePoints: null}, () => this.getNavPlanDTMPoints())
+                this.setState({navPlanPolylinePoints: null}, () => this.getNavPlanDTMPoints());
+                this.selectNavPlanOnMap();
             }
         }
     }
@@ -335,6 +368,7 @@ export default class RouteChart extends Component {
                 navPlanPolylinePoints = await Globals.g.map.getHeightsAlongLine(geo.serializer.deserializePosition(navPlan.appX.base.position, 0));
             }
         } else {
+            if (!navPlanArr) return;
             const navPlanForward = navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.forward]);
             const navPlanPatrol =  navPlanArr.find(nav => config.partrolRouteTypes.includes(nav.navPlanType));
             const navPlanBack = navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.back]);
@@ -397,7 +431,8 @@ export default class RouteChart extends Component {
 
         const res = {
             playerPosition: null,
-            playerDispName: null
+            playerDispName: null,
+            playerId: null
         }
 
         const direction = selectedRouteDirection === routeOptions.forwardBack ? routeOptions.forward : selectedRouteDirection;
@@ -406,6 +441,7 @@ export default class RouteChart extends Component {
         if (navPlan && navPlan.linkedPlayerOrDestinationPoint && navPlan.linkedPlayerOrDestinationPoint._id) {
             const player = this.props.entsIdToEntsMap[navPlan.linkedPlayerOrDestinationPoint._id];
             if (player) {
+                res.playerId = player._id;
                 res.playerDispName = player.appX.base.dispName;
                 res.playerPosition = geo.serializer.deserializePosition(player.appX.base.position, geo.returnTypeEnum.geoJson);
             }
@@ -464,7 +500,64 @@ export default class RouteChart extends Component {
             pointHoverBackgroundColor: 'rgba(0,0,0,0)',
             pointHoverBorderColor: 'rgba(0,0,0,0)',
             pointRadius: 0,
+            borderWidth: 1,
             fill: true,
+            dragData: false
+        }
+
+        return dataset;
+    }
+
+    getBottomLimitPoint = (point, patrolStartX, patrolEndX) => {
+        // if patrol waypoint then return mission.heightAMSLConstraint.minHeight  , else return mission mission.heightOfSafetyAboveGround
+        const {mission} = this.props;
+        if (!patrolStartX || !patrolEndX) return mission.heightOfSafetyAboveGround + point.y;
+
+        return point.x >= patrolStartX && point.x <= patrolEndX ? mission.heightAMSLConstraint.minHeight : mission.heightOfSafetyAboveGround + point.y;
+
+    }
+
+    getPartolStartEndPoints = (navPlanDataSet) => {
+        let patrolStartX = null, patrolEndX = null;
+
+        navPlanDataSet && navPlanDataSet.data && navPlanDataSet.data.forEach(point => {
+            if (point.waypoint && point.waypoint.pointChartType === routeOptions.patrol) {
+                patrolEndX = point.x;
+                if (point.waypoint.index === 0) {
+                    patrolStartX = point.x;
+                }
+            }
+        })
+
+        return {patrolStartX, patrolEndX}
+    }
+
+    getNavPlanBottomLimitDataSet(navPlanDataSet, navPlanDTMDataSet) {
+
+        const bottomLimitPoints = [];
+        const {patrolStartX, patrolEndX} = this.getPartolStartEndPoints(navPlanDataSet);
+
+        navPlanDTMDataSet && navPlanDTMDataSet.data && navPlanDTMDataSet.data.forEach(point => {
+            const yLimit = this.getBottomLimitPoint(point, patrolStartX, patrolEndX)
+            bottomLimitPoints.push({
+                x: point.x,
+                y: yLimit
+            })
+        })
+
+        const dataset = {
+            identifier: config.dataSetDTMIdentifier,
+            label: 'bottomLimit',
+            data: bottomLimitPoints,
+            borderColor: '#ff9c44',
+            backgroundColor: '#8b572470',
+            pointBorderColor: 'rgba(0,0,0,0)',
+            pointBackgroundColor: 'rgba(0,0,0,0)',
+            pointHoverBackgroundColor: 'rgba(0,0,0,0)',
+            pointHoverBorderColor: 'rgba(0,0,0,0)',
+            pointRadius: 0,
+            borderWidth: 2,
+            borderDash: [8,5],
             dragData: false
         }
 
@@ -474,23 +567,23 @@ export default class RouteChart extends Component {
     getNavPlanUpperLimitDataSet(navPlanDataSet, navPlanDTMDataSet) {
         const {maxAmslAltitude} = this.props;
         let navPlanUpperLimitPoints = [];
-        
+
         if (maxAmslAltitude) {
-            const navPlanArr = navPlanDataSet.data;
-            const dtmArr = navPlanDTMDataSet.data;
+            const navPlanArr = navPlanDataSet.data || [];
+            const dtmArr = navPlanDTMDataSet.data || [];
 
             navPlanUpperLimitPoints = [
                 {
-                    x: 0, 
+                    x: 0,
                     y: maxAmslAltitude
                 },
                 {
-                    x: Math.max(dtmArr[dtmArr.length -1].x, navPlanArr[navPlanArr.length -1].x),
+                    x: Math.max(dtmArr[dtmArr.length -1] && dtmArr[dtmArr.length -1].x || 0, navPlanArr[navPlanArr.length -1] && navPlanArr[navPlanArr.length -1].x || 0),
                     y: maxAmslAltitude
                 }
             ]
         };
-        
+
         const dataset = {
             identifier: config.dataSetDTMIdentifier,
             label: 'upperLimit',
@@ -501,8 +594,8 @@ export default class RouteChart extends Component {
             pointBackgroundColor: 'rgba(0,0,0,0)',
             pointHoverBackgroundColor: 'rgba(0,0,0,0)',
             pointHoverBorderColor: 'rgba(0,0,0,0)',
-            pointRadius: 0, 
-            borderWidth: 3,  
+            pointRadius: 0,
+            borderWidth: 3,
             borderDash: [1,6],
             borderCapStyle: 'round',
             dragData: false
@@ -544,11 +637,11 @@ export default class RouteChart extends Component {
     }
 
     isPatrolEndPoint(waypoint, navPlansWPCounts) {
-        return waypoint.pointChartType === routeOptions.patrol && waypoint.index === navPlansWPCounts[routeOptions.back] - 1;
+        return waypoint.pointChartType === routeOptions.patrol && waypoint.index === navPlansWPCounts[routeOptions.patrol] - 1;
     }
 
     setPointTypeIconIndicator(chartPoint, waypoint, navPlansWPCounts) {
-        
+
         if (this.isStartPoint(waypoint)) {
             chartPoint.isStartPoint = true;
         } else if (this.isEndPoint(waypoint, navPlansWPCounts)) {
@@ -565,7 +658,7 @@ export default class RouteChart extends Component {
         const {virtualPlayerToNavPlansMap, navPlansToWaypointsMap, virtualPlayerToColorMap, selectedRouteDirection, isHideChartPoints} = this.props;
 
         const navPlanArr = virtualPlayerToNavPlansMap[vPlayerId] || [];
-        const {playerPosition, playerDispName} = this.getNavPlanLinkedPlayerPositionAndDispName(navPlanArr, selectedRouteDirection);
+        const {playerPosition, playerDispName, playerId} = this.getNavPlanLinkedPlayerPositionAndDispName(navPlanArr, selectedRouteDirection);
         const sortedWaypoints = this.getNavPlanWaypoints(navPlanArr, selectedRouteDirection, navPlansToWaypointsMap) || [];
         const navPlansWPCounts = this.getNavPlansWPCounts(sortedWaypoints);
 
@@ -612,7 +705,8 @@ export default class RouteChart extends Component {
                     x: (navPlanPoints[j].x + navPlanPoints[j+1].x) / 2,
                     y: (navPlanPoints[j].y + navPlanPoints[j+1].y) / 2,
                     isPlayer: true,
-                    playerDispName
+                    playerDispName,
+                    _id: playerId
                 }
 
                 navPlanPoints.splice(j + 1, 0, playerPoint);
@@ -623,7 +717,7 @@ export default class RouteChart extends Component {
             label: `data ${vPlayerId}`,
             data: navPlanPoints,
             borderColor: virtualPlayerToColorMap[vPlayerId],
-            backgroundColor: virtualPlayerToColorMap[vPlayerId],       
+            backgroundColor: virtualPlayerToColorMap[vPlayerId],
             pointRadius: isHideChartPoints ? 0 : 3,
             pointStyle: function(param) {
                 if (isHideChartPoints) return false
@@ -639,10 +733,11 @@ export default class RouteChart extends Component {
                     return getNavPlanImage(imagePointTypes.drone, virtualPlayerToColorMap[vPlayerId])
                 }
                 return getNavPlanImage(imagePointTypes.regular, virtualPlayerToColorMap[vPlayerId])
-            }         
+            }
         }
         return dataset;
     }
+
 
     getChartData = () => {
         let data = {};
@@ -653,14 +748,15 @@ export default class RouteChart extends Component {
             Object.keys(virtualPlayerToNavPlansMap).forEach((vPlayerId) => {
                 datasets.push(this.getNavPlanDataSet(vPlayerId));
             })
-        } else {       
-            const navPlanDataSet = this.getNavPlanDataSet(selectedDroneId)     
+        } else {
+            const navPlanDataSet = this.getNavPlanDataSet(selectedDroneId)
             datasets.push(navPlanDataSet);
 
             const navPlanDTMDataSet = this.getNavPlanDTMDataSet();
             datasets.push(navPlanDTMDataSet);
 
-            datasets.push(this.getNavPlanUpperLimitDataSet(navPlanDataSet, navPlanDTMDataSet))
+            datasets.push(this.getNavPlanUpperLimitDataSet(navPlanDataSet, navPlanDTMDataSet));
+            datasets.push(this.getNavPlanBottomLimitDataSet(navPlanDataSet, navPlanDTMDataSet));
         }
 
         data.datasets = datasets;

@@ -61,7 +61,7 @@ export default class Footer extends Component {
             }))
         } else {
             const navPlanArr = virtualPlayerToNavPlansMap[selectedDroneId];
-            const navPlanPatrol =  navPlanArr.find(nav => nav.navPlanType === navDirectionMapper[routeOptions.patrol]);
+            const navPlanPatrol =  navPlanArr && navPlanArr.find(nav => nav.navPlanType === navDirectionMapper[routeOptions.patrol]);
             if (navPlanPatrol) {
                 isContainsPatrolNavPlan = true;
             }
@@ -110,8 +110,7 @@ export default class Footer extends Component {
         return <img src={icons[iconKey]} className='route-editor-footer-dropdown-icon-img'/>
     }
 
-    onItemChange = (selectedItem, { action, prevInputValue }) => {
-        console.log(action, prevInputValue)
+    onItemChange = (selectedItem) => {
          this.props.onDropDownSelect(selectedItem.value)
     }
 

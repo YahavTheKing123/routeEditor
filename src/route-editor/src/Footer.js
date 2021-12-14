@@ -147,17 +147,25 @@ export default class Footer extends Component {
         )
     }
 
-    saveChanges = () => {
+    saveChanges = async () => {
         const {newWaypointsHeight} = this.props.chartConainer.current;
         if (newWaypointsHeight && Object.keys(newWaypointsHeight).length > 0) {
-            const promises = Object.keys(newWaypointsHeight).map(id => {
-                return EntitiesMngr.updateEntity(id, {
-                    heightAGL: newWaypointsHeight[id].newHeightAGL,
-                    heightAMSL: newWaypointsHeight[id].newHeightAMSL,
+            try {
+                this.props.setChartLoader(true);
+                const promises = Object.keys(newWaypointsHeight).map(id => {
+                    return EntitiesMngr.updateEntity(id, {
+                        heightAGL: newWaypointsHeight[id].newHeightAGL,
+                        heightAMSL: newWaypointsHeight[id].newHeightAMSL,
+                    })
                 })
-            })
-            Promise.all(promises);
-            this.props.updateChartChangesFlag(false);
+                await Promise.all(promises);
+                setTimeout(() => {
+                    this.props.setChartLoader(false)
+                }, 1000)
+            } catch (e) {
+                console.error(e);
+                this.props.setChartLoader(false);
+            }
         }
     }
 
@@ -172,21 +180,23 @@ export default class Footer extends Component {
     }
 
     renderLeftButtons() {
-        const disableClass = this.props.isChartHasChanges ? '' : 'route-editor-footer-left-buttons-disable';
-        const navPlanCmdDisabledClass = this.props.isNavPlanningCommandAvailable ? '' : 'plan-action-button-disable';
+        const {selectedDroneId, isChartLoading, isChartHasChanges, isNavPlanningCommandAvailable, executeNavPlanningCommand, translator} = this.props;
+
+        const disableClass = isChartHasChanges && !isChartLoading ? '' : 'route-editor-footer-left-buttons-disable';
+        const navPlanCmdDisabledClass = isNavPlanningCommandAvailable ? '' : 'plan-action-button-disable';
         return (
             <div className={`route-editor-footer-left-buttons`}>
-                <button className={`route-editor-footer-action-button plan-action-button ${navPlanCmdDisabledClass}`} onClick={this.props.executeNavPlanningCommand} >
+                <button className={`route-editor-footer-action-button plan-action-button ${navPlanCmdDisabledClass}`} onClick={executeNavPlanningCommand} >
                     <img className='route-editor-footer-undo-icon' src={fxIcon} style={{height:'1.6rem', width:'1.6rem', marginInlineEnd: '0.5rem'}}/>
-                    <span>{this.props.translator.t('plan')}</span>
+                    <span>{translator.t('plan')}</span>
                 </button>
                 {
-                    this.props.selectedDroneId !== config.ALL &&
+                    selectedDroneId !== config.ALL &&
                     <div className={`route-editor-footer-action-buttons ${disableClass}`}>
-                        <button className='route-editor-footer-action-button' onClick={this.undoChanges} title={this.props.translator.t('undo')}>
+                        <button className='route-editor-footer-action-button' onClick={this.undoChanges} title={translator.t('undo')}>
                             <img className='route-editor-footer-undo-icon' src={undoIcon}/>
                         </button>
-                        <button className='route-editor-footer-action-button' onClick={this.saveChanges} title={this.props.translator.t('save')}>
+                        <button className='route-editor-footer-action-button' onClick={this.saveChanges} title={translator.t('save')}>
                             <img className='route-editor-footer-check-icon' src={checkIcon}/>
                         </button>
                     </div>

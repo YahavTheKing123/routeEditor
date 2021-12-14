@@ -119,7 +119,11 @@ export default class RouteChart extends Component {
                     showTooltip: true,
                     onDragStart: (e, datasetIndex, index, value) => {
                         const {mission, selectedDroneId} = this.props;
-                        this.selectOnMap(value.waypoint || value);
+
+                        setTimeout(() => {
+                            this.selectOnMap(value.waypoint || value);
+                        }, 100)
+
                         this.isDraggingPoint = true;
                         if (selectedDroneId === config.ALL || value.isPlayer) return false;
 
@@ -263,15 +267,12 @@ export default class RouteChart extends Component {
     }
 
     selectOnMap = ent => {
-        // this is wrapped in setTimout since i want it to be async task becuase if not, the ui is a bit gliches.
-        setTimeout(()=> {
-            LightMapInterface.indicateMapPosition({
-                id: ent._id,
-                hideIndication: false,
-                isMultipleSelection: true,
-                notNotifyMultiSelect: true
-            });
-        }, 0)
+        LightMapInterface.indicateMapPosition({
+            id: ent._id,
+            hideIndication: false,
+            isMultipleSelection: true,
+            notNotifyMultiSelect: true
+        });
     }
 
     isPatrolWaypoint = (waypoint) => {
@@ -299,7 +300,8 @@ export default class RouteChart extends Component {
             playerToVirtualPlayerMap,
             virtualPlayerToNavPlansMap,
             selectedRouteDirection,
-            isHideChartPoints
+            isHideChartPoints,
+            isChartLoading
         } = nextProps;
 
         if (this.props.selectedDroneId !==  selectedDroneId ||
@@ -314,7 +316,8 @@ export default class RouteChart extends Component {
             this.props.navPlansToWaypointsMap !==  navPlansToWaypointsMap ||
             this.props.playerToVirtualPlayerMap !==  playerToVirtualPlayerMap ||
             this.props.virtualPlayerToNavPlansMap !==  virtualPlayerToNavPlansMap ||
-            this.props.isHideChartPoints !== isHideChartPoints
+            this.props.isHideChartPoints !== isHideChartPoints ||
+            this.props.isChartLoading != isChartLoading
             //this.props.mission !==  mission
         ) || this.state !== nextState) {
             return true;
@@ -475,8 +478,8 @@ export default class RouteChart extends Component {
 
             if (i !== 0) {
                 const vector = geo.geometricCalculations.vectorFromTwoLocations(
-                    new geo.coordinate(navPlanPolylinePoints[i-1].x / 100000, navPlanPolylinePoints[i-1].y / 100000, navPlanPolylinePoints[i-1].z),
-                    new geo.coordinate(point.x / 100000, point.y / 100000, point.z / 100000)
+                    new geo.coordinate(navPlanPolylinePoints[i-1].x , navPlanPolylinePoints[i-1].y , navPlanPolylinePoints[i-1].z),
+                    new geo.coordinate(point.x , point.y , point.z)
                 );
                 totalNavPlanLength += vector.distance;
             }
@@ -767,7 +770,7 @@ export default class RouteChart extends Component {
         return (
             <div className='route-editor-chart-wrapper'>
                 <div className='route-editor-loader-wrapper'>
-                    <span className='route-editor-loader-icon'></span>                     
+                    <span className='route-editor-loader-icon'></span>
                 </div>
             </div>
         )
@@ -776,12 +779,12 @@ export default class RouteChart extends Component {
     render() {
 
         if (this.props.selectedDroneId !== config.ALL && !this.state.navPlanPolylinePoints) return this.renderLoader();
-    
+
         const chartData = this.getChartData();
-        const savingLoaderClass = this.props.savingLoader ? 'route-editor-chart-saving-loader' : ''
+        const loaderClass = this.props.isChartLoading ? 'route-editor-chart-saving-loader' : ''
 
         return (
-            <div className={`route-editor-chart-wrapper ${savingLoaderClass}`}>
+            <div className={`route-editor-chart-wrapper ${loaderClass}`}>
                     <Line
                         data={chartData}
                         options={this.options}

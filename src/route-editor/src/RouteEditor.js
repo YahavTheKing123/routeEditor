@@ -309,6 +309,7 @@ class RouteEditor extends Component {
                     updateChartChangesFlag={this.updateChartChangesFlag}
                     isHideChartPoints={this.state.isHideChartPoints}
                     maxAmslAltitude={this.props.additionalData.maxAmslAltitude}
+                    translator={this.translator}
                 />
     }
 

@@ -11,6 +11,7 @@
     "resetZoom": "איפוס מיקוד",
     "undo": "בטל שינויים",
     "save": "שמור שינויים",
-    "hideChartPoints": "הסתר נקודות"
+    "hideChartPoints": "הסתר נקודות",
+    "loadingData": "טוען"
   }
 }

@@ -763,13 +763,25 @@ export default class RouteChart extends Component {
         return data;
     }
 
-    render() {
-
-        if (this.props.selectedDroneId !== config.ALL && !this.state.navPlanPolylinePoints) return null;
-        const chartData = this.getChartData();
-
+    renderLoader() {
         return (
             <div className='route-editor-chart-wrapper'>
+                <div className='route-editor-loader-wrapper'>
+                    <span className='route-editor-loader-icon'></span>                     
+                </div>
+            </div>
+        )
+    }
+
+    render() {
+
+        if (this.props.selectedDroneId !== config.ALL && !this.state.navPlanPolylinePoints) return this.renderLoader();
+    
+        const chartData = this.getChartData();
+        const savingLoaderClass = this.props.savingLoader ? 'route-editor-chart-saving-loader' : ''
+
+        return (
+            <div className={`route-editor-chart-wrapper ${savingLoaderClass}`}>
                     <Line
                         data={chartData}
                         options={this.options}

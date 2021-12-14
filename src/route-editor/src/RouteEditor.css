@@ -25,6 +25,12 @@
     --route-editor-participate-list-height: 4.9rem;
     --route-editor-chart-height: 30rem;
     --route-editor-footer-height: 6.5rem;
+    --route-editor-elements-height: calc(
+                                        var(--route-editor-header-height) + 
+                                        var(--route-editor-participate-list-height) + 
+                                        var(--route-editor-footer-height)
+                                    );
+
 
     background-color: var(--route-editor-bg-color);
     color: var(--route-editor-font-primary-color);
@@ -219,7 +225,7 @@
 
 .route-editor-chart-wrapper {
     min-height: var(--route-editor-chart-height);
-    height: calc(100% - (var(--route-editor-header-height) + var(--route-editor-participate-list-height) + var(--route-editor-footer-height)));
+    height: calc(100% - var(--route-editor-elements-height));
 }
 
 canvas#route-editor-canvas {

@@ -55,10 +55,6 @@ class RouteEditor extends Component {
         this.setNavPlanningCommand();
     }
 
-    onResize = e => {
-        console.log(e);
-    }
-
     setNavPlanningCommand() {
         const {additionalData} = this.props;
 
@@ -363,7 +359,7 @@ class RouteEditor extends Component {
 
         return (
                 <Draggable handle={'.route-editor-header'} bounds={'body'}>
-                    <div className={`route-editor-wrapper ${reactSelectMenuOpenClass}`} onResize={this.onResize}>
+                    <div className={`route-editor-wrapper ${reactSelectMenuOpenClass}`}>
                         {this.renderHeader()}
                         {this.renderParticipateList()}
                         {this.renderChart()}

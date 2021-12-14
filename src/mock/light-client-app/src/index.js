@@ -1569,19 +1569,24 @@ const dtm4 = [
   }
 ]
 
-let dtmCount = -1;
+let prevLinePos = null;
+
+
+const dtms = {
+  138.149943: dtm1.slice(0,32),
+  138.14966900000002: dtm1.slice(32),
+
+  138.152007: dtm2.slice(0, 33),
+  138.151343: dtm2.slice(33),
+}
 
 function getLinePoints(linePos) {  
 
-// dtm 1 - forward: 32 back: 49
-// dtm 2 - forward: 33 back: 42
-
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      debugger;
-      dtmCount++
-      if (dtmCount % 0 === 0) resolve(dtm1)
-      resolve(dtm2);
+    
+    setTimeout(() => {      
+      const key = linePos.coordinates.reduce((back,curr) => back +  curr.longitude ,0);
+      resolve(dtms[key])
     }, 100);
   })
 }

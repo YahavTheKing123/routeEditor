@@ -129,9 +129,9 @@ export default class RouteChart extends Component {
 
                         } else {
                             const dtmDataSet = this.chartRef.current.data.datasets.find(ds => ds.identifier === config.dataSetDTMIdentifier);
-                            const dtmOnPoint =  dtmDataSet.data.find(point => Math.round(point.x) === Math.round(value.x));
+                            const dtmOnPoint =  dtmDataSet && dtmDataSet.data.find(point => Math.round(point.x) === Math.round(value.x));
                             const offset = mission.heightOfSafetyAboveGround  || 0;
-                            this.minLimitPoint = dtmOnPoint.y + offset;
+                            this.minLimitPoint = (dtmOnPoint && dtmOnPoint.y || 0) + offset;
                         }
                     },
                     onDrag: (e, datasetIndex, index, value) => {

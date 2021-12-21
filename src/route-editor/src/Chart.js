@@ -118,60 +118,13 @@ export default class RouteChart extends Component {
                     round: 1,
                     showTooltip: true,
                     onDragStart: (e, datasetIndex, index, value) => {
-                        const {mission, selectedDroneId} = this.props;
-
-                        setTimeout(() => {
-                            this.selectOnMap(value.waypoint || value);
-                        }, 100)
-
-                        this.isDraggingPoint = true;
-                        if (selectedDroneId === config.ALL || value.isPlayer) return false;
-
-
-                        if (this.isPatrolWaypoint(value.waypoint)) {
-                            this.minLimitPoint = mission.heightAMSLConstraint && mission.heightAMSLConstraint.minHeight || 0;
-
-                        } else {
-                            const dtmDataSet = this.chartRef.current.data.datasets.find(ds => ds.identifier === config.dataSetDTMIdentifier);
-                            const dtmOnPoint =  dtmDataSet && dtmDataSet.data.find(point => Math.round(point.x) === Math.round(value.x));
-                            const offset = mission.heightOfSafetyAboveGround  || 0;
-                            this.minLimitPoint = (dtmOnPoint && dtmOnPoint.y || 0) + offset;
-                        }
+                        return this.onDragStart(e, datasetIndex, index, value);
                     },
                     onDrag: (e, datasetIndex, index, value) => {
-                        e.target.style.cursor = 'grabbing';
-                        const dataSetData = this.chartRef.current.data.datasets[datasetIndex].data;
-
-                        // Set player icon in the middle of the line between current moving the next point
-                        if (dataSetData[index + 1] && dataSetData[index + 1].isPlayer && dataSetData[index + 2]) {
-                            dataSetData[index + 1].y = (value.y + dataSetData[index + 2].y) / 2
-                        } else if (dataSetData[index - 1] && dataSetData[index - 1].isPlayer && dataSetData[index - 2]) {
-                            dataSetData[index - 1].y = (value.y + dataSetData[index - 2].y) / 2
-                        }
-
-                        if (value.y <= this.minLimitPoint) {
-                            this.chartRef.current.data.datasets[datasetIndex].data[index].y = this.minLimitPoint;
-                        } else if (value.y > this.props.maxAmslAltitude) {
-                            this.chartRef.current.data.datasets[datasetIndex].data[index].y = this.props.maxAmslAltitude;
-                        }
+                        this.onDrag(e, datasetIndex, index, value);
                     },
                     onDragEnd: (e, datasetIndex, index, value) => {
-                        e.target.style.cursor = 'default'
-                        this.isDraggingPoint = false;
-                        this.minLimitPoint = null;
-                        if (value.waypoint) {
-                            // we will save the AGL. calc by newAmsl - DTM
-
-                            const dtm = this.chartRef.current.data.datasets.find(ds => ds.identifier === config.dataSetDTMIdentifier)
-                            const dtmPoint = dtm.data.find(point => point.x === value.x);
-
-                            this.newWaypointsHeight[value.waypoint._id] = {
-                                newHeightAGL: Math.round(value.y - dtmPoint.y),
-                                newHeightAMSL: value.y,
-                                waypoint: value.waypoint
-                            };
-                            this.props.updateChartChangesFlag(true);
-                        }
+                        this.onDragEnd(e, datasetIndex, index, value);
                     },
                 }
             },
@@ -245,6 +198,68 @@ export default class RouteChart extends Component {
                 },
             },
         };
+    }
+
+    onDragStart = (e, datasetIndex, index, value) => {
+        const {mission, selectedDroneId} = this.props;
+
+        setTimeout(() => {
+            this.selectOnMap(value.waypoint || value);
+        }, 100)
+
+        this.isDraggingPoint = true;
+        if (selectedDroneId === config.ALL || value.isPlayer || value.isStartPoint || value.isEndPoint) {
+            setTimeout(() => this.isDraggingPoint = false,0)
+            return false
+        };
+
+
+        if (this.isPatrolWaypoint(value.waypoint)) {
+            this.minLimitPoint = mission.heightAMSLConstraint && mission.heightAMSLConstraint.minHeight || 0;
+
+        } else {
+            const dtmDataSet = this.chartRef.current.data.datasets.find(ds => ds.identifier === config.dataSetDTMIdentifier);
+            const dtmOnPoint =  dtmDataSet && dtmDataSet.data.find(point => Math.round(point.x) === Math.round(value.x));
+            const offset = mission.heightOfSafetyAboveGround  || 0;
+            this.minLimitPoint = (dtmOnPoint && dtmOnPoint.y || 0) + offset;
+        }
+    }
+
+    onDrag = (e, datasetIndex, index, value) => {
+        e.target.style.cursor = 'grabbing';
+        const dataSetData = this.chartRef.current.data.datasets[datasetIndex].data;
+
+        // Set player icon in the middle of the line between current moving the next point
+        if (dataSetData[index + 1] && dataSetData[index + 1].isPlayer && dataSetData[index + 2]) {
+            dataSetData[index + 1].y = (value.y + dataSetData[index + 2].y) / 2
+        } else if (dataSetData[index - 1] && dataSetData[index - 1].isPlayer && dataSetData[index - 2]) {
+            dataSetData[index - 1].y = (value.y + dataSetData[index - 2].y) / 2
+        }
+
+        if (value.y <= this.minLimitPoint) {
+            this.chartRef.current.data.datasets[datasetIndex].data[index].y = this.minLimitPoint;
+        } else if (value.y > this.props.maxAmslAltitude) {
+            this.chartRef.current.data.datasets[datasetIndex].data[index].y = this.props.maxAmslAltitude;
+        }
+    }
+
+    onDragEnd = (e, datasetIndex, index, value) => {
+        e.target.style.cursor = 'default'
+        this.isDraggingPoint = false;
+        this.minLimitPoint = null;
+        if (value.waypoint) {
+            // we will save the AGL. calc by newAmsl - DTM
+
+            const dtm = this.chartRef.current.data.datasets.find(ds => ds.identifier === config.dataSetDTMIdentifier)
+            const dtmPoint = dtm.data.find(point => point.x === value.x);
+
+            this.newWaypointsHeight[value.waypoint._id] = {
+                newHeightAGL: Math.round(value.y - dtmPoint.y),
+                newHeightAMSL: value.y,
+                waypoint: value.waypoint
+            };
+            this.props.updateChartChangesFlag(true);
+        }
     }
 
     getPlayerTooltipItem = item => {
@@ -354,6 +369,8 @@ export default class RouteChart extends Component {
             if (this.props.selectedDroneId !== config.ALL) {
                 this.setState({navPlanPolylinePoints: null}, () => this.getNavPlanDTMPoints());
                 this.selectNavPlanOnMap();
+            } else {
+                this.setState({navPlanPolylinePoints: null});
             }
         }
     }
@@ -460,12 +477,17 @@ export default class RouteChart extends Component {
             const vectorFromPlayerToCurrentWaypoint = geo.geometricCalculations.vectorFromTwoLocations(this.getCoordinate(playerPosition), this.getCoordinate(position));
 
             const diffFromSegment = (vectorFromPrevWaypointToPlayer.distance + vectorFromPlayerToCurrentWaypoint.distance) - vector.distance;
+
             if (closetsSegmentToPlayer.afterWaypoint == null) {
                 closetsSegmentToPlayer.afterWaypoint = i -1;
                 closetsSegmentToPlayer.diff = diffFromSegment;
+                closetsSegmentToPlayer.vectorFromWaypointToPlayer = vectorFromPrevWaypointToPlayer;
+                closetsSegmentToPlayer.vectorFromPlayerToWaypoint = vectorFromPlayerToCurrentWaypoint;
             } else if (diffFromSegment < closetsSegmentToPlayer.diff) {
                 closetsSegmentToPlayer.afterWaypoint = i -1;
                 closetsSegmentToPlayer.diff = diffFromSegment;
+                closetsSegmentToPlayer.vectorFromWaypointToPlayer = vectorFromPrevWaypointToPlayer;
+                closetsSegmentToPlayer.vectorFromPlayerToWaypoint = vectorFromPlayerToCurrentWaypoint;
             }
         }
     }
@@ -503,9 +525,11 @@ export default class RouteChart extends Component {
             pointHoverBackgroundColor: 'rgba(0,0,0,0)',
             pointHoverBorderColor: 'rgba(0,0,0,0)',
             pointRadius: 0,
+            pointHitRadius: 0,
             borderWidth: 1,
             fill: true,
-            dragData: false
+            dragData: false,
+            order: 2,
         }
 
         return dataset;
@@ -552,16 +576,22 @@ export default class RouteChart extends Component {
             identifier: config.dataSetDTMIdentifier,
             label: 'bottomLimit',
             data: bottomLimitPoints,
-            borderColor: '#ff9c44',
+            //borderColor: '#ff9c44',
+            borderColor: '#e85454',
             backgroundColor: '#8b572470',
             pointBorderColor: 'rgba(0,0,0,0)',
             pointBackgroundColor: 'rgba(0,0,0,0)',
             pointHoverBackgroundColor: 'rgba(0,0,0,0)',
             pointHoverBorderColor: 'rgba(0,0,0,0)',
             pointRadius: 0,
-            borderWidth: 2,
-            borderDash: [8,5],
-            dragData: false
+            pointHitRadius: 0,
+            //borderWidth: 2,
+            //borderDash: [8,5],
+            borderWidth: 3,
+            borderDash: [1,6],
+            borderCapStyle: 'round',
+            dragData: false,
+            order: 2,
         }
 
         return dataset;
@@ -601,7 +631,8 @@ export default class RouteChart extends Component {
             borderWidth: 3,
             borderDash: [1,6],
             borderCapStyle: 'round',
-            dragData: false
+            dragData: false,
+            order: 2,
         }
 
         return dataset;
@@ -669,6 +700,7 @@ export default class RouteChart extends Component {
         let closetsSegmentToPlayer = {afterWaypoint: null, diff: null}
         const navPlanPoints = [];
         let navPointCount = 0;
+        let playerDataSet = null;
 
         sortedWaypoints.forEach((waypoint, i) => {
 
@@ -705,19 +737,31 @@ export default class RouteChart extends Component {
                 const j = navPlanPoints.findIndex(elem => elem.waypoint._id === sortedWaypoints[i]._id);
 
                 const playerPoint = {
-                    x: (navPlanPoints[j].x + navPlanPoints[j+1].x) / 2,
-                    y: (navPlanPoints[j].y + navPlanPoints[j+1].y) / 2,
+                    x: navPlanPoints[j].x +  closetsSegmentToPlayer.vectorFromWaypointToPlayer.distance,
+                    y: playerPosition.geometry.coordinates[2],
                     isPlayer: true,
                     playerDispName,
                     _id: playerId
                 }
 
-                navPlanPoints.splice(j + 1, 0, playerPoint);
+                playerDataSet = {
+                    label: `player ${vPlayerId}`,
+                    order: 0,
+                    data: [playerPoint],
+                    pointRadius: 3,
+                    pointStyle: function() {
+                        return getNavPlanImage(imagePointTypes.drone, virtualPlayerToColorMap[vPlayerId])
+                    }
+                }
+
             }
         }
 
-        const dataset = {
+        const navPlanDataSet = {
             label: `data ${vPlayerId}`,
+            order: 1,
+            //clip: false,
+            //clip: {left: 20, top: 0, right: 0, bottom: 0},
             data: navPlanPoints,
             borderColor: virtualPlayerToColorMap[vPlayerId],
             backgroundColor: virtualPlayerToColorMap[vPlayerId],
@@ -738,7 +782,8 @@ export default class RouteChart extends Component {
                 return getNavPlanImage(imagePointTypes.regular, virtualPlayerToColorMap[vPlayerId])
             }
         }
-        return dataset;
+
+        return {navPlanDataSet, playerDataSet};
     }
 
 
@@ -749,12 +794,18 @@ export default class RouteChart extends Component {
 
         if (this.props.selectedDroneId === config.ALL) {
             Object.keys(virtualPlayerToNavPlansMap).forEach((vPlayerId) => {
-                datasets.push(this.getNavPlanDataSet(vPlayerId));
+                const {navPlanDataSet, playerDataSet}  = this.getNavPlanDataSet(vPlayerId)
+                datasets.push(navPlanDataSet);
+                if (playerDataSet) {
+                    datasets.push(playerDataSet);
+                }
             })
         } else {
-            const navPlanDataSet = this.getNavPlanDataSet(selectedDroneId)
+            const {navPlanDataSet, playerDataSet} = this.getNavPlanDataSet(selectedDroneId)
             datasets.push(navPlanDataSet);
-
+            if (playerDataSet) {
+                datasets.push(playerDataSet);
+            }
             const navPlanDTMDataSet = this.getNavPlanDTMDataSet();
             datasets.push(navPlanDTMDataSet);
 

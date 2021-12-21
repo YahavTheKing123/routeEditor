@@ -13,6 +13,7 @@ import Chart from './Chart';
 import ParticipateList from './ParticipateList';
 import Draggable from 'react-draggable';
 import ldsh from 'lodash';
+import {executeRestCall} from './helpers';
 
 export const routeOptions = {
     forward: 'forward',
@@ -319,18 +320,30 @@ class RouteEditor extends Component {
         this.setState({selectedRouteDirection})
     }
 
-    onExecuteNavPlanningCommand = () => {
-        if (!this.navPlanningCommand) return;
+    onExecuteNavPlanningCommand = async () => {
+        const {additionalData: {snames: {updateNavPlansCommandRest}}} = this.props;
+
+        if (!updateNavPlansCommandRest) return;
 
         const {selectedDroneId} = this.state;
 
-        const params = {
-            entityId: this.mission._id,
+        const bodyParams = {
+            missionId: this.mission._id,
             playerId: ldsh.get(this.entsIdToEntsMap[selectedDroneId], 'autonomyBase.playerHolder.player._id'),
-            virtualPlayerId: selectedDroneId
+            virtualPlayerId: selectedDroneId,
+            clientId: Globals.get().clientFacade.getContextValue('appX', 'updatedByStationName')
         }
-        this.navPlanningCommand.setParams(params);
-        this.navPlanningCommand.execute();
+        try {
+            this.setState({isChartLoading: true})
+            await executeRestCall(updateNavPlansCommandRest, bodyParams);
+            this.setState({isChartLoading: false});
+        } catch (e) {
+            this.setState({isChartLoading: false});
+        }
+
+
+        /*this.navPlanningCommand.setParams(params);
+        this.navPlanningCommand.execute();*/
     }
 
     renderFooter() {

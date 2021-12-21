@@ -1,0 +1,3422 @@
+﻿entities:
+
+[
+  {
+    "id": "NKfeAjE",
+    "appX": {
+      "base": {
+        "entityName": "שחקן",
+        "icons": [
+          {
+            "sname": "autonomyBase.resource.player_g3_enabled"
+          },
+          {
+            "sname": "autonomyBase.resource.player_drone_Red"
+          }
+        ],
+        "position": "4AIO0VUB4frxAAAh~A",
+        "serverLut": 1640044768514,
+        "dispName": "1"
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "sid": 48146228,
+    "statusInMission": 2,
+    "currentMissionId": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "_id": "NKfeAjE",
+    "sname": "autonomyBase.entity.player"
+  },
+  {
+    "id": "oPrRAq4AAAAAxM4XGQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIO2XUB4eqIAAApzAA",
+        "serverLut": 1640070390996,
+        "dispName": "4"
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgAAAAA",
+      "dispName": "פרטני הלוך 1"
+    },
+    "sid": 47315616,
+    "heightAGL": 71,
+    "heightAMSL": 107,
+    "index": 4,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "_id": "oPrRAq4AAAAAxM4XGQAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XDwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOzmYB4eyVAAAAAAA",
+        "dispName": "Start-rtl",
+        "serverLut": 1640070390520
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": -33,
+    "heightAMSL": 0,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XDAAAAA",
+      "dispName": "חזור חקירה עילית 19.12.21 14:25:02"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XDwAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XnAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIO0z0B4fwAAAAT7AA",
+        "dispName": "End-rtl",
+        "serverLut": 1640070390632
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 23,
+    "heightAMSL": 51,
+    "index": 3,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XhQAAAA",
+      "dispName": "פרטני חזור 2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XnAAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XmAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOxe8B4fwAAAATiAA",
+        "dispName": "End-rtl",
+        "serverLut": 1640070390768
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 28,
+    "heightAMSL": 50,
+    "index": 3,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XhAAAAA",
+      "dispName": "פרטני חזור 3"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XmAAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "NKfeAjI",
+    "appX": {
+      "base": {
+        "entityName": "שחקן",
+        "icons": [
+          {
+            "sname": "autonomyBase.resource.player_g3_enabled"
+          },
+          {
+            "sname": "autonomyBase.resource.player_observer"
+          }
+        ],
+        "position": "4AIO0msB4enLAAALqA",
+        "serverLut": 1639995628515,
+        "dispName": "2"
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "sid": 48146228,
+    "statusInMission": 1,
+    "currentMissionId": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "_id": "NKfeAjI",
+    "sname": "autonomyBase.entity.player"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XlAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOzJYB4fonAAATiAA",
+        "dispName": "End-rtl",
+        "serverLut": 1640070390639
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 17,
+    "heightAMSL": 50,
+    "index": 3,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgwAAAA",
+      "dispName": "פרטני חזור 1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XlAAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAAAxM4XcQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOxtMB4fMSAABkAAA",
+        "serverLut": 1640070390834,
+        "dispName": "2"
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XggAAAA",
+      "dispName": "פרטני הלוך 3"
+    },
+    "sid": 47315616,
+    "heightAGL": 240,
+    "heightAMSL": 256,
+    "index": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "_id": "oPrRAq4AAAAAxM4XcQAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XkAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOxk4B4eAGAABqQAA",
+        "dispName": "End",
+        "serverLut": 1640070390791
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 248,
+    "heightAMSL": 272,
+    "index": 4,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XggAAAA",
+      "dispName": "פרטני הלוך 3"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XkAAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XhQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "????",
+        "icons": [],
+        "dispName": "פרטני חזור 2",
+        "position": "kQAAAAQCDtdEAeHgBgAATbzHokya1qjAmky94yhENUKjAAAAAAA",
+        "serverLut": 1640070390623
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "linkedPlayerOrDestinationPoint": {
+      "_id": "NKfeAjI",
+      "dispName": "2"
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlanType": 2,
+    "sid": 47735102,
+    "playerPosition": null,
+    "_id": "PmHYAq4AAAACxc4XhQAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XjAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIO10QB4eAGAABLAAA",
+        "dispName": "End",
+        "serverLut": 1640070390589
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 155,
+    "heightAMSL": 192,
+    "index": 3,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgQAAAA",
+      "dispName": "פרטני הלוך 2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XjAAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XgQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "????",
+        "icons": [],
+        "dispName": "פרטני הלוך 2",
+        "position": "kQAAAAQCDtM9AeH8AFPsxDbCnMH0QP3MuEqMR0DMpm58AA",
+        "serverLut": 1640070391141
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "linkedPlayerOrDestinationPoint": {
+      "_id": "NKfeAjI",
+      "dispName": "2"
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlanType": 2,
+    "sid": 47735102,
+    "playerPosition": "8AIO0msB4enLAAALqAA",
+    "_id": "PmHYAq4AAAACxc4XgQAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XiAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOzskB4eyaAABbaAA",
+        "dispName": "End",
+        "serverLut": 1640070391014
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 200,
+    "heightAMSL": 234,
+    "index": 5,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgAAAAA",
+      "dispName": "פרטני הלוך 1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XiAAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "dafdAa4AAAACxc4XCQAAAA",
+    "appX": {
+      "base": {
+        "dispName": "תוכנית וירטואלית",
+        "entityName": "תוכנית וירטואלית",
+        "icons": [
+          {
+            "sname": "appX.resource.default-icon",
+            "sid": 81605578011
+          }
+        ],
+        "serverLut": 1639916723487
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "sid": 31303541,
+    "_id": "dafdAa4AAAACxc4XCQAAAA",
+    "sname": "PlanningMngrService.entity.virtualPlan"
+  },
+  {
+    "id": "NKfeAjM",
+    "appX": {
+      "base": {
+        "entityName": "שחקן",
+        "icons": [
+          {
+            "sname": "autonomyBase.resource.player_g3_enabled"
+          },
+          {
+            "sname": "autonomyBase.resource.player_observer"
+          }
+        ],
+        "position": "4AIOzF4B4eqkAAALhQ",
+        "serverLut": 1639995718513,
+        "dispName": "3"
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "sid": 48146228,
+    "statusInMission": 1,
+    "currentMissionId": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "_id": "NKfeAjM",
+    "sname": "autonomyBase.entity.player"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XmgAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOz6IB4eygAAA3FAA",
+        "dispName": "1-rtl",
+        "serverLut": 1640070390617
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 110,
+    "heightAMSL": 141,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XhQAAAA",
+      "dispName": "פרטני חזור 2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XmgAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XlgAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOzSoB4eyKAABaPAA",
+        "dispName": "1-rtl",
+        "serverLut": 1640070390748
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 199,
+    "heightAMSL": 231,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XhAAAAA",
+      "dispName": "פרטני חזור 3"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XlgAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XEAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOzcwB4flSAAAINAA",
+        "dispName": "End-rtl",
+        "serverLut": 1640070390532
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": -14,
+    "heightAMSL": 21,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XDAAAAA",
+      "dispName": "חזור חקירה עילית 19.12.21 14:25:02"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XEAAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XkgAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOzmYB4eyVAAAsiAA",
+        "dispName": "1-rtl",
+        "serverLut": 1640070390648
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 81,
+    "heightAMSL": 114,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgwAAAA",
+      "dispName": "פרטני חזור 1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XkgAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XjgAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOzJEB4flAAABXgAA",
+        "dispName": "1",
+        "serverLut": 1640070390784
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 192,
+    "heightAMSL": 224,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XggAAAA",
+      "dispName": "פרטני הלוך 3"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XjgAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XgwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "????",
+        "icons": [],
+        "dispName": "פרטני חזור 1",
+        "position": "kQAAAAQCDs7JAeHsmgAAakDAY8AF~bjAmky9ZkjBNkDV~0gA",
+        "serverLut": 1640070390724
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "linkedPlayerOrDestinationPoint": {
+      "_id": "NKfeAjE",
+      "dispName": "1"
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlanType": 2,
+    "sid": 47735102,
+    "playerPosition": null,
+    "_id": "PmHYAq4AAAACxc4XgwAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "H8beAa4AAAACxc4XFAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "שחקן",
+        "icons": [
+          {
+            "sname": "Harvest.resource.virtual_player_observer"
+          }
+        ],
+        "position": "8AIOxk4B4eAGAAB1-AA",
+        "serverLut": 1640070388560,
+        "dispName": "חוקר אווירי (3)"
+      }
+    },
+    "autonomyBase": {
+      "playerHolder": {
+        "player": {
+          "_id": "NKfeAjM",
+          "dispName": "3"
+        }
+      },
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "heightAGL": 277.23650053781495,
+    "heightAMSL": 302,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "sid": 31376927,
+    "virtualPlan": {
+      "_id": "dafdAa4AAAACxc4XCQAAAA",
+      "dispName": "תוכנית וירטואלית"
+    },
+    "_id": "H8beAa4AAAACxc4XFAAAAA",
+    "sname": "PlanningMngrService.entity.VirtualPlayer"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XigAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOzwcB4flkAAAR-AA",
+        "dispName": "1",
+        "serverLut": 1640070390564
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 12,
+    "heightAMSL": 46,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgQAAAA",
+      "dispName": "פרטני הלוך 2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XigAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XhgAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOzJYB4fonAAAT7AA",
+        "dispName": "Start",
+        "serverLut": 1640070391012
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 18,
+    "heightAMSL": 51,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgAAAAA",
+      "dispName": "פרטני הלוך 1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XhgAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "h~XfAq4AAAAAxM4XBwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "משימה אוטונומית",
+        "icons": [
+          {
+            "sname": "autonomyBase.resource.mission_hold"
+          }
+        ],
+        "dispName": "חקירה עילית 19.12.21 14:25:02",
+        "position": "tQIOzskB4eQ3AAAO3gAAAO4A",
+        "serverLut": 1639993859167
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "heightAGLConstraint": {
+      "minHeight": 200,
+      "maxHeight": 250
+    },
+    "heightAMSLConstraint": {
+      "minHeight": null,
+      "maxHeight": null
+    },
+    "heightOfSafetyAboveGround": 10,
+    "heightOfSafetyBetweenPlayers": 30,
+    "maxAltitudeRelativeToMaxGroundAltitude": 500,
+    "minAltitudeRelativeToMaxGroundAltitude": 200,
+    "missionSafetyRange": 0,
+    "sid": 48231815,
+    "status": 2,
+    "maxGroundAltitude": 42,
+    "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+    "sname": "autonomyBase.entity.mission"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XCwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נתיב",
+        "icons": [],
+        "dispName": "הלוך חקירה עילית 19.12.21 14:25:02",
+        "position": "kQAAAAICDs3MAeH5Ukh5QP3MuEZlAA",
+        "serverLut": 1640070390494
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlanType": 1,
+    "sid": 47735102,
+    "status": 1,
+    "playerPosition": null,
+    "_id": "PmHYAq4AAAACxc4XCwAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "oPrRAq4AAAAAxM4XGAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIO1cYB4fSiAAAj8AA",
+        "serverLut": 1640070391038,
+        "dispName": "2"
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgAAAAA",
+      "dispName": "פרטני הלוך 1"
+    },
+    "sid": 47315616,
+    "heightAGL": 62,
+    "heightAMSL": 92,
+    "index": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "_id": "oPrRAq4AAAAAxM4XGAAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XDgAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOzskB4eyaAAAO2AA",
+        "dispName": "End",
+        "serverLut": 1640070390498
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 3,
+    "heightAMSL": 38,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XCwAAAA",
+      "dispName": "הלוך חקירה עילית 19.12.21 14:25:02"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XDgAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XmQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIO10QB4eAGAABNvAA",
+        "dispName": "Start-rtl",
+        "serverLut": 1640070390606
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 162,
+    "heightAMSL": 199,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XhQAAAA",
+      "dispName": "פרטני חזור 2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XmQAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "H8beAa4AAAACxc4XEgAAAA",
+    "appX": {
+      "base": {
+        "entityName": "שחקן",
+        "icons": [
+          {
+            "sname": "Harvest.resource.virtual_player_observer"
+          }
+        ],
+        "position": "8AIO10QB4eAGAABqQAA",
+        "serverLut": 1640070388577,
+        "dispName": "חוקר אווירי (2)"
+      }
+    },
+    "autonomyBase": {
+      "playerHolder": {
+        "player": {
+          "_id": "NKfeAjI",
+          "dispName": "2"
+        }
+      },
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "heightAGL": 234.37597559154597,
+    "heightAMSL": 272,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "sid": 31376927,
+    "virtualPlan": {
+      "_id": "dafdAa4AAAACxc4XCQAAAA",
+      "dispName": "תוכנית וירטואלית"
+    },
+    "_id": "H8beAa4AAAACxc4XEgAAAA",
+    "sname": "PlanningMngrService.entity.VirtualPlayer"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XlQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOxk4B4eAGAABbzAA",
+        "dispName": "Start-rtl",
+        "serverLut": 1640070390742
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 211,
+    "heightAMSL": 235,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XhAAAAA",
+      "dispName": "פרטני חזור 3"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XlQAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XkQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOzskB4eyaAABqQAA",
+        "dispName": "Start-rtl",
+        "serverLut": 1640070390724
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 238,
+    "heightAMSL": 272,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgwAAAA",
+      "dispName": "פרטני חזור 1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XkQAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XhAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "????",
+        "icons": [],
+        "dispName": "פרטני חזור 3",
+        "position": "kQAAAAQCDsZOAeHgBgAAW8xG3EyEwZDAmky9zUjGoUK5-WwA",
+        "serverLut": 1640070390768
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "linkedPlayerOrDestinationPoint": {
+      "_id": "NKfeAjM",
+      "dispName": "3"
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlanType": 2,
+    "sid": 47735102,
+    "playerPosition": null,
+    "_id": "PmHYAq4AAAACxc4XhAAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "H8beAa4AAAACxc4XCgAAAA",
+    "appX": {
+      "base": {
+        "entityName": "שחקן",
+        "icons": [
+          {
+            "sname": "Harvest.resource.virtual_player_observer"
+          }
+        ],
+        "position": "8AIOzskB4eyaAABeiAA",
+        "serverLut": 1640070388577,
+        "dispName": "חוקר אווירי (1)"
+      }
+    },
+    "autonomyBase": {
+      "playerHolder": {
+        "player": {
+          "_id": "NKfeAjE",
+          "dispName": "1"
+        }
+      },
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "heightAGL": 207.57890397465002,
+    "heightAMSL": 242,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "sid": 31376927,
+    "virtualPlan": {
+      "_id": "dafdAa4AAAACxc4XCQAAAA",
+      "dispName": "תוכנית וירטואלית"
+    },
+    "_id": "H8beAa4AAAACxc4XCgAAAA",
+    "sname": "PlanningMngrService.entity.VirtualPlayer"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XjQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOxe8B4fwAAAATiAA",
+        "dispName": "Start",
+        "serverLut": 1640070390789
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 28,
+    "heightAMSL": 50,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XggAAAA",
+      "dispName": "פרטני הלוך 3"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XjQAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XgAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "????",
+        "icons": [],
+        "dispName": "פרטני הלוך 1",
+        "position": "kQAAAAYCDsyWAeH6J1PsQTbA1Uu4R~rEsERMwhPDnNEwRcLGflcMyqxCEnGcAA",
+        "serverLut": 1640070392845
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "linkedPlayerOrDestinationPoint": {
+      "_id": "NKfeAjE",
+      "dispName": "1"
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlanType": 2,
+    "sid": 47735102,
+    "playerPosition": "8AIO1P0B4fUsAAALmgA",
+    "_id": "PmHYAq4AAAACxc4XgAAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XiQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIO0z0B4fwAAAAT7AA",
+        "dispName": "Start",
+        "serverLut": 1640070390587
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 23,
+    "heightAMSL": 51,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgQAAAA",
+      "dispName": "פרטני הלוך 2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XiQAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAAAxM4XGgAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIO07MB4fEGAAASwAA",
+        "serverLut": 1640070391048,
+        "dispName": "3"
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgAAAAA",
+      "dispName": "פרטני הלוך 1"
+    },
+    "sid": 47315616,
+    "heightAGL": 20,
+    "heightAMSL": 48,
+    "index": 3,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "_id": "oPrRAq4AAAAAxM4XGgAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XDAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נתיב",
+        "icons": [],
+        "dispName": "חזור חקירה עילית 19.12.21 14:25:02",
+        "position": "kQAAAAICDs5mAeHslQAAAADAmky9AAAAAAA",
+        "serverLut": 1640070390523
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlanType": 1,
+    "sid": 47735102,
+    "status": 1,
+    "playerPosition": null,
+    "_id": "PmHYAq4AAAACxc4XDAAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XmwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOzwgB4fldAAAT7AA",
+        "dispName": "2-rtl",
+        "serverLut": 1640070390612
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 17,
+    "heightAMSL": 51,
+    "index": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XhQAAAA",
+      "dispName": "פרטני חזור 2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XmwAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XlwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOzJAB4flHAABM9AA",
+        "dispName": "2-rtl",
+        "serverLut": 1640070390755
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 165,
+    "heightAMSL": 197,
+    "index": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XhAAAAA",
+      "dispName": "פרטני חזור 3"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XlwAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XkwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOzcwB4flSAABS0AA",
+        "dispName": "2-rtl",
+        "serverLut": 1640070390677
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 177,
+    "heightAMSL": 212,
+    "index": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgwAAAA",
+      "dispName": "פרטני חזור 1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XkwAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XDQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOzcwB4flSAAAINAA",
+        "dispName": "Start",
+        "serverLut": 1640070390506
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": -14,
+    "heightAMSL": 21,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XCwAAAA",
+      "dispName": "הלוך חקירה עילית 19.12.21 14:25:02"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XDQAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XjwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOzY4B4eyIAABpFAA",
+        "dispName": "3",
+        "serverLut": 1640070390817
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 236,
+    "heightAMSL": 269,
+    "index": 3,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XggAAAA",
+      "dispName": "פרטני הלוך 3"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XjwAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XggAAAA",
+    "appX": {
+      "base": {
+        "entityName": "????",
+        "icons": [],
+        "dispName": "פרטני הלוך 3",
+        "position": "kQAAAAUCDsXvAeH8AFOIRqLCwAAAQ~jFvsYuTIBGu8aKRRTHQMyCQSwA",
+        "serverLut": 1640070392667
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "linkedPlayerOrDestinationPoint": {
+      "_id": "NKfeAjM",
+      "dispName": "3"
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlanType": 2,
+    "sid": 47735102,
+    "playerPosition": "8AIOzF4B4eqkAAALhQA",
+    "_id": "PmHYAq4AAAACxc4XggAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XiwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIO0AQB4eysAAAchAA",
+        "dispName": "2",
+        "serverLut": 1640070390562
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 44,
+    "heightAMSL": 73,
+    "index": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgQAAAA",
+      "dispName": "פרטני הלוך 2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XiwAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XhwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOzcwB4flSAAAfpAA",
+        "dispName": "1",
+        "serverLut": 1640070391010
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+          "dispName": "חקירה עילית 19.12.21 14:25:02"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 46,
+    "heightAMSL": 81,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XBwAAAA",
+      "dispName": "חקירה עילית 19.12.21 14:25:02"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XgAAAAA",
+      "dispName": "פרטני הלוך 1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XhwAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  }
+]
+-------------------------------------------------------------------------------------------------------------------------------
+DTMs:
+
+1:
+45,33
+
+[
+  {
+    "x": 34.52431,
+    "y": 31.586855,
+    "z": 33.90272572403971
+  },
+  {
+    "x": 34.52431858422712,
+    "y": 31.58684910180524,
+    "z": 33.99105161285687
+  },
+  {
+    "x": 34.5245361328125,
+    "y": 31.58669962487399,
+    "z": 36.04017167687517
+  },
+  {
+    "x": 34.52462,
+    "y": 31.586642,
+    "z": 35.697958500503674
+  },
+  {
+    "x": 34.52473219532153,
+    "y": 31.58657606739185,
+    "z": 35.29984577965304
+  },
+  {
+    "x": 34.524879455566406,
+    "y": 31.586489528560392,
+    "z": 34.514616301289486
+  },
+  {
+    "x": 34.524948439943216,
+    "y": 31.58644898925962,
+    "z": 32.95323147868452
+  },
+  {
+    "x": 34.52505111694336,
+    "y": 31.586388650180204,
+    "z": 30.16787615934787
+  },
+  {
+    "x": 34.52506582835775,
+    "y": 31.586380004882812,
+    "z": 29.681490180050687
+  },
+  {
+    "x": 34.52516468456489,
+    "y": 31.586321911127392,
+    "z": 25.57361481935833
+  },
+  {
+    "x": 34.52522277832031,
+    "y": 31.586287771800016,
+    "z": 25.66270812718371
+  },
+  {
+    "x": 34.52544645997717,
+    "y": 31.586156323225953,
+    "z": 27.05101224558564
+  },
+  {
+    "x": 34.525597173808244,
+    "y": 31.58606775486293,
+    "z": 27.96360306053707
+  },
+  {
+    "x": 34.525909423828125,
+    "y": 31.585884258279265,
+    "z": 27.363615609847013
+  },
+  {
+    "x": 34.5260296630516,
+    "y": 31.585813598598474,
+    "z": 27.67386423884771
+  },
+  {
+    "x": 34.52623427013022,
+    "y": 31.585693359375,
+    "z": 28.69032094237108
+  },
+  {
+    "x": 34.526662,
+    "y": 31.585442,
+    "z": 30.58193792656195
+  },
+  {
+    "x": 34.52647908170506,
+    "y": 31.585123701498066,
+    "z": 29.476195368159726
+  },
+  {
+    "x": 34.526411851800304,
+    "y": 31.585006713867188,
+    "z": 29.165831611623485
+  },
+  {
+    "x": 34.52622849148881,
+    "y": 31.584687646206504,
+    "z": 29.487111143830223
+  },
+  {
+    "x": 34.52621455268523,
+    "y": 31.58466339111328,
+    "z": 29.483116105537807
+  },
+  {
+    "x": 34.52616294719108,
+    "y": 31.584573591722332,
+    "z": 29.016024241469513
+  },
+  {
+    "x": 34.526131,
+    "y": 31.584518,
+    "z": 28.705407002545094
+  },
+  {
+    "x": 34.526306542261295,
+    "y": 31.584320068359375,
+    "z": 28.79924034214592
+  },
+  {
+    "x": 34.52659606933594,
+    "y": 31.58399361381525,
+    "z": 29.52456611102027
+  },
+  {
+    "x": 34.52676536827741,
+    "y": 31.583802721793038,
+    "z": 30.027599428374778
+  },
+  {
+    "x": 34.52691551667677,
+    "y": 31.583633422851562,
+    "z": 30.982930324673678
+  },
+  {
+    "x": 34.52728271484375,
+    "y": 31.583219390725702,
+    "z": 33.76790940046739
+  },
+  {
+    "x": 34.52741085008769,
+    "y": 31.583074912587694,
+    "z": 35.33388982211722
+  },
+  {
+    "x": 34.527524491092244,
+    "y": 31.58294677734375,
+    "z": 35.983620329328296
+  },
+  {
+    "x": 34.527605,
+    "y": 31.582856,
+    "z": 36.85542231279588
+  },
+  {
+    "x": 34.527317770506926,
+    "y": 31.582911721680574,
+    "z": 34.468386517842625
+  },
+  {
+    "x": 34.52728271484375,
+    "y": 31.58291852237658,
+    "z": 34.16780799201967
+  },
+  {
+    "x": 34.527259050659104,
+    "y": 31.582923113159104,
+    "z": 34.06415441089179
+  },
+  {
+    "x": 34.52713706848467,
+    "y": 31.58294677734375,
+    "z": 33.637106346932285
+  },
+  {
+    "x": 34.52659606933594,
+    "y": 31.583051729594416,
+    "z": 31.469089131373934
+  },
+  {
+    "x": 34.526108887858776,
+    "y": 31.583146241374397,
+    "z": 28.944631825120148
+  },
+  {
+    "x": 34.525909423828125,
+    "y": 31.58318493681226,
+    "z": 28.602184696559906
+  },
+  {
+    "x": 34.52561394169008,
+    "y": 31.583242259481793,
+    "z": 28.128471721401706
+  },
+  {
+    "x": 34.52556610107422,
+    "y": 31.583251540421184,
+    "z": 28
+  },
+  {
+    "x": 34.525533806458604,
+    "y": 31.58325780548204,
+    "z": 28.073899230664622
+  },
+  {
+    "x": 34.52522277832031,
+    "y": 31.583318144030102,
+    "z": 29.196637036855694
+  },
+  {
+    "x": 34.52495872505844,
+    "y": 31.583369369589686,
+    "z": 33.59722005489879
+  },
+  {
+    "x": 34.524879455566406,
+    "y": 31.58338474763902,
+    "z": 34.479779209482686
+  },
+  {
+    "x": 34.524873,
+    "y": 31.583386,
+    "z": 34.42109602534998
+  },
+  {
+    "x": 34.524873,
+    "y": 31.583386,
+    "z": 34.42109602534998
+  },
+  {
+    "x": 34.52478785587252,
+    "y": 31.58338169979154,
+    "z": 33.7205184001137
+  },
+  {
+    "x": 34.524774,
+    "y": 31.583381,
+    "z": 33.68401992785347
+  },
+  {
+    "x": 34.524773278541275,
+    "y": 31.58339627712279,
+    "z": 33.54657407105277
+  },
+  {
+    "x": 34.52476207938695,
+    "y": 31.583633422851562,
+    "z": 32.61618701830513
+  },
+  {
+    "x": 34.524756261578254,
+    "y": 31.583756616839715,
+    "z": 30.838528670372973
+  },
+  {
+    "x": 34.52475189028814,
+    "y": 31.5838491803272,
+    "z": 30.012835084999328
+  },
+  {
+    "x": 34.52474586604623,
+    "y": 31.58397674560547,
+    "z": 29.76098110124252
+  },
+  {
+    "x": 34.52473924461523,
+    "y": 31.584116956556638,
+    "z": 29.456408160664562
+  },
+  {
+    "x": 34.5247296527055,
+    "y": 31.584320068359375,
+    "z": 28.932276779979265
+  },
+  {
+    "x": 34.52472222765221,
+    "y": 31.58447729627357,
+    "z": 28.7821090827106
+  },
+  {
+    "x": 34.52472092589335,
+    "y": 31.58450486144022,
+    "z": 28.43849464966632
+  },
+  {
+    "x": 34.52471343936478,
+    "y": 31.58466339111328,
+    "z": 24.36464871773997
+  },
+  {
+    "x": 34.52470544369595,
+    "y": 31.58483270199673,
+    "z": 22.530891756560226
+  },
+  {
+    "x": 34.52470521068919,
+    "y": 31.584837635990493,
+    "z": 22.537198298955158
+  },
+  {
+    "x": 34.52469722602405,
+    "y": 31.585006713867188,
+    "z": 23.960021375089916
+  },
+  {
+    "x": 34.52468996149856,
+    "y": 31.585160542553243,
+    "z": 26.82995775632853
+  },
+  {
+    "x": 34.52468101268333,
+    "y": 31.585350036621094,
+    "z": 29.88679172207766
+  },
+  {
+    "x": 34.52467447930116,
+    "y": 31.585488383109755,
+    "z": 31.112529228620815
+  },
+  {
+    "x": 34.52467117676316,
+    "y": 31.585558315424347,
+    "z": 30.49122745856816
+  },
+  {
+    "x": 34.52466479934261,
+    "y": 31.585693359375,
+    "z": 28.84323970096141
+  },
+  {
+    "x": 34.52465899710377,
+    "y": 31.585816223666267,
+    "z": 30.104393949817098
+  },
+  {
+    "x": 34.524654159800136,
+    "y": 31.58591865514127,
+    "z": 28.640312142584435
+  },
+  {
+    "x": 34.52464858600189,
+    "y": 31.586036682128906,
+    "z": 23.731576030578008
+  },
+  {
+    "x": 34.52464351490637,
+    "y": 31.58614406422278,
+    "z": 24.967299108027518
+  },
+  {
+    "x": 34.524640479331524,
+    "y": 31.58620834350586,
+    "z": 26.10517673284999
+  },
+  {
+    "x": 34.524637142837115,
+    "y": 31.586278994858194,
+    "z": 29.821771543397958
+  },
+  {
+    "x": 34.52463237266116,
+    "y": 31.586380004882812,
+    "z": 34.18305265227411
+  },
+  {
+    "x": 34.52462803270898,
+    "y": 31.586471904779295,
+    "z": 34.784638980149715
+  },
+  {
+    "x": 34.52462,
+    "y": 31.586642,
+    "z": 35.697958500503674
+  },
+  {
+    "x": 34.5245361328125,
+    "y": 31.58669962487399,
+    "z": 36.04017167687517
+  },
+  {
+    "x": 34.52431858422712,
+    "y": 31.58684910180524,
+    "z": 33.99105161285687
+  },
+  {
+    "x": 34.52431,
+    "y": 31.586855,
+    "z": 33.90272572403971
+  }
+]
+-------------------------------------
+2:
+54,54
+
+[
+  {
+    "x": 34.526013,
+    "y": 31.587328,
+    "z": 28.447379379093338
+  },
+  {
+    "x": 34.525909423828125,
+    "y": 31.58726381736288,
+    "z": 27.9955352477196
+  },
+  {
+    "x": 34.525787690726126,
+    "y": 31.587188383492627,
+    "z": 27.29089875725809
+  },
+  {
+    "x": 34.525591241199244,
+    "y": 31.587066650390625,
+    "z": 26.240457584612802
+  },
+  {
+    "x": 34.52536374808155,
+    "y": 31.58692568062938,
+    "z": 24.931163945979325
+  },
+  {
+    "x": 34.52522277832031,
+    "y": 31.586838326454515,
+    "z": 24.959355166592854
+  },
+  {
+    "x": 34.525037196395786,
+    "y": 31.58672332763672,
+    "z": 31.109007640918993
+  },
+  {
+    "x": 34.52493980543698,
+    "y": 31.586662977766142,
+    "z": 34.501166226933364
+  },
+  {
+    "x": 34.524935,
+    "y": 31.58666,
+    "z": 34.57237184974501
+  },
+  {
+    "x": 34.52495118296465,
+    "y": 31.586451732281056,
+    "z": 32.919340199282836
+  },
+  {
+    "x": 34.52495675637735,
+    "y": 31.586380004882812,
+    "z": 32.13125594118831
+  },
+  {
+    "x": 34.52496326889988,
+    "y": 31.586296191549337,
+    "z": 29.999198171955616
+  },
+  {
+    "x": 34.52497009493029,
+    "y": 31.58620834350586,
+    "z": 26.634845446579288
+  },
+  {
+    "x": 34.52497593664283,
+    "y": 31.58613316320533,
+    "z": 26.456044896968404
+  },
+  {
+    "x": 34.52498343348322,
+    "y": 31.586036682128906,
+    "z": 26.872529250423117
+  },
+  {
+    "x": 34.5249921935275,
+    "y": 31.58592394416781,
+    "z": 27.971054443534857
+  },
+  {
+    "x": 34.5250101105891,
+    "y": 31.585693359375,
+    "z": 31.835017295229033
+  },
+  {
+    "x": 34.52502544399919,
+    "y": 31.585496025053878,
+    "z": 30.578291200777944
+  },
+  {
+    "x": 34.52505004278274,
+    "y": 31.585179449404762,
+    "z": 29.22408583764921
+  },
+  {
+    "x": 34.52506346480086,
+    "y": 31.585006713867188,
+    "z": 26.07850476660483
+  },
+  {
+    "x": 34.525074951355556,
+    "y": 31.58485888690243,
+    "z": 25.465528967665932
+  },
+  {
+    "x": 34.52507896741035,
+    "y": 31.58480720202324,
+    "z": 25.795913721322457
+  },
+  {
+    "x": 34.52509014190674,
+    "y": 31.58466339111328,
+    "z": 27.741872128349684
+  },
+  {
+    "x": 34.52510789203797,
+    "y": 31.58443495464171,
+    "z": 28.93105061686585
+  },
+  {
+    "x": 34.52511681901261,
+    "y": 31.584320068359375,
+    "z": 30.405286216228163
+  },
+  {
+    "x": 34.525124458711915,
+    "y": 31.584221748750977,
+    "z": 30.63895108252186
+  },
+  {
+    "x": 34.525165741293215,
+    "y": 31.583690459878664,
+    "z": 29.749058230861717
+  },
+  {
+    "x": 34.52517017322437,
+    "y": 31.583633422851562,
+    "z": 30.167251583250938
+  },
+  {
+    "x": 34.52517396606827,
+    "y": 31.583584610599527,
+    "z": 30.294554825217546
+  },
+  {
+    "x": 34.525188,
+    "y": 31.583404000000005,
+    "z": 29.863791089401083
+  },
+  {
+    "x": 34.52522277832031,
+    "y": 31.583343325322645,
+    "z": 29.224506922014605
+  },
+  {
+    "x": 34.52536726066205,
+    "y": 31.58309125968549,
+    "z": 28.455003201151836
+  },
+  {
+    "x": 34.525450076976526,
+    "y": 31.58294677734375,
+    "z": 28.26549600901109
+  },
+  {
+    "x": 34.525492350381576,
+    "y": 31.582873026651107,
+    "z": 29.47997891338007
+  },
+  {
+    "x": 34.525548472132684,
+    "y": 31.582775115966797,
+    "z": 30.5240484358477
+  },
+  {
+    "x": 34.52556610107422,
+    "y": 31.582744360302627,
+    "z": 30.31883537629352
+  },
+  {
+    "x": 34.5256174401011,
+    "y": 31.582654793616726,
+    "z": 29.74549242889091
+  },
+  {
+    "x": 34.525646867288835,
+    "y": 31.582603454589844,
+    "z": 29.920367913840348
+  },
+  {
+    "x": 34.525742529820626,
+    "y": 31.58243656058234,
+    "z": 30.027181699362014
+  },
+  {
+    "x": 34.52575533479558,
+    "y": 31.58241422086848,
+    "z": 30.086688289379982
+  },
+  {
+    "x": 34.52584365760114,
+    "y": 31.582260131835938,
+    "z": 31.422732980143145
+  },
+  {
+    "x": 34.52586761954014,
+    "y": 31.582218327547956,
+    "z": 31.750448494154885
+  },
+  {
+    "x": 34.525909423828125,
+    "y": 31.58214539528261,
+    "z": 31.75908980261739
+  },
+  {
+    "x": 34.526040447913445,
+    "y": 31.58191680908203,
+    "z": 33.63488633646383
+  },
+  {
+    "x": 34.526117798979186,
+    "y": 31.58178186147919,
+    "z": 36.44377668880195
+  },
+  {
+    "x": 34.526237238225754,
+    "y": 31.581573486328125,
+    "z": 38.538586704892936
+  },
+  {
+    "x": 34.52636797841823,
+    "y": 31.58134539541042,
+    "z": 36.846928404566306
+  },
+  {
+    "x": 34.52659606933594,
+    "y": 31.58094746524257,
+    "z": 35.826703814575666
+  },
+  {
+    "x": 34.52661815785728,
+    "y": 31.580908929341653,
+    "z": 35.95998860115022
+  },
+  {
+    "x": 34.526630818850364,
+    "y": 31.580886840820312,
+    "z": 36.01022595892244
+  },
+  {
+    "x": 34.52667748679449,
+    "y": 31.580805423361763,
+    "z": 36.39879832594985
+  },
+  {
+    "x": 34.52686833729633,
+    "y": 31.58047246327289,
+    "z": 38.16368655933698
+  },
+  {
+    "x": 34.527024399474975,
+    "y": 31.5802001953125,
+    "z": 37.69365738535228
+  },
+  {
+    "x": 34.527044,
+    "y": 31.580165999999995,
+    "z": 37.62402440845404
+  },
+  {
+    "x": 34.527044,
+    "y": 31.580165999999995,
+    "z": 37.62402440845404
+  },
+  {
+    "x": 34.527023287774135,
+    "y": 31.5802001953125,
+    "z": 37.69650520470212
+  },
+  {
+    "x": 34.52686213240189,
+    "y": 31.580466258378447,
+    "z": 38.17798056782321
+  },
+  {
+    "x": 34.526624765373164,
+    "y": 31.580858144783083,
+    "z": 36.076477129810485
+  },
+  {
+    "x": 34.52660738407845,
+    "y": 31.580886840820312,
+    "z": 35.9365913017136
+  },
+  {
+    "x": 34.526603115930406,
+    "y": 31.580893887414785,
+    "z": 35.91984495741429
+  },
+  {
+    "x": 34.52659606933594,
+    "y": 31.580905521147518,
+    "z": 35.87813403277496
+  },
+  {
+    "x": 34.52634409945893,
+    "y": 31.58132151645112,
+    "z": 37.03409699403728
+  },
+  {
+    "x": 34.52619148038277,
+    "y": 31.581573486328125,
+    "z": 38.982287797736
+  },
+  {
+    "x": 34.52608508298745,
+    "y": 31.58174914548745,
+    "z": 37.271749372628385
+  },
+  {
+    "x": 34.52598352853493,
+    "y": 31.58191680908203,
+    "z": 33.79745440586646
+  },
+  {
+    "x": 34.525909423828125,
+    "y": 31.582039153905047,
+    "z": 32.80484315955279
+  },
+  {
+    "x": 34.525826066515975,
+    "y": 31.582176774523784,
+    "z": 32.8644439809117
+  },
+  {
+    "x": 34.525775576687096,
+    "y": 31.582260131835938,
+    "z": 32.24365982800628
+  },
+  {
+    "x": 34.52569655828023,
+    "y": 31.582390589041946,
+    "z": 31.16365821948253
+  },
+  {
+    "x": 34.52556996559152,
+    "y": 31.58259959007254,
+    "z": 29.865121132091645
+  },
+  {
+    "x": 34.525567624839255,
+    "y": 31.582603454589844,
+    "z": 29.862556144515345
+  },
+  {
+    "x": 34.525567050044494,
+    "y": 31.582604403560115,
+    "z": 29.859301171185308
+  },
+  {
+    "x": 34.52556610107422,
+    "y": 31.58260597028381,
+    "z": 29.86961061154972
+  },
+  {
+    "x": 34.525463648915334,
+    "y": 31.582775115966797,
+    "z": 31.0310829874421
+  },
+  {
+    "x": 34.52543754180875,
+    "y": 31.582818218078284,
+    "z": 30.57984020477708
+  },
+  {
+    "x": 34.52535967299142,
+    "y": 31.58294677734375,
+    "z": 28.472365941406554
+  },
+  {
+    "x": 34.52530803357301,
+    "y": 31.58303203259645,
+    "z": 28.59053156188578
+  },
+  {
+    "x": 34.52522277832031,
+    "y": 31.583172786662573,
+    "z": 29.03575994395412
+  },
+  {
+    "x": 34.52509,
+    "y": 31.583392000000003,
+    "z": 31.46268852825727
+  },
+  {
+    "x": 34.52508510065657,
+    "y": 31.58349574518782,
+    "z": 31.658108664646328
+  },
+  {
+    "x": 34.52507859885951,
+    "y": 31.583633422851562,
+    "z": 31.24945402484372
+  },
+  {
+    "x": 34.52507145253284,
+    "y": 31.583784748639037,
+    "z": 30.08543443113992
+  },
+  {
+    "x": 34.52505413626178,
+    "y": 31.584151426300846,
+    "z": 30.676676342257167
+  },
+  {
+    "x": 34.52504617217806,
+    "y": 31.584320068359375,
+    "z": 30.284660278567806
+  },
+  {
+    "x": 34.5250374186068,
+    "y": 31.58450542807289,
+    "z": 27.91574654976143
+  },
+  {
+    "x": 34.52502995883734,
+    "y": 31.58466339111328,
+    "z": 27.141463760876295
+  },
+  {
+    "x": 34.52502317186699,
+    "y": 31.584807107413866,
+    "z": 25.240483776341943
+  },
+  {
+    "x": 34.52502040164378,
+    "y": 31.584865767789815,
+    "z": 25.06529534147334
+  },
+  {
+    "x": 34.52501374549661,
+    "y": 31.585006713867188,
+    "z": 25.683838177632563
+  },
+  {
+    "x": 34.52500338468076,
+    "y": 31.58522610750674,
+    "z": 29.732159389085645
+  },
+  {
+    "x": 34.5249922074722,
+    "y": 31.58546278852689,
+    "z": 30.692890745832347
+  },
+  {
+    "x": 34.52498131881516,
+    "y": 31.585693359375,
+    "z": 32.097274046225834
+  },
+  {
+    "x": 34.524969350754716,
+    "y": 31.585946786940596,
+    "z": 27.7801741427536
+  },
+  {
+    "x": 34.524965105474436,
+    "y": 31.586036682128906,
+    "z": 26.90010760889536
+  },
+  {
+    "x": 34.52496124307741,
+    "y": 31.586118469639914,
+    "z": 26.54330083931754
+  },
+  {
+    "x": 34.52495699880407,
+    "y": 31.58620834350586,
+    "z": 26.735908689110722
+  },
+  {
+    "x": 34.524952333791695,
+    "y": 31.58630712665752,
+    "z": 30.49581404461215
+  },
+  {
+    "x": 34.52494889213371,
+    "y": 31.586380004882812,
+    "z": 32.30159274957491
+  },
+  {
+    "x": 34.52494576088002,
+    "y": 31.586446310196425,
+    "z": 32.98633252494726
+  },
+  {
+    "x": 34.524936,
+    "y": 31.586653,
+    "z": 34.5082247498031
+  },
+  {
+    "x": 34.5249444728937,
+    "y": 31.586658310309424,
+    "z": 34.38306385813128
+  },
+  {
+    "x": 34.52504821165148,
+    "y": 31.58672332763672,
+    "z": 30.765492302462466
+  },
+  {
+    "x": 34.52522277832031,
+    "y": 31.586832735716072,
+    "z": 24.976963880630997
+  },
+  {
+    "x": 34.52536657175895,
+    "y": 31.58692285695199,
+    "z": 24.94500379287591
+  },
+  {
+    "x": 34.52559600217882,
+    "y": 31.587066650390625,
+    "z": 26.266303025119534
+  },
+  {
+    "x": 34.525788670624195,
+    "y": 31.587187403594555,
+    "z": 27.29634705587207
+  },
+  {
+    "x": 34.525909423828125,
+    "y": 31.587263084571944,
+    "z": 27.995431954730307
+  },
+  {
+    "x": 34.526013,
+    "y": 31.587328,
+    "z": 28.447379379093338
+  }
+]
+----------------------------------------------------------------------------
+3:
+67,64
+
+[
+  {
+    "x": 34.522607,
+    "y": 31.587328,
+    "z": 22.947551451404575
+  },
+  {
+    "x": 34.52311006613116,
+    "y": 31.587119426056336,
+    "z": 23.511552479958386
+  },
+  {
+    "x": 34.523162841796875,
+    "y": 31.58709754497939,
+    "z": 23.740038755534734
+  },
+  {
+    "x": 34.52318468151866,
+    "y": 31.587088490112404,
+    "z": 23.890472353622087
+  },
+  {
+    "x": 34.52323735743852,
+    "y": 31.587066650390625,
+    "z": 24.260698024132616
+  },
+  {
+    "x": 34.52367007871777,
+    "y": 31.586887241803705,
+    "z": 25.739268818226545
+  },
+  {
+    "x": 34.52384948730469,
+    "y": 31.586812858031507,
+    "z": 26.73070232783543
+  },
+  {
+    "x": 34.52415547591688,
+    "y": 31.586685993495003,
+    "z": 30.776400001801463
+  },
+  {
+    "x": 34.524192810058594,
+    "y": 31.586670514557568,
+    "z": 31.203781733299028
+  },
+  {
+    "x": 34.52428302797449,
+    "y": 31.586633109720825,
+    "z": 32.369791596276436
+  },
+  {
+    "x": 34.524305,
+    "y": 31.586624,
+    "z": 32.608782807433165
+  },
+  {
+    "x": 34.524298804853245,
+    "y": 31.586617332842067,
+    "z": 32.491983346959614
+  },
+  {
+    "x": 34.524192810058594,
+    "y": 31.586503262253533,
+    "z": 29.72398723962167
+  },
+  {
+    "x": 34.52407827887341,
+    "y": 31.586380004882812,
+    "z": 26.90221843217206
+  },
+  {
+    "x": 34.52396808109948,
+    "y": 31.586261411088017,
+    "z": 23.587822153623232
+  },
+  {
+    "x": 34.52384948730469,
+    "y": 31.58613378157552,
+    "z": 22.511283680811204
+  },
+  {
+    "x": 34.52375926215518,
+    "y": 31.586036682128906,
+    "z": 21.77602690266743
+  },
+  {
+    "x": 34.52363735734572,
+    "y": 31.585905489333967,
+    "z": 20.572747253247957
+  },
+  {
+    "x": 34.523440245436944,
+    "y": 31.585693359375,
+    "z": 19.298468917052944
+  },
+  {
+    "x": 34.52330663359196,
+    "y": 31.585549567579914,
+    "z": 19.024914931149876
+  },
+  {
+    "x": 34.523162841796875,
+    "y": 31.5853948202195,
+    "z": 17.896075260347374
+  },
+  {
+    "x": 34.522975909838195,
+    "y": 31.585193645825864,
+    "z": 16.14993788018558
+  },
+  {
+    "x": 34.522835,
+    "y": 31.585042,
+    "z": 16.4141087335394
+  },
+  {
+    "x": 34.5228713190005,
+    "y": 31.585006713867188,
+    "z": 16.566529789586923
+  },
+  {
+    "x": 34.523019182932835,
+    "y": 31.58486305500315,
+    "z": 16.74921700816483
+  },
+  {
+    "x": 34.523162841796875,
+    "y": 31.584723481620447,
+    "z": 17.362154016945375
+  },
+  {
+    "x": 34.52336745794313,
+    "y": 31.58452468450563,
+    "z": 18.720965090794227
+  },
+  {
+    "x": 34.52357806345089,
+    "y": 31.584320068359375,
+    "z": 18.26844132150609
+  },
+  {
+    "x": 34.52371573295342,
+    "y": 31.58418631400811,
+    "z": 18.64079683665466
+  },
+  {
+    "x": 34.52384948730469,
+    "y": 31.58405636346602,
+    "z": 20.052235219512767
+  },
+  {
+    "x": 34.52393143567609,
+    "y": 31.58397674560547,
+    "z": 21.732618474318038
+  },
+  {
+    "x": 34.52406400796371,
+    "y": 31.583847943510584,
+    "z": 23.829493118721683
+  },
+  {
+    "x": 34.524192810058594,
+    "y": 31.583722804388806,
+    "z": 28.22017213410114
+  },
+  {
+    "x": 34.52423814546886,
+    "y": 31.58367875826183,
+    "z": 27.909137546446978
+  },
+  {
+    "x": 34.52428480790128,
+    "y": 31.583633422851562,
+    "z": 29.57058613376346
+  },
+  {
+    "x": 34.524412282974005,
+    "y": 31.583509573013064,
+    "z": 30.522991386456525
+  },
+  {
+    "x": 34.5245361328125,
+    "y": 31.58338924531159,
+    "z": 32.87812419139203
+  },
+  {
+    "x": 34.524558,
+    "y": 31.583367999999997,
+    "z": 33.133550461208664
+  },
+  {
+    "x": 34.5245361328125,
+    "y": 31.58333027438881,
+    "z": 33.40009548590732
+  },
+  {
+    "x": 34.524512846277716,
+    "y": 31.583290100097656,
+    "z": 33.513129149921724
+  },
+  {
+    "x": 34.52439541108146,
+    "y": 31.583087499074797,
+    "z": 29.38997408578171
+  },
+  {
+    "x": 34.524313843457215,
+    "y": 31.58294677734375,
+    "z": 29.437811685272937
+  },
+  {
+    "x": 34.524192810058594,
+    "y": 31.582737968646345,
+    "z": 29.406974163560424
+  },
+  {
+    "x": 34.52414345100583,
+    "y": 31.582652813642607,
+    "z": 28.431955908211258
+  },
+  {
+    "x": 34.52400732856612,
+    "y": 31.58241797309737,
+    "z": 26.927853945631405
+  },
+  {
+    "x": 34.52391583781621,
+    "y": 31.582260131835938,
+    "z": 25.561935406080092
+  },
+  {
+    "x": 34.52389149093021,
+    "y": 31.582218128210414,
+    "z": 25.410630486536
+  },
+  {
+    "x": 34.52384948730469,
+    "y": 31.582145662903883,
+    "z": 25.345528592962534
+  },
+  {
+    "x": 34.52363953085459,
+    "y": 31.581783442778224,
+    "z": 26.015361948779944
+  },
+  {
+    "x": 34.5235178321752,
+    "y": 31.581573486328125,
+    "z": 26.93423306756384
+  },
+  {
+    "x": 34.523387570778965,
+    "y": 31.581348757346035,
+    "z": 26.4943200719177
+  },
+  {
+    "x": 34.52331882935471,
+    "y": 31.58123016357422,
+    "z": 26.502514402368064
+  },
+  {
+    "x": 34.523162841796875,
+    "y": 31.580961051418956,
+    "z": 30.720822382270768
+  },
+  {
+    "x": 34.52313561070334,
+    "y": 31.580914071913845,
+    "z": 31.974697549845498
+  },
+  {
+    "x": 34.5231198265342,
+    "y": 31.580886840820312,
+    "z": 32.85622277537523
+  },
+  {
+    "x": 34.52307262068444,
+    "y": 31.580805400555796,
+    "z": 32.96490198347815
+  },
+  {
+    "x": 34.52306051276933,
+    "y": 31.58078451179276,
+    "z": 32.459540728663264
+  },
+  {
+    "x": 34.523020325123944,
+    "y": 31.58071517944336,
+    "z": 30.598320285085432
+  },
+  {
+    "x": 34.523009630665534,
+    "y": 31.580696729197747,
+    "z": 30.768478168587308
+  },
+  {
+    "x": 34.52299118041992,
+    "y": 31.580664898547727,
+    "z": 29.412766269118443
+  },
+  {
+    "x": 34.5229208237137,
+    "y": 31.580543518066406,
+    "z": 26.087982925455513
+  },
+  {
+    "x": 34.522883650627726,
+    "y": 31.580479386481652,
+    "z": 26.14049920890052
+  },
+  {
+    "x": 34.52282132230345,
+    "y": 31.580371856689453,
+    "z": 28.525763796795648
+  },
+  {
+    "x": 34.52281951904297,
+    "y": 31.580368745676495,
+    "z": 28.50098324507088
+  },
+  {
+    "x": 34.52275767058991,
+    "y": 31.58026204376556,
+    "z": 26.89090150319094
+  },
+  {
+    "x": 34.522721820893196,
+    "y": 31.5802001953125,
+    "z": 24.811855193140037
+  },
+  {
+    "x": 34.522702,
+    "y": 31.580165999999995,
+    "z": 24.76349946218504
+  },
+  {
+    "x": 34.522702,
+    "y": 31.580165999999995,
+    "z": 24.76349946218504
+  },
+  {
+    "x": 34.52272074125118,
+    "y": 31.5802001953125,
+    "z": 24.80833418060762
+  },
+  {
+    "x": 34.52275571177585,
+    "y": 31.580264002579618,
+    "z": 26.94665627247097
+  },
+  {
+    "x": 34.5228148228298,
+    "y": 31.580371856689453,
+    "z": 28.602954763661828
+  },
+  {
+    "x": 34.52281951904297,
+    "y": 31.58038042540641,
+    "z": 28.476215323627304
+  },
+  {
+    "x": 34.522877259105655,
+    "y": 31.580485778003716,
+    "z": 26.20828996441537
+  },
+  {
+    "x": 34.52290890440843,
+    "y": 31.580543518066406,
+    "z": 26.174193141444995
+  },
+  {
+    "x": 34.52299118041992,
+    "y": 31.580693638989416,
+    "z": 30.32049958944215
+  },
+  {
+    "x": 34.52299880643547,
+    "y": 31.58070755342781,
+    "z": 30.904792147711447
+  },
+  {
+    "x": 34.52300298598706,
+    "y": 31.58071517944336,
+    "z": 30.837786288188617
+  },
+  {
+    "x": 34.52301730268313,
+    "y": 31.580741301706563,
+    "z": 31.550426441136445
+  },
+  {
+    "x": 34.52305958010037,
+    "y": 31.58081844113986,
+    "z": 33.43492984042391
+  },
+  {
+    "x": 34.52309706756569,
+    "y": 31.580886840820312,
+    "z": 33.39475332739499
+  },
+  {
+    "x": 34.523120353765286,
+    "y": 31.580929328851905,
+    "z": 32.05107259513437
+  },
+  {
+    "x": 34.523162841796875,
+    "y": 31.581006852572425,
+    "z": 30.031089835227107
+  },
+  {
+    "x": 34.523285230722955,
+    "y": 31.58123016357422,
+    "z": 26.53819894917278
+  },
+  {
+    "x": 34.5233634484249,
+    "y": 31.581372879700098,
+    "z": 26.533123558691198
+  },
+  {
+    "x": 34.52347339388021,
+    "y": 31.581573486328125,
+    "z": 26.9244173888381
+  },
+  {
+    "x": 34.523606543084526,
+    "y": 31.58181643054829,
+    "z": 25.859481540111293
+  },
+  {
+    "x": 34.52384948730469,
+    "y": 31.582259706904445,
+    "z": 25.014272904245836
+  },
+  {
+    "x": 34.52384963774414,
+    "y": 31.582259981396483,
+    "z": 25.01446264331859
+  },
+  {
+    "x": 34.52384972019473,
+    "y": 31.582260131835938,
+    "z": 25.014965260830902
+  },
+  {
+    "x": 34.523850002622154,
+    "y": 31.582260647153408,
+    "z": 25.019290091772753
+  },
+  {
+    "x": 34.524092732403766,
+    "y": 31.582703532244675,
+    "z": 27.665382840426364
+  },
+  {
+    "x": 34.524192810058594,
+    "y": 31.58288613407046,
+    "z": 29.659207689005715
+  },
+  {
+    "x": 34.52422604650925,
+    "y": 31.58294677734375,
+    "z": 29.67329919582191
+  },
+  {
+    "x": 34.52433582706338,
+    "y": 31.583147083092868,
+    "z": 29.622169031936448
+  },
+  {
+    "x": 34.52441420966651,
+    "y": 31.583290100097656,
+    "z": 32.4856885610118
+  },
+  {
+    "x": 34.524458,
+    "y": 31.58337,
+    "z": 32.23460649499438
+  },
+  {
+    "x": 34.524449644314494,
+    "y": 31.583546934353556,
+    "z": 30.581465205330332
+  },
+  {
+    "x": 34.5244455599144,
+    "y": 31.583633422851562,
+    "z": 30.30374302211916
+  },
+  {
+    "x": 34.524441070623666,
+    "y": 31.583728485040396,
+    "z": 27.245686492264745
+  },
+  {
+    "x": 34.524434162117096,
+    "y": 31.58387477491007,
+    "z": 25.962001956399032
+  },
+  {
+    "x": 34.524429346573676,
+    "y": 31.58397674560547,
+    "z": 27.367337617918025
+  },
+  {
+    "x": 34.52442405366065,
+    "y": 31.58408882475732,
+    "z": 28.0423485181215
+  },
+  {
+    "x": 34.524418679919705,
+    "y": 31.58420261546658,
+    "z": 27.83910731479461
+  },
+  {
+    "x": 34.524413133232954,
+    "y": 31.584320068359375,
+    "z": 26.02964586600003
+  },
+  {
+    "x": 34.52440703669763,
+    "y": 31.584449164474243,
+    "z": 24.830436414431695
+  },
+  {
+    "x": 34.52439691989223,
+    "y": 31.58466339111328,
+    "z": 21.91182039552691
+  },
+  {
+    "x": 34.52438771552492,
+    "y": 31.5848582965796,
+    "z": 22.053106804243527
+  },
+  {
+    "x": 34.524380706551504,
+    "y": 31.585006713867188,
+    "z": 22.735924068182282
+  },
+  {
+    "x": 34.52437300277159,
+    "y": 31.585169843908098,
+    "z": 24.61182849397303
+  },
+  {
+    "x": 34.52436449321078,
+    "y": 31.585350036621094,
+    "z": 27.494499392971885
+  },
+  {
+    "x": 34.52435675113013,
+    "y": 31.585513977692624,
+    "z": 26.147232516187366
+  },
+  {
+    "x": 34.524348279870054,
+    "y": 31.585693359375,
+    "z": 23.814905138846868
+  },
+  {
+    "x": 34.52434126893273,
+    "y": 31.585841818249136,
+    "z": 22.912645699238848
+  },
+  {
+    "x": 34.5243401731997,
+    "y": 31.585865020751953,
+    "z": 23.307701013934796
+  },
+  {
+    "x": 34.52433896884555,
+    "y": 31.58589052334195,
+    "z": 22.946846692137036
+  },
+  {
+    "x": 34.52433206652933,
+    "y": 31.586036682128906,
+    "z": 22.93240808145528
+  },
+  {
+    "x": 34.52432578673534,
+    "y": 31.586169658805648,
+    "z": 24.023767105835518
+  },
+  {
+    "x": 34.524321951882534,
+    "y": 31.586250863058876,
+    "z": 25.590594604884433
+  },
+  {
+    "x": 34.524315853188604,
+    "y": 31.586380004882812,
+    "z": 30.675059381663417
+  },
+  {
+    "x": 34.524304934919506,
+    "y": 31.586611202775803,
+    "z": 32.53946064205604
+  },
+  {
+    "x": 34.524304,
+    "y": 31.586631,
+    "z": 32.63314005187538
+  },
+  {
+    "x": 34.52427199066894,
+    "y": 31.586644147026366,
+    "z": 32.28430778746937
+  },
+  {
+    "x": 34.524192810058594,
+    "y": 31.58667666846739,
+    "z": 31.25822954448873
+  },
+  {
+    "x": 34.52415973545109,
+    "y": 31.586690253029218,
+    "z": 30.878473137033367
+  },
+  {
+    "x": 34.52384948730469,
+    "y": 31.586817679639736,
+    "z": 26.767314928668764
+  },
+  {
+    "x": 34.52367300302555,
+    "y": 31.586890166111488,
+    "z": 25.786841002328675
+  },
+  {
+    "x": 34.52324331318093,
+    "y": 31.587066650390625,
+    "z": 24.303480388369145
+  },
+  {
+    "x": 34.5231862706,
+    "y": 31.587090079193754,
+    "z": 23.90248146069952
+  },
+  {
+    "x": 34.523162841796875,
+    "y": 31.58709970198443,
+    "z": 23.741059144745467
+  },
+  {
+    "x": 34.52310675324219,
+    "y": 31.58712273894531,
+    "z": 23.498127126220904
+  },
+  {
+    "x": 34.522607,
+    "y": 31.587328,
+    "z": 22.947551451404575
+  }
+]

@@ -1,0 +1,2319 @@
+﻿entities:
+
+[
+  {
+    "id": "h~XfAq4AAAAAxM4XzAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "משימה אוטונומית",
+        "icons": [
+          {
+            "sname": "autonomyBase.resource.mission_patrol"
+          }
+        ],
+        "dispName": "פטרול עילי 20.12.21 17:02:25",
+        "position": "nQAAAAQCDrPrAeGjOkw1RmzQzUF9UzPATUHtR71R0kFKAAAAGQA",
+        "serverLut": 1640012680487
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "heightAGLConstraint": {
+      "minHeight": 50,
+      "maxHeight": 300
+    },
+    "heightAMSLConstraint": {
+      "minHeight": 96,
+      "maxHeight": 346
+    },
+    "heightOfSafetyAboveGround": 10,
+    "heightOfSafetyBetweenPlayers": 30,
+    "maxAltitudeRelativeToMaxGroundAltitude": 300,
+    "minAltitudeRelativeToMaxGroundAltitude": 50,
+    "missionSafetyRange": 0,
+    "sid": 48231815,
+    "status": 2,
+    "maxGroundAltitude": 46,
+    "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+    "sname": "autonomyBase.entity.mission"
+  },
+  {
+    "id": "NKfeAtee16nXmdee16rXmTI",
+    "appX": {
+      "base": {
+        "entityName": "שחקן",
+        "icons": [
+          {
+            "sname": "autonomyBase.resource.player_g3_enabled"
+          },
+          {
+            "sname": "autonomyBase.resource.player_patrol"
+          }
+        ],
+        "position": "4AIOycIB4aQRAAAOaQ",
+        "serverLut": 1640013238515,
+        "dispName": "משימתי2"
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "sid": 48146228,
+    "statusInMission": 1,
+    "currentMissionId": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "_id": "NKfeAtee16nXmdee16rXmTI",
+    "sname": "autonomyBase.entity.player"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X3gAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOzSoB4ZuvAAAaLAA",
+        "dispName": "2-rtl",
+        "serverLut": 1640070391121
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 30,
+    "heightAMSL": 67,
+    "index": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4X0AAAAA",
+      "dispName": "פרטני חזור משימתי1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X3gAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XyAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נתיב",
+        "icons": [],
+        "dispName": "חזור פטרול עילי 20.12.21 17:02:25",
+        "position": "kQAAAAICDtVHAeGj8lDp0KnN78I0AA",
+        "serverLut": 1640070391040
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlanType": 1,
+    "sid": 47735102,
+    "status": 1,
+    "playerPosition": null,
+    "_id": "PmHYAq4AAAACxc4XyAAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X2gAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOzowB4Z5RAAAaLAA",
+        "dispName": "2-rtl",
+        "serverLut": 1640070391083
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 29,
+    "heightAMSL": 67,
+    "index": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XzwAAAA",
+      "dispName": "פרטני חזור משימתי2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X2gAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X1gAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOtLUB4aEqAABOhAA",
+        "dispName": "2",
+        "serverLut": 1640070394057
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 168,
+    "heightAMSL": 201,
+    "index": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XzgAAAA",
+      "dispName": "פרטני הלוך משימתי1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X1gAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X0gAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOwgQB4ZgSAAAchAA",
+        "dispName": "1",
+        "serverLut": 1640070390929
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 42,
+    "heightAMSL": 73,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XzQAAAA",
+      "dispName": "פרטני הלוך משימתי2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X0gAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XyQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOxJ4B4ZYDAAAOdAA",
+        "dispName": "Start",
+        "serverLut": 1640070391009
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 2,
+    "heightAMSL": 37,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XxwAAAA",
+      "dispName": "הלוך פטרול עילי 20.12.21 17:02:25"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XyQAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "dafdAa4AAAACxc4XwgAAAA",
+    "appX": {
+      "base": {
+        "dispName": "תוכנית וירטואלית",
+        "entityName": "תוכנית וירטואלית",
+        "icons": [
+          {
+            "sname": "appX.resource.default-icon",
+            "sid": 81605578011
+          }
+        ],
+        "serverLut": 1640012680419
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "sid": 31303541,
+    "_id": "dafdAa4AAAACxc4XwgAAAA",
+    "sname": "PlanningMngrService.entity.virtualPlan"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XzgAAAA",
+    "appX": {
+      "base": {
+        "entityName": "????",
+        "icons": [],
+        "dispName": "פרטני הלוך משימתי1",
+        "position": "kQAAAAQCDr33AeGYvlnIRdHDgkBkzxNL7nRYRaLOvXIAAA",
+        "serverLut": 1640070394081
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "linkedPlayerOrDestinationPoint": {
+      "_id": "NKfeAtee16nXmdee16rXmTE",
+      "dispName": "משימתי1"
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlanType": 2,
+    "sid": 47735102,
+    "playerPosition": "8AIOvwUB4aM6AAAMkgA",
+    "_id": "PmHYAq4AAAACxc4XzgAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X3QAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIO1EUB4aGfAAAyAAA",
+        "dispName": "1-rtl",
+        "serverLut": 1640070391127
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 86,
+    "heightAMSL": 128,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4X0AAAAA",
+      "dispName": "פרטני חזור משימתי1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X3QAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XywAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIO1UcB4aPyAAAQzAA",
+        "dispName": "Start-rtl",
+        "serverLut": 1640070391092
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 0,
+    "heightAMSL": 43,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XyAAAAA",
+      "dispName": "חזור פטרול עילי 20.12.21 17:02:25"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XywAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4X0AAAAA",
+    "appX": {
+      "base": {
+        "entityName": "????",
+        "icons": [],
+        "dispName": "פרטני חזור משימתי1",
+        "position": "kQAAAAQCDrpXAeGSbXikWe5PMsakxxvF8NfUzzPC8cBkAA",
+        "serverLut": 1640070391126
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "linkedPlayerOrDestinationPoint": {
+      "_id": "NKfeAtee16nXmdee16rXmTE",
+      "dispName": "משימתי1"
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlanType": 2,
+    "sid": 47735102,
+    "playerPosition": null,
+    "_id": "PmHYAq4AAAACxc4X0AAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X2QAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIO1UcB4aPyAAA4pAA",
+        "dispName": "1-rtl",
+        "serverLut": 1640070391100
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 102,
+    "heightAMSL": 145,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XzwAAAA",
+      "dispName": "פרטני חזור משימתי2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X2QAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X1QAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOw8gB4ZU8AAAaLAA",
+        "dispName": "1",
+        "serverLut": 1640070394070
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 33,
+    "heightAMSL": 67,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XzgAAAA",
+      "dispName": "פרטני הלוך משימתי1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X1QAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X0QAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOudsB4aOTAAAZyAA",
+        "dispName": "Start",
+        "serverLut": 1640070392792
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 36,
+    "heightAMSL": 66,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XzQAAAA",
+      "dispName": "פרטני הלוך משימתי2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X0QAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "H8beAa4AAAACxc4XwwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "שחקן",
+        "icons": [
+          {
+            "sname": "Harvest.resource.virtual_player_mapping"
+          }
+        ],
+        "position": "8AIOs-sB4aM6AACHKAA",
+        "serverLut": 1640070388581,
+        "dispName": "מפטרל עילי (משימתי2)"
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      },
+      "playerHolder": {
+        "player": {
+          "_id": "NKfeAtee16nXmdee16rXmTI",
+          "dispName": "משימתי2"
+        }
+      }
+    },
+    "heightAGL": 314.7479606431152,
+    "heightAMSL": 346,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "sid": 31376927,
+    "virtualPlan": {
+      "_id": "dafdAa4AAAACxc4XwgAAAA",
+      "dispName": "תוכנית וירטואלית"
+    },
+    "_id": "H8beAa4AAAACxc4XwwAAAA",
+    "sname": "PlanningMngrService.entity.VirtualPlayer"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XzQAAAA",
+    "appX": {
+      "base": {
+        "entityName": "????",
+        "icons": [],
+        "dispName": "פרטני הלוך משימתי2",
+        "position": "kQAAAAMCDrnbAeGjk1nISCnLgUK8zhlLKAAAakAA",
+        "serverLut": 1640070392788
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "linkedPlayerOrDestinationPoint": {
+      "_id": "NKfeAtee16nXmdee16rXmTI",
+      "dispName": "משימתי2"
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlanType": 2,
+    "sid": 47735102,
+    "playerPosition": "8AIOycIB4aQRAAAOaQA",
+    "_id": "PmHYAq4AAAACxc4XzQAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X3wAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOvfcB4Zi-AAAZyAA",
+        "dispName": "End-rtl",
+        "serverLut": 1640070391123
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 39,
+    "heightAMSL": 66,
+    "index": 3,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4X0AAAAA",
+      "dispName": "פרטני חזור משימתי1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X3wAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X2wAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOudsB4aOTAAAZyAA",
+        "dispName": "End-rtl",
+        "serverLut": 1640070391046
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 36,
+    "heightAMSL": 66,
+    "index": 3,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XzwAAAA",
+      "dispName": "פרטני חזור משימתי2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X2wAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X1wAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOulcB4ZJtAACAhAA",
+        "dispName": "End",
+        "serverLut": 1640070394062
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 294,
+    "heightAMSL": 329,
+    "index": 3,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XzgAAAA",
+      "dispName": "פרטני הלוך משימתי1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X1wAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X0wAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOs-sB4aM6AACGxAA",
+        "dispName": "End",
+        "serverLut": 1640070390847
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 314,
+    "heightAMSL": 345,
+    "index": 2,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XzQAAAA",
+      "dispName": "פרטני הלוך משימתי2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X0wAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XzAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOxJ4B4ZYDAAAOdAA",
+        "dispName": "End-rtl",
+        "serverLut": 1640070391095
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 2,
+    "heightAMSL": 37,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XyAAAAA",
+      "dispName": "חזור פטרול עילי 20.12.21 17:02:25"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XzAAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XzwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "????",
+        "icons": [],
+        "dispName": "פרטני חזור משימתי2",
+        "position": "kQAAAAQCDrPrAeGjOnzwYVxAuMRMxrvFod541LFFQsBkAA",
+        "serverLut": 1640070391085
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "linkedPlayerOrDestinationPoint": {
+      "_id": "NKfeAtee16nXmdee16rXmTI",
+      "dispName": "משימתי2"
+    },
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlanType": 2,
+    "sid": 47735102,
+    "playerPosition": null,
+    "_id": "PmHYAq4AAAACxc4XzwAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "H8beAa4AAAACxc4XxAAAAA",
+    "appX": {
+      "base": {
+        "entityName": "שחקן",
+        "icons": [
+          {
+            "sname": "Harvest.resource.virtual_player_mapping"
+          }
+        ],
+        "position": "8AIOulcB4ZJtAAB7cAA",
+        "serverLut": 1640070388581,
+        "dispName": "מפטרל עילי (משימתי1)"
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      },
+      "playerHolder": {
+        "player": {
+          "_id": "NKfeAtee16nXmdee16rXmTE",
+          "dispName": "משימתי1"
+        }
+      }
+    },
+    "heightAGL": 280.92973617849924,
+    "heightAMSL": 316,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "sid": 31376927,
+    "virtualPlan": {
+      "_id": "dafdAa4AAAACxc4XwgAAAA",
+      "dispName": "תוכנית וירטואלית"
+    },
+    "_id": "H8beAa4AAAACxc4XxAAAAA",
+    "sname": "PlanningMngrService.entity.VirtualPlayer"
+  },
+  {
+    "id": "PmHYAq4AAAACxc4XxwAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נתיב",
+        "icons": [],
+        "dispName": "הלוך פטרול עילי 20.12.21 17:02:25",
+        "position": "kQAAAAICDsSeAeGWA0610LNNN8KAAA",
+        "serverLut": 1640070390892
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlanType": 1,
+    "sid": 47735102,
+    "status": 1,
+    "playerPosition": null,
+    "_id": "PmHYAq4AAAACxc4XxwAAAA",
+    "sname": "autonomyBase.entity.navPlan"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X3AAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOulcB4ZJtAAA4pAA",
+        "dispName": "Start-rtl",
+        "serverLut": 1640070391125
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 110,
+    "heightAMSL": 145,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4X0AAAAA",
+      "dispName": "פרטני חזור משימתי1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X3AAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4XygAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOs-sB4aM6AAAMHAA",
+        "dispName": "End",
+        "serverLut": 1640070390892
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 0,
+    "heightAMSL": 31,
+    "index": 1,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XxwAAAA",
+      "dispName": "הלוך פטרול עילי 20.12.21 17:02:25"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4XygAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "NKfeAtee16nXmdee16rXmTE",
+    "appX": {
+      "base": {
+        "entityName": "שחקן",
+        "icons": [
+          {
+            "sname": "autonomyBase.resource.player_g3_enabled"
+          },
+          {
+            "sname": "autonomyBase.resource.player_patrol"
+          }
+        ],
+        "position": "4AIOvwUB4aM6AAAMkg",
+        "serverLut": 1640013268536,
+        "dispName": "משימתי1"
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "sid": 48146228,
+    "statusInMission": 1,
+    "currentMissionId": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "_id": "NKfeAtee16nXmdee16rXmTE",
+    "sname": "autonomyBase.entity.player"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X2AAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.orange_dot_circle"
+          }
+        ],
+        "position": "8AIOs-sB4aM6AAA88AA",
+        "dispName": "Start-rtl",
+        "serverLut": 1640070391093
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 2,
+    "heightAGL": 125,
+    "heightAMSL": 156,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XzwAAAA",
+      "dispName": "פרטני חזור משימתי2"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X2AAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  },
+  {
+    "id": "oPrRAq4AAAACxc4X1AAAAA",
+    "appX": {
+      "base": {
+        "entityName": "נקודת מעבר",
+        "icons": [
+          {},
+          {
+            "sname": "autonomyBase.resource.dot_circle"
+          }
+        ],
+        "position": "8AIOvfcB4Zi-AAAZyAA",
+        "dispName": "Start",
+        "serverLut": 1640070391090
+      }
+    },
+    "autonomyBase": {
+      "crossSection": {
+        "root": {
+          "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+          "dispName": "פטרול עילי 20.12.21 17:02:25"
+        }
+      }
+    },
+    "direction": 1,
+    "heightAGL": 39,
+    "heightAMSL": 66,
+    "index": 0,
+    "mission": {
+      "_id": "h~XfAq4AAAAAxM4XzAAAAA",
+      "dispName": "פטרול עילי 20.12.21 17:02:25"
+    },
+    "navPlan": {
+      "_id": "PmHYAq4AAAACxc4XzgAAAA",
+      "dispName": "פרטני הלוך משימתי1"
+    },
+    "sid": 47315616,
+    "_id": "oPrRAq4AAAACxc4X1AAAAA",
+    "sname": "autonomyBase.entity.wayPoint"
+  }
+]
+
+-------------------------------------------------------------
+
+DTMs:
+
+1:
+46,64
+
+[
+  {
+    "x": 34.520567,
+    "y": 31.561918,
+    "z": 27.80394854228718
+  },
+  {
+    "x": 34.52099352620298,
+    "y": 31.561660766601562,
+    "z": 29.43807895835857
+  },
+  {
+    "x": 34.52106175638141,
+    "y": 31.561619617709532,
+    "z": 29.767339056282225
+  },
+  {
+    "x": 34.52110290527344,
+    "y": 31.56159480125215,
+    "z": 29.77464156032734
+  },
+  {
+    "x": 34.52126910223667,
+    "y": 31.561494569638324,
+    "z": 30.872080983479282
+  },
+  {
+    "x": 34.52178955078125,
+    "y": 31.5611806926786,
+    "z": 33.12990472711151
+  },
+  {
+    "x": 34.52191840921856,
+    "y": 31.561102979531054,
+    "z": 34.08477387888497
+  },
+  {
+    "x": 34.522056,
+    "y": 31.56102,
+    "z": 34.47265048603871
+  },
+  {
+    "x": 34.52193287243803,
+    "y": 31.561117442750525,
+    "z": 34.16384285341079
+  },
+  {
+    "x": 34.52178955078125,
+    "y": 31.561230867041736,
+    "z": 33.06908169163909
+  },
+  {
+    "x": 34.52124633453981,
+    "y": 31.561660766601562,
+    "z": 30.588485176722582
+  },
+  {
+    "x": 34.521166268933136,
+    "y": 31.56172413026126,
+    "z": 30.317450521362463
+  },
+  {
+    "x": 34.52110290527344,
+    "y": 31.56177427605466,
+    "z": 30.167934643009197
+  },
+  {
+    "x": 34.520558764926236,
+    "y": 31.562204906948768,
+    "z": 28.686952439562504
+  },
+  {
+    "x": 34.520416259765625,
+    "y": 31.56231768506758,
+    "z": 28.228025188582958
+  },
+  {
+    "x": 34.52039966542824,
+    "y": 31.562330817771997,
+    "z": 28.330089620571908
+  },
+  {
+    "x": 34.52037869701046,
+    "y": 31.562347412109375,
+    "z": 28.253086101539218
+  },
+  {
+    "x": 34.51972961425781,
+    "y": 31.562861094080503,
+    "z": 25.854682594239808
+  },
+  {
+    "x": 34.519633061923365,
+    "y": 31.562937505282736,
+    "z": 26.46207302672821
+  },
+  {
+    "x": 34.519511059481104,
+    "y": 31.563034057617188,
+    "z": 26.519782600202145
+  },
+  {
+    "x": 34.519249760170915,
+    "y": 31.563240849038102,
+    "z": 27.628058764587884
+  },
+  {
+    "x": 34.51904296875,
+    "y": 31.563404503093423,
+    "z": 29.17750652886936
+  },
+  {
+    "x": 34.51886645841847,
+    "y": 31.563544192793472,
+    "z": 30.724738116657985
+  },
+  {
+    "x": 34.518699645996094,
+    "y": 31.563676207599883,
+    "z": 33.723268324836326
+  },
+  {
+    "x": 34.51864342195175,
+    "y": 31.563720703125,
+    "z": 34.04187842591652
+  },
+  {
+    "x": 34.51848315666603,
+    "y": 31.563847536548842,
+    "z": 33.77929770342885
+  },
+  {
+    "x": 34.51835632324219,
+    "y": 31.563947912106343,
+    "z": 33.422145189022
+  },
+  {
+    "x": 34.518209603187074,
+    "y": 31.564064025878906,
+    "z": 33.2709442786699
+  },
+  {
+    "x": 34.518197,
+    "y": 31.564074000000005,
+    "z": 33.239859586114235
+  },
+  {
+    "x": 34.51820081200176,
+    "y": 31.564064025878906,
+    "z": 33.28753051032556
+  },
+  {
+    "x": 34.518316995700786,
+    "y": 31.563760030666405,
+    "z": 34.18890841317944
+  },
+  {
+    "x": 34.51833202626392,
+    "y": 31.563720703125,
+    "z": 34.28587421401722
+  },
+  {
+    "x": 34.51835632324219,
+    "y": 31.563657129963413,
+    "z": 34.144375243788275
+  },
+  {
+    "x": 34.51852860901845,
+    "y": 31.563206343393457,
+    "z": 32.440057465696135
+  },
+  {
+    "x": 34.51859445478824,
+    "y": 31.563034057617188,
+    "z": 31.54740802214363
+  },
+  {
+    "x": 34.51874176739631,
+    "y": 31.562648613463068,
+    "z": 31.712931690537502
+  },
+  {
+    "x": 34.51885688331256,
+    "y": 31.562347412109375,
+    "z": 31.779824043778408
+  },
+  {
+    "x": 34.51890833780936,
+    "y": 31.56221278116873,
+    "z": 31.029280731077254
+  },
+  {
+    "x": 34.51904296875,
+    "y": 31.561860518658985,
+    "z": 31.6206486482809
+  },
+  {
+    "x": 34.51911931183688,
+    "y": 31.561660766601562,
+    "z": 31.617272807628872
+  },
+  {
+    "x": 34.519288066600254,
+    "y": 31.561219218944004,
+    "z": 32.5990809394189
+  },
+  {
+    "x": 34.5193817403612,
+    "y": 31.56097412109375,
+    "z": 32.62473689288926
+  },
+  {
+    "x": 34.5194779309957,
+    "y": 31.56072243783164,
+    "z": 34.08163236721368
+  },
+  {
+    "x": 34.519512954623366,
+    "y": 31.560630798339844,
+    "z": 34.50980563624303
+  },
+  {
+    "x": 34.51959131078735,
+    "y": 31.5604257790564,
+    "z": 35.4157333714364
+  },
+  {
+    "x": 34.519639,
+    "y": 31.560301000000003,
+    "z": 35.07026382150077
+  },
+  {
+    "x": 34.519639,
+    "y": 31.560301000000003,
+    "z": 35.07026382150077
+  },
+  {
+    "x": 34.51968760584943,
+    "y": 31.56032948399432,
+    "z": 35.4037414263719
+  },
+  {
+    "x": 34.51972961425781,
+    "y": 31.56035410175699,
+    "z": 34.91684940085749
+  },
+  {
+    "x": 34.51989055476853,
+    "y": 31.56044841609665,
+    "z": 32.202192095419434
+  },
+  {
+    "x": 34.51990407397637,
+    "y": 31.560456338621286,
+    "z": 32.03861218676586
+  },
+  {
+    "x": 34.52007293701172,
+    "y": 31.560555295717926,
+    "z": 32.39225257109693
+  },
+  {
+    "x": 34.520120542103314,
+    "y": 31.56058319324825,
+    "z": 31.935321157137118
+  },
+  {
+    "x": 34.52020177670433,
+    "y": 31.560630798339844,
+    "z": 29.725017481006077
+  },
+  {
+    "x": 34.520416259765625,
+    "y": 31.560756489678862,
+    "z": 25.961813027863688
+  },
+  {
+    "x": 34.52055347835719,
+    "y": 31.560836902502185,
+    "z": 25.40098295560307
+  },
+  {
+    "x": 34.520787631830416,
+    "y": 31.56097412109375,
+    "z": 26.074559103957593
+  },
+  {
+    "x": 34.52110290527344,
+    "y": 31.561158877600732,
+    "z": 27.81543114499999
+  },
+  {
+    "x": 34.52141935086495,
+    "y": 31.561344321010047,
+    "z": 31.596185466392633
+  },
+  {
+    "x": 34.52178955078125,
+    "y": 31.56156126552261,
+    "z": 32.668561639846224
+  },
+  {
+    "x": 34.52185228711883,
+    "y": 31.561598030263976,
+    "z": 33.04301855844762
+  },
+  {
+    "x": 34.52195934208256,
+    "y": 31.561660766601562,
+    "z": 33.30990421871179
+  },
+  {
+    "x": 34.52228522337272,
+    "y": 31.561851739517905,
+    "z": 35.25541868254486
+  },
+  {
+    "x": 34.52247619628906,
+    "y": 31.56196365344448,
+    "z": 33.96992855528052
+  },
+  {
+    "x": 34.5227181596266,
+    "y": 31.56210544877184,
+    "z": 34.30069986807479
+  },
+  {
+    "x": 34.52281951904297,
+    "y": 31.562164847405416,
+    "z": 35.57910643192079
+  },
+  {
+    "x": 34.52313105233471,
+    "y": 31.562347412109375,
+    "z": 32.08211131136895
+  },
+  {
+    "x": 34.52315109588048,
+    "y": 31.56235915802577,
+    "z": 31.83860993807279
+  },
+  {
+    "x": 34.523162841796875,
+    "y": 31.56236604136635,
+    "z": 31.633649657039882
+  },
+  {
+    "x": 34.52320784216362,
+    "y": 31.56239241247612,
+    "z": 31.549009800999468
+  },
+  {
+    "x": 34.52358403213436,
+    "y": 31.562612867279704,
+    "z": 31.072325648468432
+  },
+  {
+    "x": 34.52384948730469,
+    "y": 31.562768429288226,
+    "z": 32.17661643858314
+  },
+  {
+    "x": 34.52401696838824,
+    "y": 31.562866576533633,
+    "z": 33.38908565379239
+  },
+  {
+    "x": 34.52430276258686,
+    "y": 31.563034057617188,
+    "z": 35.3506341872046
+  },
+  {
+    "x": 34.524449904642125,
+    "y": 31.563120285787562,
+    "z": 36.015680370010315
+  },
+  {
+    "x": 34.5245361328125,
+    "y": 31.563170817210096,
+    "z": 37.33315734519564
+  },
+  {
+    "x": 34.52486648586117,
+    "y": 31.563364410665855,
+    "z": 38.353550440700445
+  },
+  {
+    "x": 34.524882840896005,
+    "y": 31.5633739950415,
+    "z": 38.452124324459376
+  },
+  {
+    "x": 34.52522277832031,
+    "y": 31.563573205131974,
+    "z": 40.792921970684795
+  },
+  {
+    "x": 34.525315777149885,
+    "y": 31.563627704295428,
+    "z": 40.88989698232311
+  },
+  {
+    "x": 34.52547447283901,
+    "y": 31.563720703125,
+    "z": 40.733094090055324
+  },
+  {
+    "x": 34.525748713403765,
+    "y": 31.56388141354936,
+    "z": 40.35383687343124
+  },
+  {
+    "x": 34.525909423828125,
+    "y": 31.563975593053843,
+    "z": 40.58937257919051
+  },
+  {
+    "x": 34.526277,
+    "y": 31.564191,
+    "z": 42.03075786159673
+  },
+  {
+    "x": 34.525909423828125,
+    "y": 31.563883844540268,
+    "z": 41.097132809867375
+  },
+  {
+    "x": 34.52582054864562,
+    "y": 31.563809578307502,
+    "z": 41.08964804937697
+  },
+  {
+    "x": 34.52571419077919,
+    "y": 31.563720703125,
+    "z": 41.43133385209615
+  },
+  {
+    "x": 34.52544648210513,
+    "y": 31.563496999340185,
+    "z": 42.140643196873086
+  },
+  {
+    "x": 34.52522277832031,
+    "y": 31.56331006709559,
+    "z": 42.20755790178545
+  },
+  {
+    "x": 34.52507241556463,
+    "y": 31.563184420372867,
+    "z": 41.37393337280388
+  },
+  {
+    "x": 34.524892474872146,
+    "y": 31.563034057617188,
+    "z": 40.555187276178636
+  },
+  {
+    "x": 34.5245361328125,
+    "y": 31.562736289650903,
+    "z": 37.649403672502125
+  },
+  {
+    "x": 34.524458,
+    "y": 31.562671,
+    "z": 37.1444230147881
+  },
+  {
+    "x": 34.52425234416258,
+    "y": 31.562631200759295,
+    "z": 35.60342117252302
+  },
+  {
+    "x": 34.52384948730469,
+    "y": 31.562553238483787,
+    "z": 32.47080020081181
+  },
+  {
+    "x": 34.52367703458659,
+    "y": 31.562519864827475,
+    "z": 31.660864800021507
+  },
+  {
+    "x": 34.52325328996624,
+    "y": 31.562437860278738,
+    "z": 31.401319844241478
+  },
+  {
+    "x": 34.523162841796875,
+    "y": 31.56242035643101,
+    "z": 31.454061422017855
+  },
+  {
+    "x": 34.5231017250106,
+    "y": 31.562408528895652,
+    "z": 32.441203621852836
+  },
+  {
+    "x": 34.52281951904297,
+    "y": 31.56235391540461,
+    "z": 35.87358508552731
+  },
+  {
+    "x": 34.522785914365976,
+    "y": 31.562347412109375,
+    "z": 35.48124931917838
+  },
+  {
+    "x": 34.52252641543461,
+    "y": 31.56229719296383,
+    "z": 32.37244996722927
+  },
+  {
+    "x": 34.52247619628906,
+    "y": 31.562287474378223,
+    "z": 32.19580900658504
+  },
+  {
+    "x": 34.52195110585862,
+    "y": 31.562185857032006,
+    "z": 34.60119431544039
+  },
+  {
+    "x": 34.52178955078125,
+    "y": 31.562154592325435,
+    "z": 33.797108205490126
+  },
+  {
+    "x": 34.52155046162277,
+    "y": 31.5621083229509,
+    "z": 32.279910151543575
+  },
+  {
+    "x": 34.52137579628263,
+    "y": 31.562074521100183,
+    "z": 31.25216827199462
+  },
+  {
+    "x": 34.52110290527344,
+    "y": 31.562021710272656,
+    "z": 30.37898640851593
+  },
+  {
+    "x": 34.52080048670664,
+    "y": 31.56196318516836,
+    "z": 29.301834904275267
+  },
+  {
+    "x": 34.520567,
+    "y": 31.561918,
+    "z": 27.80394854228718
+  }
+]
+
+-----------------------------------------------------------
+
+2:
+37,75
+
+[
+  {
+    "x": 34.519515,
+    "y": 31.564691,
+    "z": 30.678359665799665
+  },
+  {
+    "x": 34.519683479581175,
+    "y": 31.564453483309446,
+    "z": 27.836856523473518
+  },
+  {
+    "x": 34.51971620465401,
+    "y": 31.564407348632812,
+    "z": 27.135591726756054
+  },
+  {
+    "x": 34.51972176934657,
+    "y": 31.564399503721567,
+    "z": 26.931029385578178
+  },
+  {
+    "x": 34.51972961425781,
+    "y": 31.564388444236833,
+    "z": 26.915344212455935
+  },
+  {
+    "x": 34.520203268309636,
+    "y": 31.563720703125,
+    "z": 27.105191805435133
+  },
+  {
+    "x": 34.52029165510971,
+    "y": 31.56359609846908,
+    "z": 26.81006247334007
+  },
+  {
+    "x": 34.520416259765625,
+    "y": 31.563420435131757,
+    "z": 27.70680770709353
+  },
+  {
+    "x": 34.52069033196526,
+    "y": 31.563034057617188,
+    "z": 28.622467241026627
+  },
+  {
+    "x": 34.52086154087284,
+    "y": 31.562792693216597,
+    "z": 29.853993957190898
+  },
+  {
+    "x": 34.52110290527344,
+    "y": 31.56245242602668,
+    "z": 30.66081710844782
+  },
+  {
+    "x": 34.52117739562089,
+    "y": 31.562347412109375,
+    "z": 31.050385575500233
+  },
+  {
+    "x": 34.5213591833964,
+    "y": 31.562091133986414,
+    "z": 31.21592366122057
+  },
+  {
+    "x": 34.521431426635985,
+    "y": 31.56198928796411,
+    "z": 31.348287918652638
+  },
+  {
+    "x": 34.521604,
+    "y": 31.561746,
+    "z": 31.902542892420925
+  },
+  {
+    "x": 34.52137185096161,
+    "y": 31.561929712289736,
+    "z": 31.116679210113865
+  },
+  {
+    "x": 34.52110290527344,
+    "y": 31.562142543790266,
+    "z": 30.48205269996024
+  },
+  {
+    "x": 34.52084402230297,
+    "y": 31.562347412109375,
+    "z": 29.777443870310734
+  },
+  {
+    "x": 34.520605229573306,
+    "y": 31.562536381917056,
+    "z": 28.973564643263387
+  },
+  {
+    "x": 34.520416259765625,
+    "y": 31.562685924109,
+    "z": 27.796530726108685
+  },
+  {
+    "x": 34.51997633895643,
+    "y": 31.563034057617188,
+    "z": 26.10598156663587
+  },
+  {
+    "x": 34.519838608185005,
+    "y": 31.563143051544376,
+    "z": 25.194230023107984
+  },
+  {
+    "x": 34.51972961425781,
+    "y": 31.563229304427736,
+    "z": 24.620174337423315
+  },
+  {
+    "x": 34.51954249728317,
+    "y": 31.563377380371094,
+    "z": 25.552772943317233
+  },
+  {
+    "x": 34.51945529749085,
+    "y": 31.563446386358034,
+    "z": 26.48654962644624
+  },
+  {
+    "x": 34.519386291503906,
+    "y": 31.563500994587102,
+    "z": 26.518554902426036
+  },
+  {
+    "x": 34.519108655609905,
+    "y": 31.563720703125,
+    "z": 28.822380297223717
+  },
+  {
+    "x": 34.519071986796696,
+    "y": 31.563749721171693,
+    "z": 29.153772451146907
+  },
+  {
+    "x": 34.51904296875,
+    "y": 31.563772684746468,
+    "z": 29.859813786923898
+  },
+  {
+    "x": 34.518793829743515,
+    "y": 31.56396984213148,
+    "z": 32.01389054811325
+  },
+  {
+    "x": 34.518699645996094,
+    "y": 31.564044374905833,
+    "z": 33.01886694854077
+  },
+  {
+    "x": 34.51868867610254,
+    "y": 31.564053055985354,
+    "z": 33.000895121179205
+  },
+  {
+    "x": 34.518674813936634,
+    "y": 31.564064025878906,
+    "z": 32.961862534775065
+  },
+  {
+    "x": 34.51835632324219,
+    "y": 31.564316065065203,
+    "z": 31.60777923537541
+  },
+  {
+    "x": 34.51830536540839,
+    "y": 31.564356390799013,
+    "z": 31.48210777118128
+  },
+  {
+    "x": 34.51824097226337,
+    "y": 31.564407348632812,
+    "z": 31.42390313183196
+  },
+  {
+    "x": 34.517995,
+    "y": 31.564602,
+    "z": 31.252039356884765
+  },
+  {
+    "x": 34.517995,
+    "y": 31.564602,
+    "z": 31.252039356884765
+  },
+  {
+    "x": 34.51815815655806,
+    "y": 31.564605515316945,
+    "z": 30.786561466109774
+  },
+  {
+    "x": 34.51835632324219,
+    "y": 31.56460978495042,
+    "z": 30.787968496749688
+  },
+  {
+    "x": 34.51856321722883,
+    "y": 31.564614242619452,
+    "z": 31.114467371620364
+  },
+  {
+    "x": 34.518699645996094,
+    "y": 31.564617182068304,
+    "z": 31.073633374652992
+  },
+  {
+    "x": 34.51883031985892,
+    "y": 31.56461999752389,
+    "z": 31.712633541237146
+  },
+  {
+    "x": 34.51904296875,
+    "y": 31.564624579186184,
+    "z": 33.222718008438186
+  },
+  {
+    "x": 34.51926498274303,
+    "y": 31.564629362625848,
+    "z": 33.15784768955297
+  },
+  {
+    "x": 34.519386291503906,
+    "y": 31.564631976304067,
+    "z": 32.65616223583749
+  },
+  {
+    "x": 34.51950248315978,
+    "y": 31.56463447973084,
+    "z": 31.23764453971345
+  },
+  {
+    "x": 34.51972961425781,
+    "y": 31.564639373421947,
+    "z": 25.880752852029772
+  },
+  {
+    "x": 34.51996674825724,
+    "y": 31.564644482632243,
+    "z": 26.51437653616522
+  },
+  {
+    "x": 34.52017464646064,
+    "y": 31.564648961937795,
+    "z": 27.04271933297315
+  },
+  {
+    "x": 34.520416259765625,
+    "y": 31.564654167657714,
+    "z": 29.244791434697948
+  },
+  {
+    "x": 34.52084680976151,
+    "y": 31.564663444144745,
+    "z": 32.36977900797007
+  },
+  {
+    "x": 34.52110290527344,
+    "y": 31.564668961893478,
+    "z": 33.602628379471575
+  },
+  {
+    "x": 34.521370279285655,
+    "y": 31.56467472264503,
+    "z": 34.79960972381181
+  },
+  {
+    "x": 34.52151897306237,
+    "y": 31.564677926351692,
+    "z": 35.412005936207564
+  },
+  {
+    "x": 34.52178955078125,
+    "y": 31.564683756129245,
+    "z": 33.600379742717216
+  },
+  {
+    "x": 34.52207204479986,
+    "y": 31.564689842651426,
+    "z": 32.30209045274728
+  },
+  {
+    "x": 34.522191136363226,
+    "y": 31.564692408558646,
+    "z": 32.166811846640954
+  },
+  {
+    "x": 34.52247619628906,
+    "y": 31.564698550365012,
+    "z": 34.013625624154216
+  },
+  {
+    "x": 34.52277381031407,
+    "y": 31.56470496265782,
+    "z": 35.777841050798266
+  },
+  {
+    "x": 34.523162841796875,
+    "y": 31.56471334460078,
+    "z": 36.38798692741436
+  },
+  {
+    "x": 34.52347557582828,
+    "y": 31.564720082664216,
+    "z": 37.92077436202515
+  },
+  {
+    "x": 34.52353546296495,
+    "y": 31.56472137297255,
+    "z": 37.914348421613965
+  },
+  {
+    "x": 34.52384948730469,
+    "y": 31.564728138836543,
+    "z": 37.93420570456911
+  },
+  {
+    "x": 34.52417734134249,
+    "y": 31.564735202670608,
+    "z": 37.887450574178416
+  },
+  {
+    "x": 34.524192810058594,
+    "y": 31.564735535954423,
+    "z": 37.88770342195579
+  },
+  {
+    "x": 34.52420762626581,
+    "y": 31.5647358551795,
+    "z": 37.842668756341
+  },
+  {
+    "x": 34.5245361328125,
+    "y": 31.564742933072306,
+    "z": 35.281073812879775
+  },
+  {
+    "x": 34.524879106856694,
+    "y": 31.56475032267701,
+    "z": 38.876558947193566
+  },
+  {
+    "x": 34.524879455566406,
+    "y": 31.56475033019019,
+    "z": 38.876484099937755
+  },
+  {
+    "x": 34.524879789566675,
+    "y": 31.56475033738645,
+    "z": 38.8757595395981
+  },
+  {
+    "x": 34.52522277832031,
+    "y": 31.564757727308073,
+    "z": 36.87359540760524
+  },
+  {
+    "x": 34.52555195286754,
+    "y": 31.564764819593403,
+    "z": 37.72489778883166
+  },
+  {
+    "x": 34.5255808723709,
+    "y": 31.564765442683402,
+    "z": 37.82554677202647
+  },
+  {
+    "x": 34.525909423828125,
+    "y": 31.564772521543837,
+    "z": 39.68906511160605
+  },
+  {
+    "x": 34.5262241161684,
+    "y": 31.56477930180035,
+    "z": 41.9713311257823
+  },
+  {
+    "x": 34.526535,
+    "y": 31.564786,
+    "z": 43.30468505923319
+  },
+  {
+    "x": 34.52636205630852,
+    "y": 31.564641361660232,
+    "z": 42.39709792861518
+  },
+  {
+    "x": 34.52608224753251,
+    "y": 31.564407348632812,
+    "z": 39.438121819282756
+  },
+  {
+    "x": 34.525909423828125,
+    "y": 31.564262810642095,
+    "z": 38.99983545011089
+  },
+  {
+    "x": 34.52561421167517,
+    "y": 31.564015915277952,
+    "z": 38.9761304367987
+  },
+  {
+    "x": 34.525261227261886,
+    "y": 31.563720703125,
+    "z": 40.11196185059261
+  },
+  {
+    "x": 34.52524028935849,
+    "y": 31.56370319208682,
+    "z": 40.16753669268821
+  },
+  {
+    "x": 34.52522277832031,
+    "y": 31.5636885470456,
+    "z": 40.17284127985398
+  },
+  {
+    "x": 34.525026306955766,
+    "y": 31.56352423176045,
+    "z": 39.08433433507069
+  },
+  {
+    "x": 34.524879455566406,
+    "y": 31.56340141524736,
+    "z": 38.46240995654787
+  },
+  {
+    "x": 34.52486636704182,
+    "y": 31.563390468895683,
+    "z": 38.38402040368848
+  },
+  {
+    "x": 34.524812,
+    "y": 31.563345,
+    "z": 38.20003024103605
+  },
+  {
+    "x": 34.5245361328125,
+    "y": 31.563415099534524,
+    "z": 37.621467487227584
+  },
+  {
+    "x": 34.524292450407145,
+    "y": 31.56347702071965,
+    "z": 34.13987516719609
+  },
+  {
+    "x": 34.524192810058594,
+    "y": 31.563502339939802,
+    "z": 34.21044399281355
+  },
+  {
+    "x": 34.524025280107836,
+    "y": 31.563544910321852,
+    "z": 34.09154833887852
+  },
+  {
+    "x": 34.52384948730469,
+    "y": 31.56358958034508,
+    "z": 33.661702270090295
+  },
+  {
+    "x": 34.523744932530455,
+    "y": 31.563616148350764,
+    "z": 33.606035306147916
+  },
+  {
+    "x": 34.52350616455078,
+    "y": 31.56367682075036,
+    "z": 33.71653656519302
+  },
+  {
+    "x": 34.523333471431556,
+    "y": 31.563720703125,
+    "z": 34.621618877805
+  },
+  {
+    "x": 34.52319741465376,
+    "y": 31.563755275981883,
+    "z": 35.044591312738575
+  },
+  {
+    "x": 34.523162841796875,
+    "y": 31.563764061155634,
+    "z": 34.95627354763835
+  },
+  {
+    "x": 34.52310471284515,
+    "y": 31.56377883207673,
+    "z": 34.91163978093337
+  },
+  {
+    "x": 34.52247619628906,
+    "y": 31.56393854196619,
+    "z": 36.99972500760418
+  },
+  {
+    "x": 34.52218414558246,
+    "y": 31.564012753831605,
+    "z": 37.73092243618544
+  },
+  {
+    "x": 34.52210237890037,
+    "y": 31.564033531244117,
+    "z": 37.797478551549816
+  },
+  {
+    "x": 34.52178955078125,
+    "y": 31.56411302277675,
+    "z": 37.182264174770104
+  },
+  {
+    "x": 34.52126357831977,
+    "y": 31.56424667558648,
+    "z": 34.73572431989809
+  },
+  {
+    "x": 34.52110290527344,
+    "y": 31.564287503587305,
+    "z": 34.017300656187885
+  },
+  {
+    "x": 34.521007343146984,
+    "y": 31.56431178650636,
+    "z": 32.94812290292023
+  },
+  {
+    "x": 34.52063127139078,
+    "y": 31.564407348632812,
+    "z": 30.334412475530637
+  },
+  {
+    "x": 34.520416259765625,
+    "y": 31.564461984397862,
+    "z": 28.88483806125956
+  },
+  {
+    "x": 34.52034301105708,
+    "y": 31.56448059734136,
+    "z": 28.25506415324877
+  },
+  {
+    "x": 34.51991230739359,
+    "y": 31.564590041768593,
+    "z": 26.6189825385229
+  },
+  {
+    "x": 34.51972961425781,
+    "y": 31.56463646520842,
+    "z": 25.894405799743353
+  },
+  {
+    "x": 34.519515,
+    "y": 31.564691,
+    "z": 30.678359665799665
+  }
+]

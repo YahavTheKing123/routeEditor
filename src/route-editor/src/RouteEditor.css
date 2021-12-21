@@ -26,8 +26,8 @@
     --route-editor-chart-height: 30rem;
     --route-editor-footer-height: 6.5rem;
     --route-editor-elements-height: calc(
-                                        var(--route-editor-header-height) + 
-                                        var(--route-editor-participate-list-height) + 
+                                        var(--route-editor-header-height) +
+                                        var(--route-editor-participate-list-height) +
                                         var(--route-editor-footer-height)
                                     );
 
@@ -249,7 +249,7 @@
     height: 8rem;
     z-index: 2;
     top: calc(50% - 4rem);
-    left: calc(50% - 4rem);    
+    left: calc(50% - 4rem);
     animation: spin 1s ease-in-out infinite;
 }
 
@@ -341,9 +341,11 @@ canvas#route-editor-canvas {
     height: 1.5rem;
 }
 
-.route-editor-footer-reset-zoom-icon,
-.route-editor-footer-hide-points-icon {
+.route-editor-footer-reset-zoom-icon {
     height: 1.8rem;
+}
+.route-editor-footer-hide-points-icon {
+    height: 2.3rem;
 }
 
 .route-editor-footer-dropdown-wrapper {

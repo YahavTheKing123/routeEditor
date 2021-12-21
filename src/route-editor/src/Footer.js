@@ -4,7 +4,7 @@ import Select from 'react-select';
 import zoomInIcon from './assets/plus.svg';
 import zoomOutIcon from './assets/minus.svg';
 import resetZoomIcon from './assets/center_focus_round_corners.svg';
-import hidePointsIcon from './assets/visibility_off.svg';
+import hidePointsIcon from './assets/show-point-off.svg';
 import checkIcon from './assets/check.svg';
 import undoIcon from './assets/undo.svg';
 import fxIcon from './assets/fx.svg';
@@ -38,45 +38,73 @@ export default class Footer extends Component {
             value: key
         }))
 
-        this.setState({dropdownOptions}, this.disablePatrolOption);
+        this.setState({dropdownOptions}, this.disableUnexistingOptions);
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const {virtualPlayerToNavPlansMap, selectedDroneId} = this.props;
+        const {selectedDroneId} = this.props;
 
         if (prevProps.selectedDroneId !== selectedDroneId) {
-            this.disablePatrolOption();
+            this.disableUnexistingOptions();
         }
     }
 
-    disablePatrolOption() {
+    disableUnexistingOptions() {
         const {selectedDroneId, virtualPlayerToNavPlansMap} = this.props;
 
         let isContainsPatrolNavPlan = false;
+        let isContainsBackNavPlan = false;
+
         if (selectedDroneId === config.ALL) {
-            Object.keys(virtualPlayerToNavPlansMap).forEach(vp => virtualPlayerToNavPlansMap[vp].forEach(nav =>{
-                if (nav.navPlanType === navDirectionMapper[routeOptions.patrol]) {
+            Object.keys(virtualPlayerToNavPlansMap).forEach(vp => virtualPlayerToNavPlansMap[vp].forEach(nav => {
+                if (config.partrolRouteTypes.includes(nav.navPlanType)) {
                     isContainsPatrolNavPlan = true;
+                }
+                if (nav.direction === navDirectionMapper[routeOptions.back]) {
+                    isContainsBackNavPlan = true;
                 }
             }))
         } else {
             const navPlanArr = virtualPlayerToNavPlansMap[selectedDroneId];
-            const navPlanPatrol =  navPlanArr && navPlanArr.find(nav => nav.navPlanType === navDirectionMapper[routeOptions.patrol]);
-            if (navPlanPatrol) {
-                isContainsPatrolNavPlan = true;
-            }
+
+            const navPlanBack =  navPlanArr && navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.back]);
+            const navPlanPatrol =  navPlanArr && navPlanArr.find(nav => config.partrolRouteTypes.includes(nav.navPlanType));
+
+            isContainsPatrolNavPlan = !!isContainsPatrolNavPlan;
+            isContainsBackNavPlan = !!navPlanBack;
         }
 
-        if (!isContainsPatrolNavPlan) {
+        if (!isContainsPatrolNavPlan || !isContainsBackNavPlan) {
             const dropdownOptions = [...this.state.dropdownOptions];
             dropdownOptions.forEach(item => {
-                if (item.value === routeOptions.patrol) {
+                if (!isContainsPatrolNavPlan && item.value === routeOptions.patrol) {
+                    item.isDisabled = true;
+                }
+                if (!isContainsBackNavPlan && (item.value === routeOptions.back || item.value === routeOptions.forwardBack)) {
                     item.isDisabled = true;
                 }
             })
-            this.setState({dropdownOptions})
+            this.setState({dropdownOptions}, this.selectOnlyEnableOption)
         }
 
+    }
+
+    selectOnlyEnableOption = () => {
+
+        const {selectedDropdownItem, onDropDownSelect} = this.props;
+        const {dropdownOptions} = this.state;
+
+        if (dropdownOptions) {
+            const selectedOption = dropdownOptions.find(item => item.value === selectedDropdownItem);
+            if (selectedOption && selectedOption.isDisabled) {
+                const backForwardOption = dropdownOptions.find(item => item.value === routeOptions.forwardBack);
+                if (!backForwardOption.isDisabled) {
+                    onDropDownSelect(routeOptions.forwardBack)
+                } else {
+                    onDropDownSelect(routeOptions.back)
+                }
+            }
+        }
     }
 
     resetZoom = () => {

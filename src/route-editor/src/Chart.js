@@ -87,7 +87,8 @@ export default class RouteChart extends Component {
                 zoom: {
                     limits: {
                         x: {min: 0, max: 'original'},
-                        y: {min: 0, max: this.props.maxAmslAltitude ? this.props.maxAmslAltitude * config.chartYaxisMaxFactor : 'original'}
+                        y: {min: 0, max: 'original'}
+                        //y: {min: 0, max: this.props.maxAmslAltitude ? this.props.maxAmslAltitude * config.chartYaxisMaxFactor : 'original'}
                     },
                     zoom: {
                         wheel: {

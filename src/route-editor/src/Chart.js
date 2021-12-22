@@ -99,11 +99,16 @@ export default class RouteChart extends Component {
                     },
                     pan: {
                         enabled: true,
-                        //mode: "xy",
-                        mode: (event) => {
-                            if (!this.isDraggingPoint) {
-                                return 'xy'
-                            } else return ''
+                        mode: "xy",
+                        // mode: (event) => {
+                        //     if (!this.isDraggingPoint) {
+                        //         return 'xy'
+                        //     } else return ''
+                        // },
+                        onPanStart: (event) => {
+                            if (this.isDraggingPoint) {
+                              return false;
+                            }
                         },
                         /*rangeMin: {
                             y: 0,
@@ -201,16 +206,17 @@ export default class RouteChart extends Component {
         };
     }
 
-    onDragStart = (e, datasetIndex, index, value) => {
-        const {mission, selectedDroneId} = this.props;
-
+    onDragStart = (e, datasetIndex, index, value) => {        
+        const {mission, selectedDroneId} = this.props;        
         setTimeout(() => {
             this.selectOnMap(value.waypoint || value);
         }, 100)
 
         this.isDraggingPoint = true;
         if (selectedDroneId === config.ALL || value.isPlayer || value.isStartPoint || value.isEndPoint) {
-            setTimeout(() => this.isDraggingPoint = false,0)
+            setTimeout(() => {
+                this.isDraggingPoint = false;
+            },0)
             return false
         };
 
@@ -227,8 +233,8 @@ export default class RouteChart extends Component {
     }
 
     onDrag = (e, datasetIndex, index, value) => {
-        e.target.style.cursor = 'grabbing';
-        
+        e.target.style.cursor = 'grabbing';  
+        //this.chartRef.current.config._config.options.plugins.zoom.pan.enabled = false;
         if (value.y <= this.minLimitPoint) {
             this.chartRef.current.data.datasets[datasetIndex].data[index].y = this.minLimitPoint;
         } else if (value.y > this.props.maxAmslAltitude) {
@@ -238,6 +244,7 @@ export default class RouteChart extends Component {
 
     onDragEnd = (e, datasetIndex, index, value) => {
         e.target.style.cursor = 'default'
+        //this.chartRef.current.config._config.options.plugins.zoom.pan.enabled = true;
         this.isDraggingPoint = false;
         this.minLimitPoint = null;
         if (value.waypoint) {

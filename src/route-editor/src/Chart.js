@@ -228,15 +228,7 @@ export default class RouteChart extends Component {
 
     onDrag = (e, datasetIndex, index, value) => {
         e.target.style.cursor = 'grabbing';
-        const dataSetData = this.chartRef.current.data.datasets[datasetIndex].data;
-
-        // Set player icon in the middle of the line between current moving the next point
-        if (dataSetData[index + 1] && dataSetData[index + 1].isPlayer && dataSetData[index + 2]) {
-            dataSetData[index + 1].y = (value.y + dataSetData[index + 2].y) / 2
-        } else if (dataSetData[index - 1] && dataSetData[index - 1].isPlayer && dataSetData[index - 2]) {
-            dataSetData[index - 1].y = (value.y + dataSetData[index - 2].y) / 2
-        }
-
+        
         if (value.y <= this.minLimitPoint) {
             this.chartRef.current.data.datasets[datasetIndex].data[index].y = this.minLimitPoint;
         } else if (value.y > this.props.maxAmslAltitude) {
@@ -754,7 +746,6 @@ export default class RouteChart extends Component {
                         return getNavPlanImage(imagePointTypes.drone, virtualPlayerToColorMap[vPlayerId])
                     }
                 }
-
             }
         }
 
@@ -787,6 +778,43 @@ export default class RouteChart extends Component {
         return {navPlanDataSet, playerDataSet};
     }
 
+    pointBelowBottomLimit(point, navPlanBottomLimitDataSetMap) {
+        let isPointBellowLimit = false;
+        if (navPlanBottomLimitDataSetMap[point.raw.x] && point.raw.y < navPlanBottomLimitDataSetMap[point.raw.x]) {
+            isPointBellowLimit = true;
+        }
+
+        return isPointBellowLimit;
+    }   
+
+    overrideNavPlanDataSetPointStyleForWarningPoint(navPlanDataSet, navPlanBottomLimitDataSet) {
+        const {virtualPlayerToColorMap, isHideChartPoints, selectedDroneId: vPlayerId} = this.props;
+        
+        //for perfomance optimization go over the bottom limit dataset once and not each pointStyle callback execution
+        const navPlanBottomLimitDataSetMap = navPlanBottomLimitDataSet && 
+                                             navPlanBottomLimitDataSet.data && 
+                                             navPlanBottomLimitDataSet.data.reduce((mapperObj, curr) => {
+                                                mapperObj[curr.x] = curr.y;
+                                                return mapperObj;
+                                             },{});
+
+        navPlanDataSet.pointStyle = param => {
+            if (isHideChartPoints) return false;
+            if (param.raw && param.raw.isStartPoint) {
+                return getNavPlanImage(imagePointTypes.start, virtualPlayerToColorMap[vPlayerId])
+            } else if (param.raw && param.raw.isEndPoint) {
+                return getNavPlanImage(imagePointTypes.end, virtualPlayerToColorMap[vPlayerId])
+            } else if (param.raw && param.raw.isStartPatrolPoint) {
+                return getNavPlanImage(imagePointTypes.patrolStart, virtualPlayerToColorMap[vPlayerId])
+            } else if (param.raw && param.raw.isEndPatrolPoint) {
+                return getNavPlanImage(imagePointTypes.patrolEnd, virtualPlayerToColorMap[vPlayerId])
+            } else if (param.raw && param.raw.isPlayer) {
+                return getNavPlanImage(imagePointTypes.drone, virtualPlayerToColorMap[vPlayerId])
+            }
+
+            return this.pointBelowBottomLimit(param, navPlanBottomLimitDataSetMap) ? getNavPlanImage(imagePointTypes.regularWarning, virtualPlayerToColorMap[vPlayerId]) : getNavPlanImage(imagePointTypes.regular, virtualPlayerToColorMap[vPlayerId])
+        }
+    }
 
     getChartData = () => {
         let data = {};
@@ -810,8 +838,11 @@ export default class RouteChart extends Component {
             const navPlanDTMDataSet = this.getNavPlanDTMDataSet();
             datasets.push(navPlanDTMDataSet);
 
+            const navPlanBottomLimitDataSet = this.getNavPlanBottomLimitDataSet(navPlanDataSet, navPlanDTMDataSet)
+            datasets.push(navPlanBottomLimitDataSet);
             datasets.push(this.getNavPlanUpperLimitDataSet(navPlanDataSet, navPlanDTMDataSet));
-            datasets.push(this.getNavPlanBottomLimitDataSet(navPlanDataSet, navPlanDTMDataSet));
+
+            this.overrideNavPlanDataSetPointStyleForWarningPoint(navPlanDataSet, navPlanBottomLimitDataSet);
         }
 
         data.datasets = datasets;

@@ -1,10 +1,13 @@
+
+const imagesCache = new Map();
+
 export const imagePointTypes = {
     start: 'start',
     end: 'end',
     regular: 'regular',
+    regularWarning: 'regularWarning',
     patrolStart: 'patrolStart',
     patrolEnd: 'patrolEnd',
-    middle: 'middle',
     drone: 'drone',    
 }
 
@@ -12,6 +15,7 @@ export const getImageByType = {
     [imagePointTypes.start]: color => getNavPlanStartImageSrc(color),
     [imagePointTypes.end]: color => getNavPlanEndImageSrc(color),
     [imagePointTypes.regular]: color => getNavPlanPointImageSrc(color),
+    [imagePointTypes.regularWarning]: color => getNavPlanWarningPointImageSrc(color),
     [imagePointTypes.drone]: color => getNavPlanDroneImageSrc(color),
     [imagePointTypes.patrolStart]: color => getNavPlanPatrolStartImageSrc(color),
     [imagePointTypes.patrolEnd]: color => getNavPlanPatrolEndImageSrc(color),
@@ -31,7 +35,6 @@ export function getNavPlanPointImageSrcOld(color) {
                   </svg>`;
 }
 export function getNavPlanPointImageSrc(color) {
-    const escapedColor = encodeURIComponent(color);
     return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28px" height="29px" viewBox="0 0 28 29" version="1.1">
                 <defs>
                     <path d="M10,0 C15.5228475,0 20,4.4771525 20,10 C20,15.5228475 15.5228475,20 10,20 C4.4771525,20 0,15.5228475 0,10 C0,4.4771525 4.4771525,0 10,0 Z M10,1.36986301 C5.23370695,1.36986301 1.36986301,5.23370695 1.36986301,10 C1.36986301,14.766293 5.23370695,18.630137 10,18.630137 C14.766293,18.630137 18.630137,14.766293 18.630137,10 C18.630137,5.23370695 14.766293,1.36986301 10,1.36986301 Z M10,7.80821918 C11.2104871,7.80821918 12.1917808,8.78951288 12.1917808,10 C12.1917808,11.2104871 11.2104871,12.1917808 10,12.1917808 C8.78951288,12.1917808 7.80821918,11.2104871 7.80821918,10 C7.80821918,8.78951288 8.78951288,7.80821918 10,7.80821918 Z" id="path-1"/>
@@ -48,6 +51,56 @@ export function getNavPlanPointImageSrc(color) {
                             <g id="Shape">
                             <use fill="black" fill-opacity="1" filter="${encodeURIComponent('url(#filter-2)')}" href="${encodeURIComponent('#path-1')}"/>
                             <use fill="${encodeURIComponent(color)}" fill-rule="evenodd" href="${encodeURIComponent('#path-1')}"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>`;
+}
+
+export function getNavPlanWarningPointImageSrc(color) {
+    return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="27px" height="27px" viewBox="0 0 27 27" version="1.1">
+                <defs>
+                    <path d="M13.5,3.82627351 C8.15734839,3.82627351 3.82627351,8.15734839 3.82627351,13.5 C3.82627351,18.8426516 8.15734839,23.1737265 13.5,23.1737265 C18.8426516,23.1737265 23.1737265,18.8426516 23.1737265,13.5 C23.1737265,8.15734839 18.8426516,3.82627351 13.5,3.82627351 Z M13.5,5.15144152 C18.1107815,5.15144152 21.8485585,8.88921847 21.8485585,13.5 C21.8485585,18.1107815 18.1107815,21.8485585 13.5,21.8485585 C8.88921847,21.8485585 5.15144152,18.1107815 5.15144152,13.5 C5.15144152,8.88921847 8.88921847,5.15144152 13.5,5.15144152 Z" id="path-1"/>
+                    <filter x="${encodeURIComponent('-36.2%')}" y="${encodeURIComponent('-36.2%')}" width="${encodeURIComponent('172.4%')}" height="${encodeURIComponent('172.4%')}" filterUnits="objectBoundingBox" id="filter-2">
+                        <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"/>
+                        <feOffset dx="0" dy="0" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+                        <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+                        <feColorMatrix values="0 0 0 0 0.00392156863   0 0 0 0 0.149019608   0 0 0 0 0.2  0 0 0 1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"/>
+                        <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter2"/>
+                        <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter2" result="shadowBlurOuter2"/>
+                        <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowBlurOuter2" result="shadowMatrixOuter2"/>
+                        <feMerge>
+                            <feMergeNode in="shadowMatrixOuter1"/>
+                            <feMergeNode in="shadowMatrixOuter2"/>
+                        </feMerge>
+                    </filter>
+                    <circle id="path-3" cx="13.5" cy="13.5" r="2.12026882"/>
+                    <filter x="${encodeURIComponent('-165.1%')}" y="${encodeURIComponent('-165.1%')}" width="${encodeURIComponent('430.1%')}" height="${encodeURIComponent('430.1%')}" filterUnits="objectBoundingBox" id="filter-4">
+                        <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"/>
+                        <feOffset dx="0" dy="0" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+                        <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+                        <feColorMatrix values="0 0 0 0 0.00392156863   0 0 0 0 0.149019608   0 0 0 0 0.2  0 0 0 1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"/>
+                        <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter2"/>
+                        <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter2" result="shadowBlurOuter2"/>
+                        <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0" type="matrix" in="shadowBlurOuter2" result="shadowMatrixOuter2"/>
+                        <feMerge>
+                            <feMergeNode in="shadowMatrixOuter1"/>
+                            <feMergeNode in="shadowMatrixOuter2"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                <g id="Route-Editor" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="0" transform="translate(-1738.000000, -238.000000)">
+                        <g id="Group" transform="translate(1738.000000, 238.000000)">
+                            <path d="M13.5,0 C6.04415588,0 0,6.04415588 0,13.5 C0,20.9558441 6.04415588,27 13.5,27 C20.9558441,27 27,20.9558441 27,13.5 C27,6.04415588 20.9558441,0 13.5,0 Z" id="Oval-Copy" fill="${encodeURIComponent('#C73939')}" fill-rule="nonzero"/>
+                            <g id="Oval">
+                                <use fill="black" fill-opacity="1" filter="${encodeURIComponent('url(#filter-2)')}" href="${encodeURIComponent('#path-1')}"/>
+                                <use fill="${encodeURIComponent(color)}" fill-rule="evenodd" href="${encodeURIComponent('#path-1')}"/>
+                            </g>
+                            <g id="Oval">
+                                <use fill="black" fill-opacity="1" filter="${encodeURIComponent('url(#filter-4)')}" href="${encodeURIComponent('#path-3')}"/>
+                                <use fill="${encodeURIComponent(color)}" fill-rule="evenodd" href="${encodeURIComponent('#path-3')}"/>
                             </g>
                         </g>
                     </g>
@@ -179,7 +232,14 @@ export function getNavPlanDroneImage(color) {
 }
 
 export function getNavPlanImage(type, color) {
-    const img = new Image();
-    img.src = getImageByType[type](color);
+
+    const img = imagesCache.get(`${type}-${color}`);
+
+    if (!img) {
+        const img = new Image();
+        img.src = getImageByType[type](color);
+        imagesCache.set(`${type}-${color}`, img);
+    }
+
     return img;
 }

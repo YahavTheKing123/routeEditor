@@ -206,8 +206,9 @@ export default class RouteChart extends Component {
         };
     }
 
-    onDragStart = (e, datasetIndex, index, value) => {        
-        const {mission, selectedDroneId} = this.props;        
+    onDragStart = (e, datasetIndex, index, value) => {
+        const {mission, selectedDroneId} = this.props;
+
         setTimeout(() => {
             this.selectOnMap(value.waypoint || value);
         }, 100)
@@ -233,7 +234,7 @@ export default class RouteChart extends Component {
     }
 
     onDrag = (e, datasetIndex, index, value) => {
-        e.target.style.cursor = 'grabbing';  
+        e.target.style.cursor = 'grabbing';
         //this.chartRef.current.config._config.options.plugins.zoom.pan.enabled = false;
         if (value.y <= this.minLimitPoint) {
             this.chartRef.current.data.datasets[datasetIndex].data[index].y = this.minLimitPoint;
@@ -792,14 +793,14 @@ export default class RouteChart extends Component {
         }
 
         return isPointBellowLimit;
-    }   
+    }
 
     overrideNavPlanDataSetPointStyleForWarningPoint(navPlanDataSet, navPlanBottomLimitDataSet) {
         const {virtualPlayerToColorMap, isHideChartPoints, selectedDroneId: vPlayerId} = this.props;
-        
+
         //for perfomance optimization go over the bottom limit dataset once and not each pointStyle callback execution
-        const navPlanBottomLimitDataSetMap = navPlanBottomLimitDataSet && 
-                                             navPlanBottomLimitDataSet.data && 
+        const navPlanBottomLimitDataSetMap = navPlanBottomLimitDataSet &&
+                                             navPlanBottomLimitDataSet.data &&
                                              navPlanBottomLimitDataSet.data.reduce((mapperObj, curr) => {
                                                 mapperObj[curr.x] = curr.y;
                                                 return mapperObj;

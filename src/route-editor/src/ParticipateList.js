@@ -15,15 +15,32 @@ export default class ParticipateList extends Component {
         super(props);
         this.state = {
             arrowClickCounter: 0,
+            showAllButton: true
         }
     }
+
     componentDidMount() {
         if (this.props.virtualPlayerToNavPlansMap) {
             const vPlayersIds = Object.keys(this.props.virtualPlayerToNavPlansMap);
             if (vPlayersIds.length === 1) {
                 this.props.selectDrone(vPlayersIds[0]);
+                this.setState({showAllButton: false})
             }
         }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.virtualPlayerToNavPlansMap !== prevProps.virtualPlayerToNavPlansMap) {
+            const vPlayersIds = Object.keys(this.props.virtualPlayerToNavPlansMap);
+
+            if (vPlayersIds.length > 1 && !this.state.showAllButton) {
+                this.setState({showAllButton: true})
+            } else if (vPlayersIds.length === 1 && this.state.showAllButton) {
+                this.setState({showAllButton: false});
+                this.props.selectDrone(vPlayersIds[0]);
+            }
+        }
+
     }
 
     onArrowButtonClick(arrow) {
@@ -59,6 +76,16 @@ export default class ParticipateList extends Component {
         selectDroneCallback(id);
     }
 
+    renderAllButton() {
+        if (!this.state.showAllButton) return null;
+
+        return (
+            <button className={`route-editor-participates-button all-participates-button ${this.props.getSelectedDroneClass('all')}`} onClick={this.selectDrone.bind(this, 'all')}>
+                {this.props.translator.t('all')}
+            </button>
+        )
+    }
+
     render() {
         return (
         <div className='route-editor-participate-list-wrapper'>
@@ -71,9 +98,7 @@ export default class ParticipateList extends Component {
                 </button>
                 <div className='route-editor-participates-buttons'>
                     <div className='route-editor-participates-buttons-wrapper' style={{transform: `translateX(${this.state.arrowClickCounter * MOVMENT_FACTOR}rem)`}}>
-                        <button className={`route-editor-participates-button all-participates-button ${this.props.getSelectedDroneClass('all')}`} onClick={this.selectDrone.bind(this, 'all')}>
-                            {this.props.translator.t('all')}
-                        </button>
+                        {this.renderAllButton()}
                         {
                             Object.keys(this.props.virtualPlayerToNavPlansMap).map((vPlayerId, i) => {
                                 return (

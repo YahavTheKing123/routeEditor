@@ -70,7 +70,7 @@ export default class Footer extends Component {
             const navPlanBack =  navPlanArr && navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.back]);
             const navPlanPatrol =  navPlanArr && navPlanArr.find(nav => config.partrolRouteTypes.includes(nav.navPlanType));
 
-            isContainsPatrolNavPlan = !!isContainsPatrolNavPlan;
+            isContainsPatrolNavPlan = !!navPlanPatrol;
             isContainsBackNavPlan = !!navPlanBack;
         }
 

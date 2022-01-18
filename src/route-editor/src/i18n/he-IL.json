@@ -1,6 +1,6 @@
 {
   "translation": {
-    "sideCut" : "חתך צד",
+    "sideCut": "חתך צד",
     "plan": "תכנן",
     "route": "נתיב:",
     "forward": "הלוך",
@@ -12,6 +12,7 @@
     "undo": "בטל שינויים",
     "save": "שמור שינויים",
     "hideChartPoints": "הסתר נקודות",
-    "loadingData": "טוען"
+    "loadingData": "טוען",
+    "amsl": "מעפ\"י"
   }
 }

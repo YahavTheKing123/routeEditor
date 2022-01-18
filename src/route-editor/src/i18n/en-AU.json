@@ -1,6 +1,6 @@
 {
   "translation": {
-    "sideCut" : "Side Cut",
+    "sideCut": "Side Cut",
     "plan": "Plan",
     "route": "Route:",
     "forward": "Forward",
@@ -12,6 +12,7 @@
     "undo": "Undo Changes",
     "save": "Save Changes",
     "hideChartPoints": "Hide Chart Points",
-    "loadingData": "Loading"
+    "loadingData": "Loading",
+    "amsl": "AMSL"
   }
 }

@@ -37,8 +37,8 @@
 
     min-width: 58rem;
     position: fixed;
-    top: calc(var(--touch-header-height, 5rem) + 1rem);
-    right: calc(var(--touch-left-menu-width, 10rem) + 1.5rem);
+    top: calc(var(--header-height, 5rem) + 1rem);
+    right: calc(var(--left-menu-width, 10rem) + 1.5rem);
     transform-origin: top right;
     border-radius: 1rem;
     font-size: 1.4rem;

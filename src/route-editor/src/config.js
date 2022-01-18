@@ -8,18 +8,18 @@ const config = {
         missionSname: "autonomyBase.entity.mission"
     },
     dronesColor: {
-        0: '#43BEF4',
+        0: '#8dcee5',
         1: '#43F47D',
         2: '#B959F4',
         3: '#F49459',
         4: '#F459A2',
-        5: '#51F988',
-        6: '#FF46A3',
-        7: '#35F9FF',
-        8: '#7342FF',
+        5: '#4200f3',
+        6: '#5c1136',
+        7: '#04edfa',
+        8: '#592dcd',
         9: '#F95152',
         10: '#E6FA33',
-        11: '#4F57FF'
+        11: '#c91454'
     },
     ALL: 'all',
     dataSetDTMIdentifier: 'dataSetDTMIdentifier',

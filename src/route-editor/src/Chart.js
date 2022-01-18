@@ -63,7 +63,7 @@ export default class RouteChart extends Component {
                     yAlign: 'bottom',
                     borderColor: '#bab4cab5',
                     borderWidth: 0.5,
-                    textDirection: 'ltr',
+                    textDirection: this.getTooltipDirection(),
                     displayColors: false,
                     filter: (tooltipItem, data) => {
                         return tooltipItem.dataset.identifier !== config.dataSetDTMIdentifier
@@ -76,7 +76,7 @@ export default class RouteChart extends Component {
                             return tooltipItem &&
                                 tooltipItem.parsed &&
                                 tooltipItem.parsed.y &&
-                                    DisplayDataHandler.parse({type:Enum.fieldType.altitude , data: Math.round(tooltipItem.parsed.y) ,fieldMetadata: {hideLabel: false}}) + '\u0027' + " " + this.props.translator.t('amsl');
+                                    `${DisplayDataHandler.parse({type:Enum.fieldType.altitude , data: this.getTag('rtl') + Math.round(tooltipItem.parsed.y) + this.getTag('ltr') ,fieldMetadata: {hideLabel: false}})} ${this.props.translator.t('amsl')}`;
                         },
                         labelTextColor: (context) => '#c2c5cb',
                     }
@@ -265,6 +265,13 @@ export default class RouteChart extends Component {
         }
     }
 
+    getTag = (side) => {
+        return side === this.props.translator.dir() ?  '\u0027' : ''        
+    }
+    getTooltipDirection = () => {
+        return this.props.translator.dir();
+    }
+    
     getPlayerTooltipItem = item => {
         return 'Player ' + item.raw.playerDispName
     }

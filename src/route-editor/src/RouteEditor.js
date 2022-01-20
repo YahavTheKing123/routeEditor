@@ -46,7 +46,8 @@ class RouteEditor extends Component {
             isNavPlanningCommandAvailable: false,
             isHideChartPoints: false,
             reactSelectMenuOption: reactSelectMenuOptions.close,
-            isChartLoading: false
+            isChartLoading: false,
+            isSaveButtonEnable: true
         }
         this.chartContainerRef = React.createRef();
     }
@@ -313,6 +314,7 @@ class RouteEditor extends Component {
                     maxAmslAltitude={this.props.additionalData.maxAmslAltitude}
                     translator={this.translator}
                     isChartLoading={this.state.isChartLoading}
+                    isSaveButtonEnable={isSaveButtonEnable=>this.setState({isSaveButtonEnable})}
                 />
     }
 
@@ -366,6 +368,7 @@ class RouteEditor extends Component {
                 handleMenuAction={actionType => this.setState({reactSelectMenuOption: actionType})}
                 setChartLoader={isChartLoading => this.setState({isChartLoading})}
                 isChartLoading={this.state.isChartLoading}
+                isSaveButtonEnable={this.state.isSaveButtonEnable}
             />
         );
     }

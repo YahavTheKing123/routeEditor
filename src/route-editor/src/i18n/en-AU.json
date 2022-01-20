@@ -13,6 +13,7 @@
     "save": "Save Changes",
     "hideChartPoints": "Hide Chart Points",
     "loadingData": "Loading",
-    "amsl": "AMSL"
+    "amsl": "AMSL",
+    "waypointsCloseToNavPlan": "Waypoints close to ground in this nav plan"
   }
 }

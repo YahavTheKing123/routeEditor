@@ -208,9 +208,11 @@ export default class Footer extends Component {
     }
 
     renderLeftButtons() {
-        const {selectedDroneId, isChartLoading, isChartHasChanges, isNavPlanningCommandAvailable, executeNavPlanningCommand, translator} = this.props;
+        const {selectedDroneId, isChartLoading, isChartHasChanges, isNavPlanningCommandAvailable, executeNavPlanningCommand, translator, isSaveButtonEnable} = this.props;
 
-        const disableClass = isChartHasChanges && !isChartLoading ? '' : 'route-editor-footer-left-buttons-disable';
+        const buttonsWrapperdisableClass = isChartHasChanges && !isChartLoading ? '' : 'route-editor-footer-left-buttons-disable';
+        const saveButtondisableClass = isSaveButtonEnable  ? '' : 'route-editor-footer-save-button-disable';
+
         const navPlanCmdDisabledClass = isNavPlanningCommandAvailable ? '' : 'plan-action-button-disable';
         return (
             <div className={`route-editor-footer-left-buttons`}>
@@ -219,12 +221,12 @@ export default class Footer extends Component {
                     <span>{translator.t('plan')}</span>
                 </button>
                 {
-                    selectedDroneId !== config.ALL &&
-                    <div className={`route-editor-footer-action-buttons ${disableClass}`}>
+                    selectedDroneId !== config.ALL &&                    
+                    <div className={`route-editor-footer-action-buttons ${buttonsWrapperdisableClass}`}>
                         <button className='route-editor-footer-action-button' onClick={this.undoChanges} title={translator.t('undo')}>
                             <img className='route-editor-footer-undo-icon' src={undoIcon}/>
                         </button>
-                        <button className='route-editor-footer-action-button' onClick={this.saveChanges} title={translator.t('save')}>
+                        <button className={`route-editor-footer-action-button ${saveButtondisableClass}`} onClick={this.saveChanges} title={translator.t('save')}>
                             <img className='route-editor-footer-check-icon' src={checkIcon}/>
                         </button>
                     </div>

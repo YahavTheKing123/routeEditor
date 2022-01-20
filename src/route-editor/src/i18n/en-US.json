@@ -12,6 +12,7 @@
     "undo": "Undo Changes",
     "save": "Save Changes",
     "loadingData": "Loading",
-    "amsl": "AMSL"
+    "amsl": "AMSL",
+    "waypointsCloseToNavPlan": "Waypoints close to ground in this nav plan"
   }
 }

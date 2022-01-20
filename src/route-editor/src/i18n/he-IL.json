@@ -13,6 +13,7 @@
     "save": "שמור שינויים",
     "hideChartPoints": "הסתר נקודות",
     "loadingData": "טוען",
-    "amsl": "מעפ\"י"
+    "amsl": "מעפ\"י",
+    "waypointsCloseToNavPlan": "חריגה מגובה בטיחות"
   }
 }

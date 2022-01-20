@@ -23,7 +23,8 @@ export default class RouteChart extends Component {
         this.chartRef = React.createRef();
         this.newWaypointsHeight = {};
         this.state = {
-            navPlanPolylinePoints: null
+            navPlanPolylinePoints: null,
+            isShowWarningMessage: false
         }
     }
 
@@ -252,7 +253,6 @@ export default class RouteChart extends Component {
         this.minLimitPoint = null;
         if (value.waypoint) {
             // we will save the AGL. calc by newAmsl - DTM
-
             const dtm = this.chartRef.current.data.datasets.find(ds => ds.identifier === config.dataSetDTMIdentifier)
             const dtmPoint = dtm.data.find(point => point.x === value.x);
 
@@ -261,6 +261,12 @@ export default class RouteChart extends Component {
                 newHeightAMSL: value.y,
                 waypoint: value.waypoint
             };
+            // remove warning message if needed
+            if (this.state.isShowWarningMessage &&
+                this.chartRef.current.data.datasets[datasetIndex].data.filter(point => point.isWarning).length === 0) {
+                this.setState({isShowWarningMessage: false});
+                this.props.isSaveButtonEnable(true);
+            }
             this.props.updateChartChangesFlag(true);
         }
     }
@@ -805,6 +811,21 @@ export default class RouteChart extends Component {
         return isPointBellowLimit;
     }
 
+    handleWarningPoint = (charPoint, pointType, color) => {
+        if (!this.state.isShowWarningMessage) {
+            this.setState({isShowWarningMessage: true});
+            this.props.isSaveButtonEnable(false);
+            //todo - disable save button
+        }
+        charPoint.raw.isWarning = true;
+        return getNavPlanImage(pointType, color)
+    }
+
+    handleRegularPoint = (charPoint, pointType, color) => {
+        charPoint.raw.isWarning = false;
+        return getNavPlanImage(pointType, color)
+    }
+
     overrideNavPlanDataSetPointStyleForWarningPoint(navPlanDataSet, navPlanBottomLimitDataSet) {
         const {virtualPlayerToColorMap, isHideChartPoints, selectedDroneId: vPlayerId} = this.props;
 
@@ -830,7 +851,7 @@ export default class RouteChart extends Component {
                 return getNavPlanImage(imagePointTypes.drone, virtualPlayerToColorMap[vPlayerId])
             }
 
-            return this.pointBelowBottomLimit(param, navPlanBottomLimitDataSetMap) ? getNavPlanImage(imagePointTypes.regularWarning, virtualPlayerToColorMap[vPlayerId]) : getNavPlanImage(imagePointTypes.regular, virtualPlayerToColorMap[vPlayerId])
+            return this.pointBelowBottomLimit(param, navPlanBottomLimitDataSetMap) ? this.handleWarningPoint(param, imagePointTypes.regularWarning, virtualPlayerToColorMap[vPlayerId]) : this.handleRegularPoint(param, imagePointTypes.regular, virtualPlayerToColorMap[vPlayerId])
         }
     }
 
@@ -877,7 +898,18 @@ export default class RouteChart extends Component {
         )
     }
 
-    render() {
+    getWarnningMessage() {
+        if (!this.state.isShowWarningMessage) return;
+
+        return (
+            <span className='route-editor-chart-message-wrapper warning-message'>
+                <span className='route-editor-chart-icon'></span>
+                <span className='route-editor-chart-warning-text'>{this.props.translator.t('waypointsCloseToNavPlan')}</span>
+            </span>        
+        )
+    }
+
+    render() {  
 
         if (this.props.selectedDroneId !== config.ALL && !this.state.navPlanPolylinePoints) return this.renderLoader();
 
@@ -891,8 +923,8 @@ export default class RouteChart extends Component {
                     options={this.options}
                     id='route-editor-canvas'
                     ref={this.chartRef}
-
                 />
+                {this.getWarnningMessage()}
             </div>
         )
     }

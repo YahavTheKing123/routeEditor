@@ -1,4 +1,3 @@
-import { tsThisType } from "@babel/types";
 import {Component} from "react";
 import {RouteEditor} from './route-editor/src';
 

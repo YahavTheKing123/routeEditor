@@ -37,6 +37,9 @@ export default class RouteChart extends Component {
             hover: {
                 mode: 'dataset'
             },
+            onHover: (e, activeElements, chart) => {
+                console.log(`x: ${e.chart.scales.x.getValueForPixel(e.x)}, y:${e.chart.scales.y.getValueForPixel(e.y)}`)
+            },
             animation: {
                 //duration: 0
             },

@@ -18,10 +18,11 @@ export default class RouteChart extends Component {
     constructor(props) {
         super(props);
         this.setOptions();
-
+        
         this.isDraggingPoint = false;
         this.chartRef = React.createRef();
         this.newWaypointsHeight = {};
+        this.dtmPoints = [];
         this.state = {
             navPlanPolylinePoints: null,
             isShowWarningMessage: false
@@ -38,7 +39,8 @@ export default class RouteChart extends Component {
                 mode: 'dataset'
             },
             onHover: (e, activeElements, chart) => {
-                console.log(`x: ${e.chart.scales.x.getValueForPixel(e.x)}, y:${e.chart.scales.y.getValueForPixel(e.y)}`)
+                if (this.props.selectedDroneId === config.ALL) return;
+                this.setPointPositionOnTheNavPlan(e, activeElements);            
             },
             animation: {
                 //duration: 0
@@ -211,6 +213,76 @@ export default class RouteChart extends Component {
                 },
             },
         };
+    }
+
+    calcLineYPoint(x, point1, point2) {
+        if (point1 && point2) {
+    
+            const gradient = (point2.y - point1.y) / (point2.x - point1.x);
+            const intercept = point1.y - (gradient * point1.x);
+            return gradient * x + intercept;
+        }
+        return null;
+    }
+
+    setPointPositionOnTheNavPlan(e, activeElements) {
+        //console.log(`x: ${e.chart.scales.x.getValueForPixel(e.x)}, y:${e.chart.scales.y.getValueForPixel(e.y)}`)        
+
+        const horizontalLine = document.querySelector('#route-editor-horizontal-line');
+        const verticalLine = document.querySelector('#route-editor-vertical-line');
+        const movingPoint = document.querySelector('#route-editor-moving-point');
+        const movingPointTooltip = document.querySelector('#route-editor-moving-point-tooltip');
+        const movingPointTooltipDetails = document.querySelector('#route-editor-moving-point-tooltip-details');
+        
+        horizontalLine.style.top = `${e.y}px`;
+        verticalLine.style.left = `${e.x}px`;
+
+        const chartX = e.chart.scales.x.getValueForPixel(e.x);
+        const chartY = e.chart.scales.y.getValueForPixel(e.y);
+        
+        const navPlan = this.chartRef.current.data.datasets.find(ds => ds.label.includes(this.props.selectedDroneId));
+
+        //find relevent section        
+        let i = 0;
+        while (navPlan.data && navPlan.data && navPlan.data[i] && navPlan.data[i].hasOwnProperty('x') && navPlan.data[i].x < chartX) {
+            i++;
+        }
+        const lineY = this.calcLineYPoint(chartX, navPlan.data[i - 1], navPlan.data[i]);
+        if (navPlan && lineY) {
+            const y = e.chart.scales.y.getPixelForValue(lineY);
+            movingPoint.style.left = `${e.x}px`;
+            movingPoint.style.top = `${y}px`;
+
+            movingPoint.style.setProperty('--route-editor-moving-point-bg-color', this.props.virtualPlayerToColorMap[this.props.selectedDroneId]);
+            movingPoint.style.setProperty('--route-editor-moving-point-shadow-color', `${this.props.virtualPlayerToColorMap[this.props.selectedDroneId]}40`);
+
+            movingPointTooltip.style.left = `${e.x}px`;
+            movingPointTooltip.style.top = `${y - 32}px`;
+
+            if (activeElements && activeElements.length > 0) {
+                movingPoint.style.display = 'none';
+                movingPointTooltip.style.display = 'none';
+                horizontalLine.style.display = 'none';
+                verticalLine.style.display = 'none';
+            } else { 
+                movingPoint.style.display = 'unset';
+                movingPointTooltip.style.display = 'unset'; 
+                horizontalLine.style.display = 'unset';
+                verticalLine.style.display = 'unset';               
+            }
+            
+            const chartXRounded = Math.round(chartX);
+            console.log(chartXRounded);
+
+            let aglValue = null;
+            let j = 0;
+            while (chartXRounded > this.dtmPoints[j].x) {
+                j++;
+            }
+            
+            aglValue = Math.round(lineY - this.dtmPoints[j].y);
+            movingPointTooltipDetails.setAttribute('data-yvalue', `${aglValue}`);                        
+        }                
     }
 
     onDragStart = (e, datasetIndex, index, value) => {
@@ -516,6 +588,7 @@ export default class RouteChart extends Component {
         const {navPlanPolylinePoints} = this.state;
         let totalNavPlanLength = 0;
 
+        this.dtmPoints = [];
         const navPlanDTMPoints = navPlanPolylinePoints.map((point, i) => {
 
             if (i !== 0) {
@@ -530,6 +603,8 @@ export default class RouteChart extends Component {
                 x: Math.round(totalNavPlanLength),
                 y: point.z,
             }
+
+            this.dtmPoints.push({...dtmChartPoint});
 
             return dtmChartPoint;
         })
@@ -912,6 +987,41 @@ export default class RouteChart extends Component {
         )
     }
 
+    getHorizontalLine() {
+        return <span id='route-editor-horizontal-line' className={'route-editor-chart-cursor-line route-editor-chart-cursor-horizontal-line'}></span>
+    }
+
+    getVerticalLine() {
+        return <span id='route-editor-vertical-line' className={'route-editor-chart-cursor-line route-editor-chart-cursor-vertical-line'}></span>
+    }
+
+    getMovingPoint() {
+        return (
+            <span id='route-editor-moving-point' className={'route-editor-moving-point-indicator'}></span>
+        )
+    }
+
+    getMovingPointTooltip() {
+        return (
+            <div id='route-editor-moving-point-tooltip' className='route-editor-moving-point-tooltip'>            
+                <span id={'route-editor-moving-point-tooltip-details'} className='route-editor-moving-point-tooltip-details' data-yvalue><span>AGL</span></span>
+            </div>
+        )
+    }
+
+    getHoveredLinesAndPoint() {
+        if (this.props.selectedDroneId !== config.ALL) {
+            return (
+                <>
+                    {this.getHorizontalLine()}
+                    {this.getVerticalLine()}
+                    {this.getMovingPoint()}
+                    {this.getMovingPointTooltip()}
+                </>
+            )
+        }
+    }
+
     render() {  
 
         if (this.props.selectedDroneId !== config.ALL && !this.state.navPlanPolylinePoints) return this.renderLoader();
@@ -928,6 +1038,7 @@ export default class RouteChart extends Component {
                     ref={this.chartRef}
                 />
                 {this.getWarnningMessage()}
+                {this.getHoveredLinesAndPoint()}
             </div>
         )
     }

@@ -229,6 +229,7 @@
     min-height: var(--route-editor-chart-height);
     height: calc(100% - var(--route-editor-elements-height));
     position: relative;
+    overflow: hidden;
 }
 
 .route-editor-chart-wrapper.route-editor-chart-saving-loader::before {
@@ -579,4 +580,80 @@ canvas#route-editor-canvas {
 
 .route-editor-footer-action-buttons {
     display: flex;
+}
+
+.route-editor-chart-cursor-line {
+    position: absolute; 
+    border-color: #898989;
+    border-style: dashed;
+    border-width: 0;
+    pointer-events: none;
+}
+
+.route-editor-chart-cursor-line.route-editor-chart-cursor-horizontal-line {
+    width: calc(100% - 75px);    
+    left: 55px;    
+    border-top-width: 1px;    
+}
+
+.route-editor-chart-cursor-line.route-editor-chart-cursor-vertical-line {
+    height: calc(100% - 60px);
+    top: 20px;
+    border-right-width: 1px;        
+}
+
+.route-editor-moving-point-indicator {
+    position: absolute;
+    height: 9px;
+    width: 9px;
+    border-radius: 50%;
+    background: var(--route-editor-moving-point-bg-color, black);    
+    box-shadow: 0 0 0 2px #d7d7d7,
+                0 0 0 6px var(--route-editor-moving-point-shadow-color);
+    transform: translate(-50%, -50%);
+    border: 1px solid #adadad;
+    z-index: 1;
+    pointer-events: none;
+    display: none;
+}
+
+
+.route-editor-moving-point-tooltip {
+    position: absolute;    
+    background: #010E0F;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: 0.5px solid rgb(108 108 108 / 71%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    display: none;
+}
+
+.route-editor-moving-point-tooltip::after {
+    content: '';    
+    background-color: #010E0F;    
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    transform: rotateZ(45deg);
+    z-index: -1;
+    top: unset;
+    bottom: -4px;
+    left: calc(50% - 5px);
+    right: unset;
+    border-bottom: 0.5px solid rgb(108 108 108 / 71%);
+    border-right: 0.5px solid rgb(108 108 108 / 71%);
+}
+
+.route-editor-moving-point-tooltip-details > span {
+    font-size: 10px;
+    opacity: 0.8;
+    position: relative;
+    margin-inline-end: 5px;
+}
+
+.route-editor-moving-point-tooltip-details::before {
+    /* content: attr(data-yvalue); */
+    content: attr(data-yvalue);
 }

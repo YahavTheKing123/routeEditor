@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 34 34" version="1.1">   
+    <defs>
+        <path d="M16.2,20.8 L16.2,30 L13.8,30 L13.8,20.8 L16.2,20.8 Z M9.2,14.4 L9.2,16.8 L0,16.8 L0,14.4 L9.2,14.4 Z M30,14.4 L30,16.8 L20.8,16.8 L20.8,14.4 L30,14.4 Z M16.2,0 L16.2,9.2 L13.8,9.2 L13.8,0 L16.2,0 Z" id="path-1"/>
+    </defs>
+    <g id="Route-Editor-New" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Height---Map-&amp;-Route-Editor" transform="translate(-981.000000, -555.000000)">
+            <g id="Cursor-Indicator" transform="translate(983.000000, 557.000000)">
+                <g id="Combined-Shape-Copy">
+                    <g id="path-1-link" transform="translate(0.600000, 0.600000)" fill="#FFD65D" fill-rule="nonzero">
+                        <path d="M15,20.8 L15,28.8 L13.8,28.8 L13.8,20.8 L15,20.8 Z M8,14.4 L8,15.6 L0,15.6 L0,14.4 L8,14.4 Z M28.8,14.4 L28.8,15.6 L20.8,15.6 L20.8,14.4 L28.8,14.4 Z M15,0 L15,8 L13.8,8 L13.8,0 L15,0 Z" id="path-1"/>
+                    </g>
+                    <g id="Shape" stroke-width="2">
+                        <path stroke="#FFFFFF" d="M12.8,19.8 L17.2,19.8 L17.2,31 L12.8,31 L12.8,19.8 Z M10.2,13.4 L10.2,17.8 L-1,17.8 L-1,13.4 L10.2,13.4 Z M31,13.4 L31,17.8 L19.8,17.8 L19.8,13.4 L31,13.4 Z M17.2,-1 L17.2,10.2 L12.8,10.2 L12.8,-1 L17.2,-1 Z"/>
+                        <path stroke="#000000" d="M12.8,19.8 L17.2,19.8 L17.2,31 L12.8,31 L12.8,19.8 Z M10.2,13.4 L10.2,17.8 L-1,17.8 L-1,13.4 L10.2,13.4 Z M31,13.4 L31,17.8 L19.8,17.8 L19.8,13.4 L31,13.4 Z M17.2,-1 L17.2,10.2 L12.8,10.2 L12.8,-1 L17.2,-1 Z"/>
+                    </g>
+                    <g id="path-1-link" transform="translate(0.600000, 0.600000)" stroke="#F6EA75" stroke-width="2">
+                        <path d="M15,20.8 L15,28.8 L13.8,28.8 L13.8,20.8 L15,20.8 Z M8,14.4 L8,15.6 L0,15.6 L0,14.4 L8,14.4 Z M28.8,14.4 L28.8,15.6 L20.8,15.6 L20.8,14.4 L28.8,14.4 Z M15,0 L15,8 L13.8,8 L13.8,0 L15,0 Z" id="path-1"/>
+                    </g>
+                </g>
+                <g id="Oval-Copy" transform="translate(12.800000, 12.800000)">
+                    <g id="path-2-link" transform="translate(0.600000, 0.600000)" fill="#F6EA75" fill-rule="nonzero">
+                        <circle id="path-2" cx="1.6" cy="1.6" r="1.6"/>
+                    </g>
+                    <circle id="Oval" stroke="#000000" stroke-width="3" cx="2.2" cy="2.2" r="2.2"/>
+                    <g id="path-2-link" transform="translate(0.600000, 0.600000)" stroke="#F6EA75" stroke-width="2">
+                        <circle id="path-2" cx="1.6" cy="1.6" r="1.6"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

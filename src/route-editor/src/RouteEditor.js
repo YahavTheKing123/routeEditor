@@ -85,7 +85,7 @@ class RouteEditor extends Component {
     setContextEntityInState() {
         // we can set here navPlan (back, forward or patrol), and / or player and / or vPlayer
 
-        const {additionalData : {contextId = null}} = this.props;
+        const {additionalData: {contextId = null}} = this.props;
         if (!contextId) return;
 
         const contextEntity = this.entsIdToEntsMap[contextId];
@@ -144,7 +144,7 @@ class RouteEditor extends Component {
     }
 
     getSubscriptionResults = (subscriptionResults) => {
-        if(subscriptionResults === undefined) {
+        if (subscriptionResults === undefined) {
             return null;
         }
         return Object.values(subscriptionResults.toJS());
@@ -221,9 +221,9 @@ class RouteEditor extends Component {
                 playerToVirtualPlayerMap[ent.autonomyBase.playerHolder.player._id] = ent;
             }
 
-            if (ent.sname === this.missionSname) {
+            if (ent.sname === this.missionSname || ent._id === (ent.autonomyBase && ent.autonomyBase.crossSection && ent.autonomyBase.crossSection.root && ent.autonomyBase.crossSection.root._id)) {
                 this.mission = ent;
-                const isNavPlanningCommandAvailable = this.navPlanningCommand.isAvailable(Globals.get(), null,this.mission._id);
+                const isNavPlanningCommandAvailable = this.navPlanningCommand.isAvailable(Globals.get(), null, this.mission._id);
                 if (this.state.isNavPlanningCommandAvailable !== isNavPlanningCommandAvailable) {
                     this.setState({isNavPlanningCommandAvailable})
                 }
@@ -244,7 +244,7 @@ class RouteEditor extends Component {
 
         //set player color
         Object.keys(virtualPlayerToNavPlansMap).map((vPlayerId, index) => {
-            virtualPlayerToColorMap[vPlayerId] =  config.dronesColor[index];
+            virtualPlayerToColorMap[vPlayerId] = config.dronesColor[index];
         })
 
         this.entsIdToEntsMap = entsIdToEntsMap;
@@ -262,9 +262,11 @@ class RouteEditor extends Component {
             <div className='route-editor-header'>
                 <span className='route-editor-header-label'>
                     {this.translator.t('sideCut')}
-                    {this.mission ? <span className='route-editor-header-description'> - {this.mission.appX.base.dispName}</span> : null}
+                    {this.mission ? <span
+                        className='route-editor-header-description'> - {this.mission.appX.base.dispName}</span> : null}
                 </span>
-                <button className='route-editor-header-close-button' onClick={() => this.props.layoutAPI.removeContent({contentId: this.props.id})}>
+                <button className='route-editor-header-close-button'
+                        onClick={() => this.props.layoutAPI.removeContent({contentId: this.props.id})}>
                     <img className='route-editor-header-close-icon' src={closeIcon}/>
                 </button>
             </div>
@@ -276,17 +278,17 @@ class RouteEditor extends Component {
     }
 
 
-     renderParticipateList() {
+    renderParticipateList() {
         return <ParticipateList
-                    translator={this.translator}
-                    virtualPlayerToNavPlansMap={this.virtualPlayerToNavPlansMap}
-                    getSelectedDroneClass={this.getSelectedDroneClass}
-                    selectDrone={vPlayerId => this.setState({selectedDroneId: vPlayerId})}
-                    selectedDroneId={this.state.selectedDroneId}
-                    virtualPlayerToColorMap = {this.virtualPlayerToColorMap}
-                    entsIdToEntsMap={this.entsIdToEntsMap}
-                    chartConainer={this.chartContainerRef}
-                />
+            translator={this.translator}
+            virtualPlayerToNavPlansMap={this.virtualPlayerToNavPlansMap}
+            getSelectedDroneClass={this.getSelectedDroneClass}
+            selectDrone={vPlayerId => this.setState({selectedDroneId: vPlayerId})}
+            selectedDroneId={this.state.selectedDroneId}
+            virtualPlayerToColorMap={this.virtualPlayerToColorMap}
+            entsIdToEntsMap={this.entsIdToEntsMap}
+            chartConainer={this.chartContainerRef}
+        />
     }
 
     updateChartChangesFlag = (isChartHasChanges) => {
@@ -300,22 +302,23 @@ class RouteEditor extends Component {
 
     renderChart() {
         return <Chart
-                    selectedDroneId={this.state.selectedDroneId}
-                    entsIdToEntsMap={this.entsIdToEntsMap}
-                    mission={this.mission}
-                    navPlansToWaypointsMap={this.navPlansToWaypointsMap}
-                    playerToVirtualPlayerMap={this.playerToVirtualPlayerMap}
-                    virtualPlayerToNavPlansMap = {this.virtualPlayerToNavPlansMap}
-                    virtualPlayerToColorMap = {this.virtualPlayerToColorMap}
-                    selectedRouteDirection={this.state.selectedRouteDirection}
-                    ref={this.chartContainerRef}
-                    updateChartChangesFlag={this.updateChartChangesFlag}
-                    isHideChartPoints={this.state.isHideChartPoints}
-                    maxAmslAltitude={this.props.additionalData.maxAmslAltitude}
-                    translator={this.translator}
-                    isChartLoading={this.state.isChartLoading}
-                    isSaveButtonEnable={isSaveButtonEnable=>this.setState({isSaveButtonEnable})}
-                />
+            selectedDroneId={this.state.selectedDroneId}
+            entsIdToEntsMap={this.entsIdToEntsMap}
+            mission={this.mission}
+            navPlansToWaypointsMap={this.navPlansToWaypointsMap}
+            playerToVirtualPlayerMap={this.playerToVirtualPlayerMap}
+            virtualPlayerToNavPlansMap={this.virtualPlayerToNavPlansMap}
+            virtualPlayerToColorMap={this.virtualPlayerToColorMap}
+            selectedRouteDirection={this.state.selectedRouteDirection}
+            ref={this.chartContainerRef}
+            updateChartChangesFlag={this.updateChartChangesFlag}
+            isHideChartPoints={this.state.isHideChartPoints}
+            maxAmslAltitude={this.props.additionalData.maxAmslAltitude}
+            translator={this.translator}
+            isChartLoading={this.state.isChartLoading}
+            isSaveButtonEnable={isSaveButtonEnable => this.setState({isSaveButtonEnable})}
+            crossSectionArrowEntityId={this.props.additionalData.snames.crossSectionArrow}
+        />
     }
 
     onDropDownSelect = selectedRouteDirection => {
@@ -352,7 +355,7 @@ class RouteEditor extends Component {
         return (
             <Footer
                 selectedDroneId={this.state.selectedDroneId}
-                virtualPlayerToNavPlansMap = {this.virtualPlayerToNavPlansMap}
+                virtualPlayerToNavPlansMap={this.virtualPlayerToNavPlansMap}
                 chartConainer={this.chartContainerRef}
                 translator={this.translator}
                 dropDownOptionsKeys={routeOptions}
@@ -379,15 +382,16 @@ class RouteEditor extends Component {
         const reactSelectMenuOpenClass = this.state.reactSelectMenuOption === reactSelectMenuOptions.open ? 'react-select-menu-open' : '';
 
         return (
-                <Draggable handle={'.route-editor-header'} bounds={'body'}>
-                    <div className={`route-editor-wrapper ${reactSelectMenuOpenClass}`}>
-                        {this.renderHeader()}
-                        {this.renderParticipateList()}
-                        {this.renderChart()}
-                        {this.renderFooter()}
-                    </div>
-                </Draggable>
+            <Draggable handle={'.route-editor-header'} bounds={'body'}>
+                <div className={`route-editor-wrapper ${reactSelectMenuOpenClass}`}>
+                    {this.renderHeader()}
+                    {this.renderParticipateList()}
+                    {this.renderChart()}
+                    {this.renderFooter()}
+                </div>
+            </Draggable>
         )
     }
 }
+
 export default SubscriptionsHOC(RouteEditor)

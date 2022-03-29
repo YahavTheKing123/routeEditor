@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Select from 'react-select';
 
 import zoomInIcon from './assets/plus.svg';
@@ -9,8 +9,8 @@ import checkIcon from './assets/check.svg';
 import undoIcon from './assets/undo.svg';
 import fxIcon from './assets/fx.svg';
 import directionDown from './assets/directionDown.svg';
-import directionUp from'./assets/directionUp.svg';
-import directionUpDown from'./assets/directionUpDown.svg';
+import directionUp from './assets/directionUp.svg';
+import directionUpDown from './assets/directionUpDown.svg';
 import config from "./config";
 import {navDirectionMapper, routeOptions, reactSelectMenuOptions} from "./RouteEditor";
 import {EntitiesMngr} from '~/entities-client';
@@ -67,8 +67,8 @@ export default class Footer extends Component {
         } else {
             const navPlanArr = virtualPlayerToNavPlansMap[selectedDroneId];
 
-            const navPlanBack =  navPlanArr && navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.back]);
-            const navPlanPatrol =  navPlanArr && navPlanArr.find(nav => config.partrolRouteTypes.includes(nav.navPlanType));
+            const navPlanBack = navPlanArr && navPlanArr.find(nav => nav.direction === navDirectionMapper[routeOptions.back]);
+            const navPlanPatrol = navPlanArr && navPlanArr.find(nav => config.partrolRouteTypes.includes(nav.navPlanType));
 
             isContainsPatrolNavPlan = !!navPlanPatrol;
             isContainsBackNavPlan = !!navPlanBack;
@@ -116,10 +116,12 @@ export default class Footer extends Component {
 
         return (
             <div className='route-editor-footer-zoom-wrapper'>
-                <button className='route-editor-footer-zoom-button' onClick={this.resetZoom} title={this.props.translator.t('resetZoom')}>
+                <button className='route-editor-footer-zoom-button' onClick={this.resetZoom}
+                        title={this.props.translator.t('resetZoom')}>
                     <img className='route-editor-footer-reset-zoom-icon' src={resetZoomIcon}/>
                 </button>
-                <button className={`route-editor-footer-zoom-button ${hideChartPointsActiveClass}`} onClick={this.props.toggleHideChartPoints} title={this.props.translator.t('hideChartPoints')}>
+                <button className={`route-editor-footer-zoom-button ${hideChartPointsActiveClass}`}
+                        onClick={this.props.toggleHideChartPoints} title={this.props.translator.t('hideChartPoints')}>
                     <img className='route-editor-footer-hide-points-icon' src={hidePointsIcon}/>
                 </button>
                 {/*<button className='route-editor-footer-zoom-button' onClick={this.props.onClose}>
@@ -139,7 +141,7 @@ export default class Footer extends Component {
     }
 
     onItemChange = (selectedItem) => {
-         this.props.onDropDownSelect(selectedItem.value)
+        this.props.onDropDownSelect(selectedItem.value)
     }
 
     renderDropDown() {
@@ -160,7 +162,7 @@ export default class Footer extends Component {
                         onChange={this.onItemChange}
                         onMenuOpen={() => this.props.handleMenuAction(reactSelectMenuOptions.open)}
                         onMenuClose={() => this.props.handleMenuAction(reactSelectMenuOptions.close)}
-                />
+                    />
                 </span>
             </div>
         )
@@ -211,22 +213,26 @@ export default class Footer extends Component {
         const {selectedDroneId, isChartLoading, isChartHasChanges, isNavPlanningCommandAvailable, executeNavPlanningCommand, translator, isSaveButtonEnable} = this.props;
 
         const buttonsWrapperdisableClass = isChartHasChanges && !isChartLoading ? '' : 'route-editor-footer-left-buttons-disable';
-        const saveButtondisableClass = isSaveButtonEnable  ? '' : 'route-editor-footer-save-button-disable';
+        const saveButtondisableClass = isSaveButtonEnable ? '' : 'route-editor-footer-save-button-disable';
 
-        const navPlanCmdDisabledClass = isNavPlanningCommandAvailable ? '' : 'plan-action-button-disable';
+        // const navPlanCmdDisabledClass = isNavPlanningCommandAvailable ? '' : 'plan-action-button-disable';
         return (
             <div className={`route-editor-footer-left-buttons`}>
-                <button className={`route-editor-footer-action-button plan-action-button ${navPlanCmdDisabledClass}`} onClick={executeNavPlanningCommand} >
-                    <img className='route-editor-footer-undo-icon' src={fxIcon} style={{height:'1.6rem', width:'1.6rem', marginInlineEnd: '0.5rem'}}/>
-                    <span>{translator.t('plan')}</span>
-                </button>
+                {/*<button className={`route-editor-footer-action-button plan-action-button ${navPlanCmdDisabledClass}`}*/}
+                {/*        onClick={executeNavPlanningCommand}>*/}
+                {/*    <img className='route-editor-footer-undo-icon' src={fxIcon}*/}
+                {/*         style={{height: '1.6rem', width: '1.6rem', marginInlineEnd: '0.5rem'}}/>*/}
+                {/*    <span>{translator.t('plan')}</span>*/}
+                {/*</button>*/}
                 {
-                    selectedDroneId !== config.ALL &&                    
+                    selectedDroneId !== config.ALL &&
                     <div className={`route-editor-footer-action-buttons ${buttonsWrapperdisableClass}`}>
-                        <button className='route-editor-footer-action-button' onClick={this.undoChanges} title={translator.t('undo')}>
+                        <button className='route-editor-footer-action-button' onClick={this.undoChanges}
+                                title={translator.t('undo')}>
                             <img className='route-editor-footer-undo-icon' src={undoIcon}/>
                         </button>
-                        <button className={`route-editor-footer-action-button ${saveButtondisableClass}`} onClick={this.saveChanges} title={translator.t('save')}>
+                        <button className={`route-editor-footer-action-button ${saveButtondisableClass}`}
+                                onClick={this.saveChanges} title={translator.t('save')}>
                             <img className='route-editor-footer-check-icon' src={checkIcon}/>
                         </button>
                     </div>
@@ -238,8 +244,8 @@ export default class Footer extends Component {
     render() {
         return (
             <div className='route-editor-footer'>
-                    {this.renderRightButtons()}
-                    {this.renderLeftButtons()}
+                {this.renderRightButtons()}
+                {this.renderLeftButtons()}
             </div>
         )
     }

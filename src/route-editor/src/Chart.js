@@ -10,19 +10,22 @@ import {Enum} from '~/enums-client';
 import {DisplayDataHandler} from '~/converter-mngr';
 import ldsh from 'lodash';
 import {LightMapInterface} from '~/map';
+import {EntitiesMngr} from '~/entities-client';
 
 const {geo} = require('@elbit/js-geo');
 
+const mapPositionIndicatorOverlay = 'mapPositionIndicatorOverlay';
 export default class RouteChart extends Component {
 
     constructor(props) {
         super(props);
         this.setOptions();
-        
+
         this.isDraggingPoint = false;
         this.chartRef = React.createRef();
         this.newWaypointsHeight = {};
         this.dtmPoints = [];
+        this.mapPositionIndicatorEnt = null;
         this.state = {
             navPlanPolylinePoints: null,
             isShowWarningMessage: false
@@ -40,7 +43,7 @@ export default class RouteChart extends Component {
             },
             onHover: (e, activeElements, chart) => {
                 if (this.props.selectedDroneId === config.ALL) return;
-                this.setPointPositionOnTheNavPlan(e, activeElements);            
+                this.setPointPositionOnTheNavPlan(e, activeElements);
             },
             animation: {
                 //duration: 0
@@ -82,7 +85,11 @@ export default class RouteChart extends Component {
                             return tooltipItem &&
                                 tooltipItem.parsed &&
                                 tooltipItem.parsed.y &&
-                                    `${DisplayDataHandler.parse({type:Enum.fieldType.altitude , data: this.getTag('rtl') + Math.round(tooltipItem.parsed.y) + this.getTag('ltr') ,fieldMetadata: {hideLabel: false}})} ${this.props.translator.t('amsl')}`;
+                                `${this.getTag('rtl')}${DisplayDataHandler.parse({
+                                    type: Enum.fieldType.altitude,
+                                    data: Math.round(tooltipItem.parsed.y),
+                                    fieldMetadata: {hideLabel: false}
+                                })}${this.getTag('ltr')} ${this.props.translator.t('amsl')}`;
                         },
                         labelTextColor: (context) => '#c2c5cb',
                     }
@@ -92,7 +99,7 @@ export default class RouteChart extends Component {
                 },
                 zoom: {
                     limits: {
-                        x: {min: -50, max: 'original'},
+                        x: {min: -1 * config.thresholdX, max: 'original'},
                         y: {min: 0, max: 'original'}
                         //y: {min: 0, max: this.props.maxAmslAltitude ? this.props.maxAmslAltitude * config.chartYaxisMaxFactor : 'original'}
                     },
@@ -152,9 +159,18 @@ export default class RouteChart extends Component {
                         stepSize: 100,
                         callback: function (value, index) {
                             if (index === 0) {
-                                return DisplayDataHandler.buildBtypeMembers({ field: { value: 0, type: Enum.fieldType.altitude } }).shortName;
+                                return DisplayDataHandler.buildBtypeMembers({
+                                    field: {
+                                        value: 0,
+                                        type: Enum.fieldType.altitude
                                     }
-                            const parsedValue = DisplayDataHandler.parse({type:Enum.fieldType.altitude , data: Math.round(value),  fieldMetadata: {hideLabel: false}});
+                                }).shortName;
+                            }
+                            const parsedValue = DisplayDataHandler.parse({
+                                type: Enum.fieldType.altitude,
+                                data: Math.round(value),
+                                fieldMetadata: {hideLabel: false}
+                            });
                             return Math.round(parsedValue)
                         },
                         color: 'rgba(255,255,255,0.7)',
@@ -176,12 +192,16 @@ export default class RouteChart extends Component {
                     //offset: true,
                     beginAtZero: true,
                     min: (event) => {
-                        return -50;
+                        return config.thresholdX * -1;
                     },
                     max: (event) => {
                         let maxValue = 0;
                         event.chart.data.datasets.forEach(dataSet => {
-                            if (!dataSet.data) return;
+                            if ((!dataSet.data) ||
+                                (dataSet.label === "dtm") ||
+                                (dataSet.label === "bottomLimit") ||
+                                (dataSet.label === "upperLimit")) return;
+
                             dataSet.data.forEach(point => {
                                 if (point.x > maxValue) {
                                     maxValue = point.x;
@@ -193,9 +213,18 @@ export default class RouteChart extends Component {
                     ticks: {
                         callback: (value, index) => {
                             if (index === 0) {
-                                return DisplayDataHandler.buildBtypeMembers({ field: { value: 0, type: Enum.fieldType.distance } }).shortName;
+                                return DisplayDataHandler.buildBtypeMembers({
+                                    field: {
+                                        value: 0,
+                                        type: Enum.fieldType.distance
                                     }
-                            const parsedValue = DisplayDataHandler.parse({type:Enum.fieldType.distance , data: Math.round(value),  fieldMetadata: {hideLabel: false}});
+                                }).shortName;
+                            }
+                            const parsedValue = DisplayDataHandler.parse({
+                                type: Enum.fieldType.distance,
+                                data: Math.round(value),
+                                fieldMetadata: {hideLabel: false}
+                            });
                             return Math.round(parsedValue)
                         },
                         color: 'rgba(255,255,255,0.7)',
@@ -217,32 +246,25 @@ export default class RouteChart extends Component {
 
     calcLineYPoint(x, point1, point2) {
         if (point1 && point2) {
-    
             const gradient = (point2.y - point1.y) / (point2.x - point1.x);
             const intercept = point1.y - (gradient * point1.x);
             return gradient * x + intercept;
         }
         return null;
     }
-
     setPointPositionOnTheNavPlan(e, activeElements) {
-        //console.log(`x: ${e.chart.scales.x.getValueForPixel(e.x)}, y:${e.chart.scales.y.getValueForPixel(e.y)}`)        
-
+        //console.log(`x: ${e.chart.scales.x.getValueForPixel(e.x)}, y:${e.chart.scales.y.getValueForPixel(e.y)}`)
         const horizontalLine = document.querySelector('#route-editor-horizontal-line');
         const verticalLine = document.querySelector('#route-editor-vertical-line');
         const movingPoint = document.querySelector('#route-editor-moving-point');
         const movingPointTooltip = document.querySelector('#route-editor-moving-point-tooltip');
         const movingPointTooltipDetails = document.querySelector('#route-editor-moving-point-tooltip-details');
-        
         horizontalLine.style.top = `${e.y}px`;
         verticalLine.style.left = `${e.x}px`;
-
         const chartX = e.chart.scales.x.getValueForPixel(e.x);
         const chartY = e.chart.scales.y.getValueForPixel(e.y);
-        
         const navPlan = this.chartRef.current.data.datasets.find(ds => ds.label.includes(this.props.selectedDroneId));
-
-        //find relevent section        
+        //find relevent section
         let i = 0;
         while (navPlan.data && navPlan.data && navPlan.data[i] && navPlan.data[i].hasOwnProperty('x') && navPlan.data[i].x < chartX) {
             i++;
@@ -252,39 +274,34 @@ export default class RouteChart extends Component {
             const y = e.chart.scales.y.getPixelForValue(lineY);
             movingPoint.style.left = `${e.x}px`;
             movingPoint.style.top = `${y}px`;
-
             movingPoint.style.setProperty('--route-editor-moving-point-bg-color', this.props.virtualPlayerToColorMap[this.props.selectedDroneId]);
             movingPoint.style.setProperty('--route-editor-moving-point-shadow-color', `${this.props.virtualPlayerToColorMap[this.props.selectedDroneId]}40`);
-
             movingPointTooltip.style.left = `${e.x}px`;
             movingPointTooltip.style.top = `${y - 32}px`;
-
             if (activeElements && activeElements.length > 0) {
                 movingPoint.style.display = 'none';
                 movingPointTooltip.style.display = 'none';
                 horizontalLine.style.display = 'none';
                 verticalLine.style.display = 'none';
-            } else { 
+            } else {
                 movingPoint.style.display = 'unset';
-                movingPointTooltip.style.display = 'unset'; 
+                movingPointTooltip.style.display = 'unset';
                 horizontalLine.style.display = 'unset';
-                verticalLine.style.display = 'unset';               
+                verticalLine.style.display = 'unset';
             }
-            
             const chartXRounded = Math.round(chartX);
-            console.log(chartXRounded);
-
             let aglValue = null;
             let j = 0;
             while (chartXRounded > this.dtmPoints[j].x) {
                 j++;
             }
-            
             aglValue = Math.round(lineY - this.dtmPoints[j].y);
-            movingPointTooltipDetails.setAttribute('data-yvalue', `${aglValue}`);                        
-        }                
+            this.mapPositionIndicatorEnt.appX.base.position = this.dtmPoints[j].pointPosition;
+            this.mapPositionIndicatorEnt.appX.map.isVisible = true;
+            LightMapInterface.updateClientEntity(mapPositionIndicatorOverlay, this.mapPositionIndicatorEnt, false);
+            movingPointTooltipDetails.setAttribute('data-yvalue', `${aglValue}`);
+        }
     }
-
     onDragStart = (e, datasetIndex, index, value) => {
         const {mission, selectedDroneId} = this.props;
 
@@ -301,13 +318,14 @@ export default class RouteChart extends Component {
         }
 
         if (this.isPatrolWaypoint(value.waypoint)) {
-            this.minLimitPoint = mission.heightAMSLConstraint && mission.heightAMSLConstraint.minHeight || 0;
+            this.minLimitPoint = mission && mission.autonomyBase && mission.autonomyBase.mission && mission.autonomyBase.mission.heightAMSLConstraint && mission.autonomyBase.mission.heightAMSLConstraint.minHeight || 0;
 
         } else {
             const dtmDataSet = this.chartRef.current.data.datasets.find(ds => ds.identifier === config.dataSetDTMIdentifier);
             const dtmOnPoint = dtmDataSet && dtmDataSet.data.find(point => Math.round(point.x) === Math.round(value.x));
-            const offset = mission.heightOfSafetyAboveGround || 0;
+            const offset = mission && mission.autonomyBase && mission.autonomyBase.mission && mission.autonomyBase.mission.heightOfSafetyAboveGround || 0;
             this.minLimitPoint = (dtmOnPoint && dtmOnPoint.y || 0) + offset;
+            value.waypoint.tempMinLimitPoint = this.minLimitPoint;
         }
     }
 
@@ -347,12 +365,12 @@ export default class RouteChart extends Component {
     }
 
     getTag = (side) => {
-        return side === this.props.translator.dir() ?  '\u0027' : ''        
+        return side === this.props.translator.dir() ? '\u0027' : ''
     }
     getTooltipDirection = () => {
         return this.props.translator.dir();
     }
-    
+
     getPlayerTooltipItem = item => {
         return 'Player ' + item.raw.playerDispName
     }
@@ -392,9 +410,56 @@ export default class RouteChart extends Component {
         return isPatrolWP;
     }
 
-    componentDidMount = () => {
+    async setMapPositionIndicatorEntity() {
+        const mapSchemeSid = Globals.get().sid.getSID('appX.resource.default');
+        const crossSectionArrowEntity = await EntitiesMngr.getSingleEntity(this.props.crossSectionArrowEntityId);
+        this.mapPositionIndicatorEnt = {
+            _id: this.props.crossSectionArrowEntityId,
+            sid: crossSectionArrowEntity.sid,
+            appX: {
+                map: {
+                    isVisible: true,
+                    mapScheme: {
+                        sid: crossSectionArrowEntity.appX.map.mapScheme.sid
+                    }
+                },
+                base: {
+                    icon: crossSectionArrowEntity.appX.base.icon,
+                }
+            }
+        };
+        LightMapInterface.addClientOverlay(mapPositionIndicatorOverlay, true);
+        LightMapInterface.addClientEntity(mapPositionIndicatorOverlay, this.mapPositionIndicatorEnt);
+    }
+    hideChartLinesIndicators = () => {
+        const horizontalLine = document.querySelector('#route-editor-horizontal-line');
+        const verticalLine = document.querySelector('#route-editor-vertical-line');
+        const movingPoint = document.querySelector('#route-editor-moving-point');
+        const movingPointTooltip = document.querySelector('#route-editor-moving-point-tooltip');
+        movingPoint.style.display = 'none';
+        movingPointTooltip.style.display = 'none';
+        horizontalLine.style.display = 'none';
+        verticalLine.style.display = 'none';
+    }
+    componentDidMount() {
+        const chartEventsPlugin = {
+            id: 'eventHandlerPlugin',
+            beforeEvent: (chart, args, pluginOptions) => {
+                const event = args.event;
+                if (event.type === 'mouseout') {
+                    this.hideChartLinesIndicators();
+                    this.mapPositionIndicatorEnt.appX.map.isVisible = false;
+                    LightMapInterface.updateClientEntity(mapPositionIndicatorOverlay, this.mapPositionIndicatorEnt, false);
+                }
+            }
+        }
+        Chart.register(chartEventsPlugin);
         Chart.register(zoomPlugin);
         Chart.register(dragdataPlugin);
+        this.setMapPositionIndicatorEntity();
+    }
+    componentWillUnmount() {
+        LightMapInterface.removeClientOverlay(mapPositionIndicatorOverlay);
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -591,10 +656,11 @@ export default class RouteChart extends Component {
         this.dtmPoints = [];
         const navPlanDTMPoints = navPlanPolylinePoints.map((point, i) => {
 
+            const currentCoord = new geo.coordinate(point.x, point.y, point.z);
             if (i !== 0) {
                 const vector = geo.geometricCalculations.vectorFromTwoLocations(
                     new geo.coordinate(navPlanPolylinePoints[i - 1].x, navPlanPolylinePoints[i - 1].y, navPlanPolylinePoints[i - 1].z),
-                    new geo.coordinate(point.x, point.y, point.z)
+                    currentCoord
                 );
                 totalNavPlanLength += vector.distance;
             }
@@ -604,15 +670,27 @@ export default class RouteChart extends Component {
                 y: point.z,
             }
 
-            this.dtmPoints.push({...dtmChartPoint});
-
+            const geoPoint = new geo.shapes.point();
+            geoPoint.setCoordinates([currentCoord]);
+            const pointPosition = geo.serializer.serializePosition(geoPoint);
+            this.dtmPoints.push({...dtmChartPoint, pointPosition});
             return dtmChartPoint;
         })
 
         const dataset = {
             identifier: config.dataSetDTMIdentifier,
             label: 'dtm',
-            data: navPlanDTMPoints,
+            data: [
+                {
+                    x: -1 * config.thresholdX,
+                    y: navPlanDTMPoints[0] && navPlanDTMPoints[0].y
+                },
+                ...navPlanDTMPoints,
+                {
+                    x: (navPlanDTMPoints[navPlanDTMPoints.length - 1] && (navPlanDTMPoints[navPlanDTMPoints.length - 1].x * config.chartXaxisMaxFactor)),
+                    y: navPlanDTMPoints[navPlanDTMPoints.length - 1] && navPlanDTMPoints[navPlanDTMPoints.length - 1].y
+                }
+            ],
             borderColor: '#ff9c44',
             backgroundColor: '#8b572470',
             pointBorderColor: 'rgba(0,0,0,0)',
@@ -633,10 +711,21 @@ export default class RouteChart extends Component {
     getBottomLimitPoint = (point, patrolStartX, patrolEndX) => {
         // if patrol waypoint then return mission.heightAMSLConstraint.minHeight  , else return mission mission.heightOfSafetyAboveGround
         const {mission} = this.props;
-        if (!patrolStartX || !patrolEndX) return mission.heightOfSafetyAboveGround + point.y;
+        if (!patrolStartX || !patrolEndX) return mission &&
+            mission.autonomyBase &&
+            mission.autonomyBase.mission &&
+            mission.autonomyBase.mission.heightOfSafetyAboveGround + point.y;
 
-        return point.x >= patrolStartX && point.x <= patrolEndX ? mission.heightAMSLConstraint.minHeight : mission.heightOfSafetyAboveGround + point.y;
-
+        return (point.x >= patrolStartX && point.x <= patrolEndX) ?
+            (mission &&
+                mission.autonomyBase &&
+                mission.autonomyBase.mission &&
+                mission.autonomyBase.mission.heightAMSLConstraint &&
+                mission.autonomyBase.mission.heightAMSLConstraint.minHeight) :
+            (mission &&
+                mission.autonomyBase &&
+                mission.autonomyBase.mission &&
+                mission.autonomyBase.mission.heightOfSafetyAboveGround) + point.y;
     }
 
     getPartolStartEndPoints = (navPlanDataSet) => {
@@ -702,7 +791,7 @@ export default class RouteChart extends Component {
 
             navPlanUpperLimitPoints = [
                 {
-                    x: 0,
+                    x: -1 * config.thresholdX,
                     y: maxAmslAltitude
                 },
                 {
@@ -765,6 +854,11 @@ export default class RouteChart extends Component {
         return waypoint.pointChartType === routeOptions.patrol && waypoint.index === 0;
     }
 
+    isEndOfInboundOrStartOfRtlAtPatolMission(waypoint, navPlansWPCounts) {
+        return (waypoint.pointChartType === routeOptions.forward && waypoint.index === navPlansWPCounts[routeOptions.forward] - 1) ||
+            (waypoint.pointChartType === routeOptions.back && waypoint.index === 0);
+    }
+
     isPatrolEndPoint(waypoint, navPlansWPCounts) {
         return waypoint.pointChartType === routeOptions.patrol && waypoint.index === navPlansWPCounts[routeOptions.patrol] - 1;
     }
@@ -779,6 +873,8 @@ export default class RouteChart extends Component {
             chartPoint.isStartPatrolPoint = true;
         } else if (this.isPatrolEndPoint(waypoint, navPlansWPCounts)) {
             chartPoint.isEndPatrolPoint = true;
+        } else if (this.isEndOfInboundOrStartOfRtlAtPatolMission(waypoint, navPlansWPCounts)) {
+            chartPoint.isEndOfInboundOrStartOfRtlAtPatolMission = true;
         }
     }
 
@@ -861,7 +957,7 @@ export default class RouteChart extends Component {
             backgroundColor: virtualPlayerToColorMap[vPlayerId],
             pointRadius: isHideChartPoints ? 0 : 3,
             pointStyle: function (param) {
-                if (isHideChartPoints) return false
+                if (isHideChartPoints) return false;
                 if (param.raw && param.raw.isStartPoint) {
                     return getNavPlanImage(imagePointTypes.start, virtualPlayerToColorMap[vPlayerId])
                 } else if (param.raw && param.raw.isEndPoint) {
@@ -878,6 +974,10 @@ export default class RouteChart extends Component {
         }
 
         return {navPlanDataSet, playerDataSet};
+    }
+
+    pointOfPatrolBelowBottomLimit(point) {
+        return point.raw.y < point.raw.waypoint.tempMinLimitPoint;
     }
 
     pointBelowBottomLimit(point, navPlanBottomLimitDataSetMap) {
@@ -917,6 +1017,7 @@ export default class RouteChart extends Component {
 
         navPlanDataSet.pointStyle = param => {
             if (isHideChartPoints) return false;
+            let isPointBelowBottomLimit;
             if (param.raw && param.raw.isStartPoint) {
                 return getNavPlanImage(imagePointTypes.start, virtualPlayerToColorMap[vPlayerId])
             } else if (param.raw && param.raw.isEndPoint) {
@@ -927,9 +1028,14 @@ export default class RouteChart extends Component {
                 return getNavPlanImage(imagePointTypes.patrolEnd, virtualPlayerToColorMap[vPlayerId])
             } else if (param.raw && param.raw.isPlayer) {
                 return getNavPlanImage(imagePointTypes.drone, virtualPlayerToColorMap[vPlayerId])
+            } else if (param.raw && param.raw.isEndOfInboundOrStartOfRtlAtPatolMission) {
+                isPointBelowBottomLimit = this.pointOfPatrolBelowBottomLimit(param);
+            } else {
+                isPointBelowBottomLimit = this.pointBelowBottomLimit(param, navPlanBottomLimitDataSetMap);
             }
-
-            return this.pointBelowBottomLimit(param, navPlanBottomLimitDataSetMap) ? this.handleWarningPoint(param, imagePointTypes.regularWarning, virtualPlayerToColorMap[vPlayerId]) : this.handleRegularPoint(param, imagePointTypes.regular, virtualPlayerToColorMap[vPlayerId])
+            return isPointBelowBottomLimit ?
+                this.handleWarningPoint(param, imagePointTypes.regularWarning, virtualPlayerToColorMap[vPlayerId]) :
+                this.handleRegularPoint(param, imagePointTypes.regular, virtualPlayerToColorMap[vPlayerId])
         }
     }
 
@@ -939,7 +1045,7 @@ export default class RouteChart extends Component {
         const {selectedDroneId, virtualPlayerToNavPlansMap} = this.props;
 
         if (this.props.selectedDroneId === config.ALL) {
-            Object.keys(virtualPlayerToNavPlansMap).forEach((vPlayerId) => {
+            Object.keys(virtualPlayerToNavPlansMap).forEach(vPlayerId => {
                 const {navPlanDataSet, playerDataSet} = this.getNavPlanDataSet(vPlayerId)
                 datasets.push(navPlanDataSet);
                 if (playerDataSet) {
@@ -950,6 +1056,7 @@ export default class RouteChart extends Component {
             const {navPlanDataSet, playerDataSet} = this.getNavPlanDataSet(selectedDroneId)
             datasets.push(navPlanDataSet);
             if (playerDataSet) {
+
                 datasets.push(playerDataSet);
             }
             const navPlanDTMDataSet = this.getNavPlanDTMDataSet();
@@ -982,47 +1089,41 @@ export default class RouteChart extends Component {
         return (
             <span className='route-editor-chart-message-wrapper warning-message'>
                 <span className='route-editor-chart-icon'></span>
-                <span className='route-editor-chart-warning-text'>{this.props.translator.t('waypointsCloseToNavPlan')}</span>
-            </span>        
+                <span
+                    className='route-editor-chart-warning-text'>{this.props.translator.t('waypointsCloseToNavPlan')}</span>
+            </span>
         )
     }
-
     getHorizontalLine() {
         return <span id='route-editor-horizontal-line' className={'route-editor-chart-cursor-line route-editor-chart-cursor-horizontal-line'}></span>
     }
-
     getVerticalLine() {
         return <span id='route-editor-vertical-line' className={'route-editor-chart-cursor-line route-editor-chart-cursor-vertical-line'}></span>
     }
-
     getMovingPoint() {
         return (
             <span id='route-editor-moving-point' className={'route-editor-moving-point-indicator'}></span>
         )
     }
-
     getMovingPointTooltip() {
         return (
-            <div id='route-editor-moving-point-tooltip' className='route-editor-moving-point-tooltip'>            
-                <span id={'route-editor-moving-point-tooltip-details'} className='route-editor-moving-point-tooltip-details' data-yvalue><span>AGL</span></span>
+            <div id='route-editor-moving-point-tooltip' className='route-editor-moving-point-tooltip'>
+                <span id={'route-editor-moving-point-tooltip-details'} className='route-editor-moving-point-tooltip-details' data-yvalue><span>{this.props.translator.t('agl')}</span></span>
             </div>
         )
     }
-
     getHoveredLinesAndPoint() {
-        if (this.props.selectedDroneId !== config.ALL) {
             return (
-                <>
+                <React.Fragment>
                     {this.getHorizontalLine()}
                     {this.getVerticalLine()}
                     {this.getMovingPoint()}
                     {this.getMovingPointTooltip()}
-                </>
+                </React.Fragment>
             )
-        }
     }
 
-    render() {  
+    render() {
 
         if (this.props.selectedDroneId !== config.ALL && !this.state.navPlanPolylinePoints) return this.renderLoader();
 

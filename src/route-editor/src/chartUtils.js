@@ -1,4 +1,3 @@
-
 const imagesCache = new Map();
 
 export const imagePointTypes = {
@@ -8,7 +7,7 @@ export const imagePointTypes = {
     regularWarning: 'regularWarning',
     patrolStart: 'patrolStart',
     patrolEnd: 'patrolEnd',
-    drone: 'drone',    
+    drone: 'drone',
 }
 
 export const getImageByType = {
@@ -34,6 +33,7 @@ export function getNavPlanPointImageSrcOld(color) {
                   </g>
                   </svg>`;
 }
+
 export function getNavPlanPointImageSrc(color) {
     return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28px" height="29px" viewBox="0 0 28 29" version="1.1">
                 <defs>

@@ -25,7 +25,8 @@ const config = {
     dataSetDTMIdentifier: 'dataSetDTMIdentifier',
     partrolRouteTypes: [3, 4, 5],
     chartXaxisMaxFactor: 1.05,
-    chartYaxisMaxFactor: 1.1
+    chartYaxisMaxFactor: 1.1,
+    thresholdX: 50
 }
 
 export default config;
